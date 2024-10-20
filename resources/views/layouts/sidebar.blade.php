@@ -124,8 +124,8 @@
                   <li><a href="service2">Pengumuman</a></li>
                 </ul>
             </li>
-            <li><a href="#">Galeri Kegiatan</a></li>
-            <li><a href="#">Profil</a></li>
+            <li><a href="galeriKegiatan">Galeri Kegiatan</a></li>
+            <li><a href="profile">Profil</a></li>
             <li><a href="#">Tentang</a>
                 <ul class="sub-menu">
                   <li><a href="case">Tentang Dispusip</a></li>
