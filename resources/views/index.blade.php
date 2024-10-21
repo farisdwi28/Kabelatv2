@@ -3,14 +3,12 @@
 @section('content')
 
     <!--===== HERO AREA STARTS =======-->
-    <div class="hero1-section-area" style="background-image: url(build/img/bg/header-bg1.png);">
+    {{-- <div class="hero1-section-area" style="background-image: url(build/img/bg/header-bg1.png);">
         <img src="{{ asset('img/Logo Kabelat.svg') }}" alt="" class="elements1 aniamtion-key-1">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="header-main-content heading1">
-                        {{-- <h5><img src="{{ URL::asset('build/img/icons/logo-icons.svg') }}" alt="">Top #1 SEO &
-                            Marketing Agency</h5> --}}
                         <h1 class="text-anime-style-3">Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
                         <p data-aos="fade-left" data-aos-duration="1000">Meriahkan Sasakala Dongeng Bandung Bersama Ki
                             Bedas!. Dinas Perpustakaan dan Kearsipan Kabupaten Bandung dengan bangga menghadirkan Lomba
@@ -34,6 +32,113 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    <div class="hero1-section-area">
+        <div id="carouselExampleDark" class="carousel carousel-light slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner" data-aos="fade-left" data-aos-duration="1200">
+                <a href="detailKegiatan">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img src="{{ URL::asset('build/img/all-images/carousel1.png') }}" class="d-block w-100"
+                            alt="...">
+                        <div class="carousel-caption">
+                            <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
+                            <p class="d-none d-md-block">Meriahkan Sasakala Dongeng Bandung Bersama Ki Bedas!.</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="detailKegiatan">
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img src="{{ URL::asset('build/img/all-images/carousel2.png') }}" class="d-block w-100"
+                            alt="...">
+                        <div class="carousel-caption">
+                            <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
+                            <p class="d-none d-md-block">Meriahkan Sasakala Dongeng Bandung Bersama Ki Bedas!.</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="detailKegiatan">
+                    <div class="carousel-item" data-bs-interval="1000">
+                        <img src="{{ URL::asset('build/img/all-images/carousel3.png') }}" class="d-block w-100"
+                            alt="...">
+
+                        <div class="carousel-caption">
+                            <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
+                            <p class="d-none d-md-block">Meriahkan Sasakala Dongeng Bandung Bersama Ki Bedas!.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        {{-- <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="{{ URL::asset('build/img/all-images/contoh4.png') }}" class="d-block"
+                        style="width: 1920px; height:656px;" alt="...">
+                    <div class="carousel-caption d-none d-md-block text-black">
+                        <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
+                        <div class="btn-area justify-content-center" data-aos="fade-left" data-aos-duration="1200">
+                            <a href="detailKegiatan" class="header-btn1">Baca Selengkapnya <span><i
+                                        class="fa-solid fa-arrow-right"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="{{ URL::asset('build/img/all-images/carousel2.png') }}" class="d-block"
+                        style="width: 1920px; height:656px;" alt="...">
+                    <div class="carousel-caption d-none d-md-block text-black">
+                        <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
+                        <div class="btn-area justify-content-center" data-aos="fade-left" data-aos-duration="1200">
+                            <a href="detailKegiatan" class="header-btn1">Baca Selengkapnya <span><i
+                                        class="fa-solid fa-arrow-right"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ URL::asset('build/img/all-images/carousel3.png') }}" class="d-block"
+                        style="width: 1920px; height:656px;" alt="...">
+                    <div class="carousel-caption d-none d-md-block text-black">
+                        <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
+                        <div class="btn-area justify-content-center" data-aos="fade-left" data-aos-duration="1200">
+                            <a href="detailKegiatan" class="header-btn1">Baca Selengkapnya <span><i
+                                        class="fa-solid fa-arrow-right"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div> --}}
     </div>
     <!--===== HERO AREA ENDS =======-->
 
