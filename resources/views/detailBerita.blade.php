@@ -78,9 +78,11 @@
                                         <img src="{{ URL::asset('build/img/all-images/comments-img1.png') }}"
                                             alt="">
                                     </div>
-                                    <div class="content">
-                                        <a href="#" class="name">Ervalsa Dwi Nanda</a>
-                                        <a href="#" class="date">Hari Ini</a>
+                                    <div class="content mt-2">
+                                        <a href="#" class="name font-bold">Wawan</a>
+                                    </div>
+                                    <div class="text-gray-500 text-sm" style="text-align: right;">
+                                       <span>1 jam yang lalu</span>
                                     </div>
                                 </div>
                                 <p>Berita Ini sangat Bermanfaat ya min</p>
@@ -92,9 +94,11 @@
                                         <img src="{{ URL::asset('build/img/all-images/comments-img2.png') }}"
                                             alt="">
                                     </div>
-                                    <div class="content">
-                                        <a href="#" class="name">Wawan</a>
-                                        <a href="#" class="date">Kemarin</a>
+                                    <div class="content mt-2">
+                                        <a href="#" class="name font-bold">Soedibjo</a>
+                                    </div>
+                                    <div class="text-gray-500 text-sm" style="text-align: right;">
+                                       <span>10 menit yang lalu</span>
                                     </div>
                                 </div>
                                 <p>Kegiatannya Mantap!</p>
