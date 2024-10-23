@@ -51,7 +51,7 @@
                                     <li>
                                         <a href="#" id="view-button" onclick="incrementViews()">
                                             <i class="fa-solid fa-eye"></i>
-                                            <span id="view-count">10</span>
+                                            <span id="view-count">0</span>
                                         </a>
                                     </li>
                                 </ul>
