@@ -81,7 +81,7 @@
                             </div>
                             <br>
                             <a href="contact" class="header-btn1" data-bs-toggle="modal"
-                                data-bs-target="#editProfileModal">Masuk <span><i
+                                data-bs-target="#editProfileModal">Edit <span><i
                                         class="fa-solid fa-arrow-right"></i></span></a>
                         </div>
                     </div>
