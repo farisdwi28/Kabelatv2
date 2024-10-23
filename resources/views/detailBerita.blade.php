@@ -5,7 +5,6 @@
 
     <x-page-title title="Beranda" pagetitle="Berita" maintitle="Detail Berita" />
 
-
     <!--===== BLOG AREA STARTS =======-->
     <div class="blog-auhtor-section-area sp1">
         <div class="container">
@@ -24,7 +23,7 @@
                             <img src="{{ URL::asset('build/img/all-images/blog-img23.png') }}" alt="">
                         </div>
                         <div class="space24"></div>
-                        <p>Wargi Bedas!!!
+                        <p class="text-black" style="font-size: 20px;">Wargi Bedas!!!
 
                             Tim Naskah Kuna DISPUSIP Kabupaten Bandung berkesempatan hadir dalam acara Wuku Taun Kampung
                             Adat Cikondang. Wuku Taun merupakan perayaan Tahun Baru Islam 1 Muharam 1446 H, moment ini
@@ -37,16 +36,24 @@
                             Kampung Adat Cikondang merupakan Kampung Adat yang berada di Desa Lamajang, Kecamatan
                             Pangalengan, Kabupaten Bandung. Kampung Adat Cikondang masih mempertahankan adat istiadat
                             sebagai kearipan lokal, salah satunya dengan Pelestarian Naskah Kuna peninggalan leluhurnya.
-                            @dadangsupriatna </p>
-
+                            @dadangsupriatna </p>
 
                         <div class="social-tags">
                             <div class="tags">
-                                <h4>Tags:</h4>
+                                <h4>Statistics:</h4>
                                 <ul>
-                                    <li><a href="#">PPC Advertising</a></li>
-                                    <li><a href="#">SEO</a></li>
-                                    <li><a href="#" class="m-0">Digital Marketing</a></li>
+                                    <li>
+                                        <a href="#" id="like-button" onclick="incrementLikes()">
+                                            <i class="fa-solid fa-thumbs-up"></i>
+                                            <span id="like-count">0</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="view-button" onclick="incrementViews()">
+                                            <i class="fa-solid fa-eye"></i>
+                                            <span id="view-count">10</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="social">
@@ -64,8 +71,8 @@
                         <div class="space50"></div>
                         <h3>Komentar (2)</h3>
                         <div class="space32"></div>
-                        <div class="comments-boxarea">
-                            <div class="comments-boxes">
+                        <div class="flex flex-wrap space-x-4">
+                            <div class="comments-boxarea flex items-start space-x-4">
                                 <div class="comments-auhtor-box">
                                     <div class="img3">
                                         <img src="{{ URL::asset('build/img/all-images/comments-img1.png') }}"
@@ -76,13 +83,10 @@
                                         <a href="#" class="date">Hari Ini</a>
                                     </div>
                                 </div>
+                                <p>Berita Ini sangat Bermanfaat ya min</p>
                             </div>
-                            <div class="space16"></div>
-                            <p>Berita Ini sangat Bermanfaat ya min</p>
-                        </div>
-                        <div class="space30"></div>
-                        <div class="comments-boxarea box2">
-                            <div class="comments-boxes">
+                            <br>
+                            <div class="comments-boxarea flex items-start space-x-4">
                                 <div class="comments-auhtor-box">
                                     <div class="img3">
                                         <img src="{{ URL::asset('build/img/all-images/comments-img2.png') }}"
@@ -93,11 +97,11 @@
                                         <a href="#" class="date">Kemarin</a>
                                     </div>
                                 </div>
+                                <p>Kegiatannya Mantap!</p>
                             </div>
-                            <div class="space16"></div>
-                            <p>Kegiatannya Mantap!</p>
                         </div>
                         <div class="space50"></div>
+
 
                         <div class="contact-form-area">
                             <h4>Berikan Komentar</h4>
@@ -175,7 +179,7 @@
                             <a href="blog-single">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke Dispusip
                                 Kabupaten Bandung</a>
                             <p>Dinas Perpustakaan dan Arsip Kab. Bandung _menerima penyerahan arsip yang berasal dari
-                                Kecamatan : </p>
+                                Kecamatan : </p>
                             <a href="blog-single" class="readmore">Baca Selengkapnya <i
                                     class="fa-solid fa-arrow-right"></i></a>
                         </div>
@@ -210,4 +214,23 @@
     </div>
     <!--===== BLOG AREA ENDS =======-->
 
+@endsection
+
+@section('scripts')
+    <script>
+        let likes = 0;
+        let views = 0;
+
+        function incrementLikes() {
+            likes++;
+            document.getElementById('like-count').innerText = likes;
+            alert('Terima kasih telah menyukai!');
+        }
+
+        function incrementViews() {
+            views++;
+            document.getElementById('view-count').innerText = views;
+            alert('Terima kasih telah melihat!');
+        }
+    </script>
 @endsection

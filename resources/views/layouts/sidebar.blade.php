@@ -26,7 +26,7 @@
                                 <li><a href="#">Informasi <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
                                         <li><a href="berita">Berita</a></li>
-                                        <li><a href="#">Pengumuman</a></li>
+                                        <li><a href="Pengumuman">Pengumuman</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="galeriKegiatan">Galeri Kegiatan</a></li>
@@ -34,7 +34,7 @@
                                 <li><a href="#">Tentang <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
                                         <li><a href="case">Tentang Dispusip</a></li>
-                                        <li><a href="case-single">Hubungi Kami</a></li>
+                                        {{-- <li><a href="case-single">Hubungi Kami</a></li> --}}
                                         <li><a href="404">404</a></li>
                                         <form method="POST" action="{{ route('logout') }}" x-data>
                                             @csrf
@@ -110,7 +110,7 @@
             <li><a href="features">Program Dispusip</a>
                 <ul class="sub-menu">
                   <li><a href="service1">Semua Program</a></li>
-                  <li><a href="service2">Jelajah Literasi Asik</a></li>
+                  <li><a href="DetailProgramDispusip">Jelajah Literasi Asik</a></li>
                   <li><a href="service3">Bedas Literasi Ramadhan dan Lentera Langit</a></li>
                   <li><a href="service4">Wisata Literasi dan Perpustakaan anak</a></li>
                   <li><a href="service5">Sasakala Dongeng Bandung Bersama Ki Badas</a></li>
@@ -120,8 +120,8 @@
             <li><a href="#">Komunitas</a></li>
             <li><a href="#">Informasi</a>
                 <ul class="sub-menu">
-                  <li><a href="service1">Berita</a></li>
-                  <li><a href="service2">Pengumuman</a></li>
+                  <li><a href="Berita">Berita</a></li>
+                  <li><a href="Pengumuman">Pengumuman</a></li>
                 </ul>
             </li>
             <li><a href="galeriKegiatan">Galeri Kegiatan</a></li>
@@ -129,7 +129,7 @@
             <li><a href="#">Tentang</a>
                 <ul class="sub-menu">
                   <li><a href="case">Tentang Dispusip</a></li>
-                  <li><a href="case-single">Hubungi Kami</a></li>
+                  {{-- <li><a href="case-single">Hubungi Kami</a></li> --}}
                 </ul>
             </li>
         </ul>

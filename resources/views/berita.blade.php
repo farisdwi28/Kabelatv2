@@ -25,17 +25,17 @@
                         <div class="content-area">
                             <div class="tags-area">
                                 <ul>
-                                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}"
+                                    <li><a href="detailBerita"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}"
                                                 alt="">Hari Ini</a></li>
                                 </ul>
                             </div>
-                            <a href="blog-single">Dispusip Kab. Bandung turut hadir dalam kegiatan "Tradisi Wuku Taun
+                            <a href="detailBerita">Dispusip Kab. Bandung turut hadir dalam kegiatan "Tradisi Wuku Taun
                                 Kampung Adat Cikondang"</a>
                             <p>Tim Naskah Kuna DISPUSIP Kabupaten Bandung berkesempatan hadir dalam acara Wuku Taun Kampung
                                 Adat Cikondang. Wuku Taun merupakan perayaan Tahun Baru Islam 1 Muharam 1446 H, moment ini
                                 dilaksanakan setiap tahunnya selama 14 hari berturut-turut.
                             </p>
-                            <a href="blog-single" class="readmore">Baca Selengkapnya <i
+                            <a href="detailBerita" class="readmore">Baca Selengkapnya <i
                                     class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>

@@ -360,7 +360,7 @@
                                         <div class="space30"></div>
                                         <div class="list-area">
                                             <div class="list">
-                                                <a href="team">Jelajah Literasi Asik</a>
+                                                <a href="detailProgramDispusip">Jelajah Literasi Asik</a>
                                             </div>
                                         </div>
                                     </div>

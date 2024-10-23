@@ -34,13 +34,14 @@
             </div>
         </div>
     </div>
-    <div class="case-lista-area sp1 bg2">
+    <div class="case-lista-area sp1">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
-                    <div class="case-pera-area heading2">
-                        <h2>Isi :</h2>
-                        <p>Sehubungan dengan Hari Raya Idul Adha dan Cuti Bersama. Hari ini dan Besok Layanan Perpustakaaan
+                    <div class="case-pera-area">
+                        <h2>Rincian Pengumuman:</h2>       
+                        <br>                
+                        <p class="text-black" style="font-size: 25px;">Sehubungan dengan Hari Raya Idul Adha dan Cuti Bersama. Hari ini dan Besok Layanan Perpustakaaan
                             Tutup Sementara. Layanan perpustakaan akan dibuka kembali pada hari Rabu, 19 Juni 2024. Terima
                             kasih.</p>
                     </div>
