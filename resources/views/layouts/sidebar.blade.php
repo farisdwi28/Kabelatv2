@@ -14,7 +14,7 @@
                                 <li><a href="/">Beranda</a></li>
                                 <li><a href="#">Program Dispusip <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
-                                        <li><a href="#">Semua Program</a></li>
+                                        <li><a href="programDispusip">Semua Program</a></li>
                                         <li><a href="detailProgramDispusip">Jelajah Literasi Asik</a></li>
                                         <li><a href="#">Bedas Literasi Ramadhan dan Lentera Langit</a></li>
                                         <li><a href="#">Wisata Literasi dan Perpustakaan anak</a></li>
@@ -107,9 +107,9 @@
     <div class="mobile-nav mobile-nav1">
         <ul class="mobile-nav-list nav-list1">
             <li><a href="#">Beranda </a></li>
-            <li><a href="features">Program Dispusip</a>
+            <li><a href="#">Program Dispusip</a>
                 <ul class="sub-menu">
-                  <li><a href="service1">Semua Program</a></li>
+                  <li><a href="programDispusip">Semua Program</a></li>
                   <li><a href="DetailProgramDispusip">Jelajah Literasi Asik</a></li>
                   <li><a href="service3">Bedas Literasi Ramadhan dan Lentera Langit</a></li>
                   <li><a href="service4">Wisata Literasi dan Perpustakaan anak</a></li>

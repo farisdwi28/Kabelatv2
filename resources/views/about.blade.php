@@ -3,9 +3,176 @@
 
 @section('content')
 
-<x-page-title title="Home" pagetitle="About Us" maintitle="About Us" />
+    <x-page-title title="Home" pagetitle="About Us" maintitle="About Us" />
 
-<!--===== ABOUT AREA STARTS =======-->
+    <!--===== SERVICE AREA STARTS =======-->
+    <div class="service2-section-area sp1 bg2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 m-auto">
+                    <div class="service2-header heading2 text-center">
+                        <img src="{{ URL::asset('build/img/elements/star7.png') }}" alt="" class="star2 keyframe5">
+                        <img src="{{ URL::asset('build/img/elements/star7.png') }}" alt="" class="star3 keyframe5">
+                        <h5>Our Value</h5>
+                        <h2>
+                            Tailored Solutions, Proven Results,
+                            <br class="d-md-block d-none">
+                            And Exceptional Service
+                        </h2>
+                        <p>
+                            We pride ourselves on delivering a value proposition that goes beyond expectations.
+                            <br class="d-md-block d-none">
+                            Our approach is centered on understanding your business inside.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="images-content-area">
+                        <div class="img1">
+                            <a href="detailBerita">
+                                <img src="{{ URL::asset('build/img/all-images/berita1.png') }}" alt="">Hari Ini
+                            </a>
+                        </div>
+                        <div class="content-area">
+                            <h5>Our Value</h5>
+                            <a href="service1" class="text">
+                                Explore Our Unique Value Proposition & How We Drive Business Growth
+                            </a>
+                            <p>
+                                We're committed to delivering exceptional value to our clients. We understand that every business is unique, which is why we take a personalized approach to every project we undertake.
+                            </p>
+                            <div class="btn-area">
+                                <a href="service1" class="header-btn1">
+                                    Learn More <span><i class="fa-solid fa-arrow-right"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="arrow-area">
+                            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="service-all-boxes">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-6">
+                                <div class="service2-auhtor-boxarea">
+                                    <div class="arrow">
+                                        <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                    <div class="content-area">
+                                        <h5>Our Mission</h5>
+                                        <a href="service1">
+                                            We strive to be more than just a service provider; we aim to be trusted SEOC
+                                        </a>
+                                        <p>
+                                            By staying true to our mission and values, we are committed to helping businesses of all sizes achieve their goals and realize their potential.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-6">
+                                <div class="service2-auhtor2-boxarea">
+                                    <div class="arrow">
+                                        <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                    <div class="content-area">
+                                        <h5>Our Mission</h5>
+                                        <h5>Our Vision</h5>
+                                        <a href="service1">
+                                            We aspire to create a world where every business owner feels empowered
+                                        </a>
+                                        <p>
+                                            By staying true to our vision and values, we are committed to driving positive change and shaping a brighter future for businesses and communities.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="images-content-area">
+                        <div class="img1">
+                            <a href="detailBerita">
+                                <img src="{{ URL::asset('build/img/all-images/berita1.png') }}" alt="">Hari Ini
+                            </a>
+                        </div>
+                        <div class="content-area">
+                            <h5>Our Value</h5>
+                            <a href="service1" class="text">
+                                Explore Our Unique Value Proposition & How We Drive Business Growth
+                            </a>
+                            <p>
+                                We're committed to delivering exceptional value to our clients. We understand that every business is unique, which is why we take a personalized approach to every project we undertake.
+                            </p>
+                            <div class="btn-area">
+                                <a href="service1" class="header-btn1">
+                                    Learn More <span><i class="fa-solid fa-arrow-right"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="arrow-area">
+                            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="service-all-boxes">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-6">
+                                <div class="service2-auhtor-boxarea">
+                                    <div class="arrow">
+                                        <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                    <div class="content-area">
+                                        <h5>Our Mission</h5>
+                                        <a href="service1">
+                                            We strive to be more than just a service provider; we aim to be trusted SEOC
+                                        </a>
+                                        <p>
+                                            By staying true to our mission and values, we are committed to helping businesses of all sizes achieve their goals and realize their potential.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-6">
+                                <div class="service2-auhtor2-boxarea">
+                                    <div class="arrow">
+                                        <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                    <div class="content-area">
+                                        <h5>Our Mission</h5>
+                                        <h5>Our Vision</h5>
+                                        <a href="service1">
+                                            We aspire to create a world where every business owner feels empowered
+                                        </a>
+                                        <p>
+                                            By staying true to our vision and values, we are committed to driving positive change and shaping a brighter future for businesses and communities.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{{-- <!--===== ABOUT AREA STARTS =======-->
 <div class="about1-section-area sp6 bg-white">
   <div class="container">
     <div class="row align-items-center">
@@ -42,9 +209,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 <!--===== ABOUT AREA ENDS =======-->
-<div class="space60"></div>
+{{-- <div class="space60"></div>
 <!--===== TESTIMONIAL AREA STARTS =======-->
 <div class="slider-section-area slider-inner sp5">
     <div class="container">
@@ -141,80 +308,11 @@
         </div>
     </div>
 </div>
-<!--===== WORK AREA ENDS =======-->
-
-<!--===== SERVICE AREA STARTS =======-->
-<div class="service2-section-area sp1 bg2">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 m-auto">
-        <div class="service2-header heading2 text-center">
-          <img src="{{ URL::asset('build/img/elements/star7.png') }}" alt="" class="star2 keyframe5">
-          <img src="{{ URL::asset('build/img/elements/star7.png') }}" alt="" class="star3 keyframe5">
-          <h5>Our Value</h5>
-          <h2>Tailored Solutions, Proven Results, <br class="d-md-block d-none"> And Exceptional Service</h2>
-          <p>We pride ourselves on delivering a value proposition that goes beyond expectations. Our <br class="d-md-block d-none"> approach is centered on understanding your business inside</p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-7">
-        <div class="images-content-area">
-          <div class="img1">
-            <img src="{{ URL::asset('build/img/all-images/service-img1.png') }}" alt="">
-          </div>
-          <div class="content-area">
-            <h5>Our Value</h5>
-            <a href="service1" class="text">Explore Our Unique Value Proposition & How We Drive Business Growth</a>
-            <p>we're committed to delivering exceptional value to our clients. We understand that every business is unique, personalized approach to every project we undertake.</p>
-            <div class="btn-area">
-              <a href="service1" class="header-btn1">Learn More <span><i class="fa-solid fa-arrow-right"></i></span>
-              </a>
-            </div>
-          </div>
-          <div class="arrow-area">
-            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-5">
-        <div class="service-all-boxes">
-          <div class="row">
-            <div class="col-lg-12 col-md-6">
-              <div class="service2-auhtor-boxarea">
-                <div class="arrow">
-                  <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                <div class="content-area">
-                  <h5>Our Mission</h5>
-                  <a href="service1">We strive to be more than just a service provider; we aim to be trusted SEOC </a>
-                  <p>By staying true to our mission and values, we are committed to helping businesses of all sizes achieve their goals, realize their potential shape.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-12 col-md-6">
-              <div class="service2-auhtor2-boxarea">
-                <div class="arrow">
-                  <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                <div class="content-area">
-                  <h5>Our Vision</h5>
-                  <a href="service1">We aspire to create a world where every business owner feels empowered</a>
-                  <p>By staying true to our vision and values, we are committed to driving positive change and shaping a brighter future for businesses and communities.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--===== WORK AREA ENDS =======--> --}}
 <!--===== SERVICE AREA ENDS =======-->
 
 <!--===== HISTORY AREA STARTS =======-->
-<div class="history-inner-section-area">
+{{-- <div class="history-inner-section-area">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 m-auto">
@@ -308,11 +406,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!--===== HISTORY AREA ENDS =======-->
 
 <!--===== SKILLS AREA STARTS =======-->
-<div class="skills-section-area sp2">
+{{-- <div class="skills-section-area sp2">
     <img src="{{ URL::asset('build/img/bg/cta-bg1.png') }}" alt="" class="cta-bg1 aniamtion-key-2">
     <img src="{{ URL::asset('build/img/bg/cta-bg2.png') }}" alt="" class="cta-bg2 aniamtion-key-1">
     <div class="container">
@@ -579,7 +677,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 <!--===== TESTIMONIAL AREA ENDS =======-->
 
 @endsection

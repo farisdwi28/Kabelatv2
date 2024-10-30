@@ -778,7 +778,7 @@
                         <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
                             class="star3 keyframe5">
                         <h2 class="text-anime-style-3">Hubungi Kami</h2>
-                        <p>Kami selalu terbuka untuk masukan, pengaduan, maupun peluang karir <br
+                        <p>Kami selalu terbuka untuk masukan, pengaduan. <br
                                 class="d-md-block d-none"> Anda dapat menghubungi kami melalui detail berikut:</p>
                     </div>
                 </div>
@@ -807,13 +807,15 @@
                             <div class="content">
                                 <h4>Kontak</h4>
                                 <h6 class="text-white">Telepon</h6>
-                                <a href="tel:02258998875">02258998875<br></a>
-                                <h6 class="text-white">WhatsApp</h6>
-                                <a href="https://wa.link/wu4nxi" target="_blank">+62-821-1837-2435<br></a>
+                                <a href="tel:02258998875">(022)58998875<br></a>
+                                <h6 class="text-white">Website</h6>
+                                <a href="tel:02258998875">dispusip@bandungkab.go.id<br></a>
+                                {{-- <h6 class="text-white">WhatsApp</h6>
+                                <a href="https://wa.link/wu4nxi" target="_blank">+62-821-1837-2435<br></a> --}}
                             </div>
                         </div>
 
-                        <div class="space40"></div>
+                        {{-- <div class="space40"></div>
                         <div class="contact-auhtor-box">
                             <div class="icons">
                                 <img src="{{ URL::asset('build/img/icons/email2.svg') }}" alt="">
@@ -844,7 +846,7 @@
                                 <h4>Masukan</h4>
                                 <a href="mailto:feedback_kabelat@gmail.com">feedback_kabelat@gmail.com <br></a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 

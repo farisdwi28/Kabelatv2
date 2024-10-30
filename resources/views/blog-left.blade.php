@@ -129,7 +129,7 @@
                             <p><span>Keyword Research:</span> Conduct thorough keyword research to identify relevant search terms and phrases that your target audience is using. Choose keywords with high search volume, low competition, and strong buyer intent to maximize your chances of success.</p>
                         </div>
                       </div>
-
+                      
                       <div class="right-area">
                         <div class="check1">
                             <img src="{{ URL::asset('build/img/icons/check4.svg') }}" alt="">

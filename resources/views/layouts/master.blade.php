@@ -17,7 +17,8 @@
 @include('layouts.sidebar')
 
 @yield('content')
- 
+
+
 @include('layouts.footer')
 @include('layouts.footer-scripts')
 @yield('scripts')
