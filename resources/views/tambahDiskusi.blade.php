@@ -1,8 +1,9 @@
 @extends('layouts.master2')
 @section('title', 'FAQS')
-
-@section('content')
+@include('layouts.sidebar')
 <x-page-title title="Beranda" pagetitle="Forum Diskusi" maintitle="Tambah Diskusi" />
+@section('content')
+
 
 <div class="contact-inner-section-area sp1">
     <div class="container">

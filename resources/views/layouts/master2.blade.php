@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') | SEOC - Digital Marketing Agency</title>
     <link rel="shortcut icon" href="{{ URL::asset('build/img/logo/fav-logo1.png') }}" type="image/x-icon">
-    
+
     @yield('css')
     @include('layouts.head-css')
 </head>
-<body class="homepage1-body">
 
+<body class="homepage1-body">
     @include('layouts.preloader')
-    @include('layouts.sidebar')
-   
-    <div class="d-flex">
-        <div class="p-3 bg-light" style="width: 300px; max-height: calc(100vh - 120px); position: sticky; top: 300px; ">
+    <div class="row">
+        <div class="col-6 col-md-2 p-4">
             <a href="/" class="d-flex align-items-center mb-3 text-dark text-decoration-none">
                 <span class="fs-5">Komunitas Bunda Literasi</span>
             </a>
@@ -53,14 +52,14 @@
                 </li>
             </ul>
         </div>
-        <div class="content flex-grow-1 p-3">
+        <div class="col-md-10">
             @yield('content')
         </div>
     </div>
-
     @include('layouts.footer')
     @include('layouts.footer-scripts')
     @yield('scripts')
 
 </body>
+
 </html>
