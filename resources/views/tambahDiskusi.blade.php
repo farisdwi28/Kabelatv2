@@ -1,7 +1,7 @@
 @extends('layouts.master2')
 @section('title', 'FAQS')
 @include('layouts.sidebar')
-<x-page-title title="Beranda" pagetitle="Forum Diskusi" maintitle="Tambah Diskusi" />
+<x-page-title title="Beranda" pagetitle="Tambah Diskusi" maintitle="Tambah Diskusi" />
 @section('content')
 
 

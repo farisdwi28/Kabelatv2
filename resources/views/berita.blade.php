@@ -16,16 +16,16 @@
                         </div>
                         <div class="content-area">
                             <h5>19 Jul 2024</h5>
-                            <a href="service1" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
+                            <a href="detailBerita" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
                                 kegiatan "Tradisi Wuku Taun Kampung Adat Cikondang"</a>
                             <div class="btn-area" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="service1" class="header-btn1">Lihat Selengkapnya<span><i
+                                <a href="detailBerita" class="header-btn1">Lihat Selengkapnya<span><i
                                             class="fa-solid fa-arrow-right"></i></span>
                                 </a>
                             </div>
                         </div>
                         <div class="arrow-area">
-                            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                     <br>
@@ -37,16 +37,16 @@
                         </div>
                         <div class="content-area">
                             <h5>19 Jul 2024</h5>
-                            <a href="service1" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
+                            <a href="detailBerita" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
                                 kegiatan "Tradisi Wuku Taun Kampung Adat Cikondang"</a>
                             <div class="btn-area" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="service1" class="header-btn1">Lihat Selengkapnya<span><i
+                                <a href="detailBerita" class="header-btn1">Lihat Selengkapnya<span><i
                                             class="fa-solid fa-arrow-right"></i></span>
                                 </a>
                             </div>
                         </div>
                         <div class="arrow-area">
-                            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                     <br>
@@ -58,16 +58,16 @@
                         </div>
                         <div class="content-area">
                             <h5>19 Jul 2024</h5>
-                            <a href="service1" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
+                            <a href="detailBerita" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
                                 kegiatan "Tradisi Wuku Taun Kampung Adat Cikondang"</a>
                             <div class="btn-area" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="service1" class="header-btn1">Lihat Selengkapnya<span><i
+                                <a href="detailBerita" class="header-btn1">Lihat Selengkapnya<span><i
                                             class="fa-solid fa-arrow-right"></i></span>
                                 </a>
                             </div>
                         </div>
                         <div class="arrow-area">
-                            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -78,11 +78,11 @@
                             <div class="col-lg-12 col-md-6">
                                 <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000">
                                     <div class="arrow">
-                                        <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                     <div class="content-area">
                                         <h5>18 Jul 2024</h5>
-                                        <a href="service1">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
+                                        <a href="detailBerita">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
                                             Dispusip Kabupaten Bandung</a>
                                         <p>Dinas Perpustakaan dan Arsip Kab. Bandung _menerima penyerahan arsip yang berasal
                                             dari Kecamatan</p>
@@ -93,11 +93,11 @@
                             <div class="col-lg-12 col-md-6">
                                 <div class="service2-auhtor2-boxarea" data-aos="zoom-out" data-aos-duration="1200">
                                     <div class="arrow">
-                                        <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                     <div class="content-area">
                                         <h5>17 Jul 2024</h5>
-                                        <a href="service1">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
+                                        <a href="detailBerita">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
                                             Lomba Bertutur Tingkat Jawa Barat Tahun Anggaran 2024</a>
                                         <p>Dinas Perpustakaan dan Arsip Kabupaten Bandung mengikuti Technical meeting dalam
                                             rangka persiapan Lomba Bertutur Bagi Siswa-Siswi SD/MI Tingkat Provinsi Jawa
@@ -110,11 +110,11 @@
                                 <div class="col-lg-12 col-md-6">
                                     <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000">
                                         <div class="arrow">
-                                            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                                         </div>
                                         <div class="content-area">
                                             <h5>18 Jul 2024</h5>
-                                            <a href="service1">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
+                                            <a href="detailBerita">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
                                                 Dispusip Kabupaten Bandung</a>
                                             <p>Dinas Perpustakaan dan Arsip Kab. Bandung _menerima penyerahan arsip yang berasal
                                                 dari Kecamatan</p>
@@ -125,11 +125,11 @@
                                 <div class="col-lg-12 col-md-6">
                                     <div class="service2-auhtor2-boxarea" data-aos="zoom-out" data-aos-duration="1200">
                                         <div class="arrow">
-                                            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                                         </div>
                                         <div class="content-area">
                                             <h5>17 Jul 2024</h5>
-                                            <a href="service1">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
+                                            <a href="detailBerita">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
                                                 Lomba Bertutur Tingkat Jawa Barat Tahun Anggaran 2024</a>
                                             <p>Dinas Perpustakaan dan Arsip Kabupaten Bandung mengikuti Technical meeting dalam
                                                 rangka persiapan Lomba Bertutur Bagi Siswa-Siswi SD/MI Tingkat Provinsi Jawa

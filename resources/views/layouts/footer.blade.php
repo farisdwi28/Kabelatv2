@@ -59,7 +59,24 @@
 
       <div class="col-lg-2 col-md-6">
         <div class="footer-logo-area3">
-          <h3>Galeri Kegiatan</h3>
+            <h3>Galeri Kegiatan</h3>
+            <div class="row mt-4">
+                <div class="col-6 col-md-4 mb-4">
+                    <div class="card border-0 rounded-3 shadow">
+                        <img src="{{ URL::asset('build/img/all-images/contoh4.png') }}" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 mb-4">
+                    <div class="card border-0 rounded-3 shadow">
+                        <img src="{{ URL::asset('build/img/all-images/contoh4.png') }}" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 mb-4">
+                  <div class="card border-0 rounded-3 shadow">
+                      <img src="{{ URL::asset('build/img/all-images/contoh4.png') }}" alt="" class="img-fluid">
+                  </div>
+              </div>
+            </div>
           <form action="#">
             <input type="text" placeholder="Enter Your email">
             <button class="header-btn1"> Subscribe <span><i class="fa-solid fa-arrow-right"></i></span></button>

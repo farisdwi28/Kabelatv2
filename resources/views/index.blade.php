@@ -44,13 +44,13 @@
                     aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner" data-aos="fade-left" data-aos-duration="1200">
-                <a href="detailKegiatan">
+                <a href="">
                     <div class="carousel-item active" data-bs-interval="10000">
-                        <img src="{{ URL::asset('build/img/all-images/carousel1.png') }}" class="d-block w-100"
+                        <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100"
                             alt="...">
                         <div class="carousel-caption">
-                            <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
-                            <p class="d-none d-md-block">Meriahkan Sasakala Dongeng Bandung Bersama Ki Bedas!.</p>
+                            <h1></h1>
+                            <p class="d-none d-md-block"></p>
                         </div>
                     </div>
                 </a>
@@ -66,7 +66,7 @@
                 </a>
                 <a href="detailKegiatan">
                     <div class="carousel-item" data-bs-interval="1000">
-                        <img src="{{ URL::asset('build/img/all-images/carousel3.png') }}" class="d-block w-100"
+                        <img src="{{ URL::asset('build/img/all-images/carousel1.png') }}" class="d-block w-100"
                             alt="...">
 
                         <div class="carousel-caption">
@@ -314,7 +314,7 @@
                                         <div class="space30"></div>
                                         <div class="list-area">
                                             <div class="list">
-                                                <a href="team">Bedas Literasi Ramadhan dan Lentera Langit</a>
+                                                <a href="detailProgramDispusip">Bedas Literasi Ramadhan dan Lentera Langit</a>
                                             </div>
                                         </div>
                                     </div>
@@ -337,7 +337,7 @@
                                         <div class="space30"></div>
                                         <div class="list-area">
                                             <div class="list">
-                                                <a href="team">Bandung Bedas Preservasi Manuskrip dan Naskah Kuno</a>
+                                                <a href="detailProgramDispusip">Bandung Bedas Preservasi Manuskrip dan Naskah Kuno</a>
                                             </div>
                                         </div>
                                     </div>
@@ -403,16 +403,16 @@
                         </div>
                         <div class="content-area">
                             <h5>19 Jul 2024</h5>
-                            <a href="service1" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
+                            <a href="detailBerita" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
                                 kegiatan "Tradisi Wuku Taun Kampung Adat Cikondang"</a>
                             <div class="btn-area" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="service1" class="header-btn1">Lihat Selengkapnya<span><i
+                                <a href="detailBerita" class="header-btn1">Lihat Selengkapnya<span><i
                                             class="fa-solid fa-arrow-right"></i></span>
                                 </a>
                             </div>
                         </div>
                         <div class="arrow-area">
-                            <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -422,11 +422,11 @@
                             <div class="col-lg-12 col-md-6">
                                 <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000">
                                     <div class="arrow">
-                                        <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                     <div class="content-area">
                                         <h5>18 Jul 2024</h5>
-                                        <a href="service1">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
+                                        <a href="detailBerita">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
                                             Dispusip Kabupaten Bandung</a>
                                         <p>Dinas Perpustakaan dan Arsip Kab. Bandung _menerima penyerahan arsip yang berasal
                                             dari Kecamatan
@@ -438,11 +438,11 @@
                             <div class="col-lg-12 col-md-6">
                                 <div class="service2-auhtor2-boxarea" data-aos="zoom-out" data-aos-duration="1200">
                                     <div class="arrow">
-                                        <a href="service1"><i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                     <div class="content-area">
                                         <h5>17 Jul 2024</h5>
-                                        <a href="service1">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
+                                        <a href="detailBerita">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
                                             Lomba Bertutur Tingkat Jawa Barat Tahun Anggaran 2024</a>
                                         <p>Dinas Perpustakaan dan Arsip Kabupaten Bandung mengikuti Technical meeting dalam
                                             rangka persiapan Lomba Bertutur Bagi Siswa-Siswi SD/MI Tingkat Provinsi Jawa
@@ -633,7 +633,7 @@
                                         <div class="space30"></div>
                                         <div class="list-area">
                                             <div class="list">
-                                                <a href="team">KOMUNITAS GPMB</a>
+                                                <a href="joinKomunitas">KOMUNITAS GPMB</a>
                                             </div>
                                         </div>
                                     </div>
@@ -657,7 +657,7 @@
                                         <div class="space30"></div>
                                         <div class="list-area">
                                             <div class="list">
-                                                <a href="team">KOMUNITAS PECINTA NASKAH KUNO</a>
+                                                <a href="joinKomunitas">KOMUNITAS PECINTA NASKAH KUNO</a>
                                             </div>
                                         </div>
                                     </div>

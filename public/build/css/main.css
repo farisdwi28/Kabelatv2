@@ -463,12 +463,12 @@ img {
   --ztc-text-text-10: #F6F8F9;
   --ztc-text-text-11: #ADFF1C;
   --ztc-text-text-12: #0A2828;
-  --ztc-text-text-13: #2E00FF;
+  --ztc-text-text-13: #227377;
   --ztc-text-text-14: #FF6610;
   --ztc-text-text-15: #0D47A1;
   --ztc-text-text-16: #1B6CFC;
   --ztc-text-text-17: #6455E1;
-  --ztc-bg-bg-1: #4E2FDA;
+  --ztc-bg-bg-1: #227377;
   --ztc-bg-bg-2: #EDE9F8;
   --ztc-bg-bg-3: #C8BFF4;
   --ztc-bg-bg-4: #EDEAFB;
@@ -1496,7 +1496,7 @@ Location:
   line-height: var(--ztc-font-size-font-s36);
   text-align: center;
   background: var(--ztc-text-text-1);
-  color: var(--ztc-text-text-4);
+  color: var(--ztc-text-text-2);
   transform: rotate(-45deg);
   position: relative;
   left: 8px;
@@ -10899,7 +10899,7 @@ Location:
   padding: 0;
 }
 .homepage1-body .header-area.homepage1 nav#navbar-example2 ul li a.nav-link.active {
-  color: var(--ztc-text-text-4);
+  color: var(--ztc-text-text-13);
 }
 .homepage1-body .header-area.homepage1 .header-elements {
   display: flex;

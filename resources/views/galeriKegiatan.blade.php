@@ -21,12 +21,18 @@
         <div class="row">
             <div class="col-lg-7 m-auto">
                 <div class="tabs-area text-center">
-                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist" style="text-align: center;">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-email-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onclick="updateTitle('Kegiatan Dispusip')">Kegiatan Program Dispusip</button>
+                            <button class="nav-item" id="pills-email-tab" 
+                                data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onclick="updateTitle('Kegiatan Dispusip')" style="background-color: #1a5b5b; color: white; border: none; border-radius: 25px; padding: 10px 20px; transition: background-color 0.3s ease, color 0.3s ease;">
+                                Kegiatan Program Dispusip
+                            </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-hyper-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="updateTitle('Kegiatan Komunitas')">Kegiatan Komunitas</button>
+                            <button class="nav-item" id="pills-hyper-tab" 
+                                data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="updateTitle('Kegiatan Komunitas')" style="background-color: #227377; color: white; border: none; border-radius: 25px; padding: 10px 20px; transition: background-color 0.3s ease, color 0.3s ease;">
+                                Kegiatan Komunitas
+                            </button>
                         </li>
                     </ul>
                 </div>

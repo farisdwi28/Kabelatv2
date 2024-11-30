@@ -28,7 +28,6 @@
                                     <br>
                                     <div class="case-others-area">
                                         <ul>
-                                            <li><span>Lokasi:</span>Perpustakaan Kabupaten Bandung, Jl. Raya Soreang No.17 Kabupaten Bandung Provinsi Jawa Barat</li>
                                             <li><span>Tanggal Kegiatan:</span>29/06/2024 - 02/07/2024</li>
                                         </ul>
                                     </div>

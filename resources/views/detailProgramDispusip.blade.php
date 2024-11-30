@@ -13,8 +13,9 @@
                         <div class="row align-items-center">
                             <div class="col-lg-4">
                                 <div class="case-single-hedaer heading2">
-                                    <h2 class="text-3xl">Jelajah Literasi Asik</h2> <!-- Adjusted size -->
-                                    <h4 class="text-xl">Diinisiasi oleh Sani Kurnia</h4> <!-- Adjusted size -->
+                                    <h2 class="text-3xl">Jelajah Literasi Asik</h2> 
+                                    <h4 class="text-xl">Diinisiasi oleh Sani Kurnia</h4>
+                                    <p class="text-muted" style="font-size: 18px;"> 1 November 2024</p>
                                 </div>
                             </div>
                             <div class="col-lg-1"></div>
@@ -35,7 +36,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <div class="case-pera-area heading2">
-                        <h2 class="text-3xl">Tentang Program</h2> <!-- Adjusted size -->
+                        <h2 class="text-3xl">Tentang Program</h2> 
                         <p class="text-black" style="font-size: 20px;">Indonesia tertinggal dalam hal budaya literasi. Data UNESCO tahun 2017 menunjukkan
                             bahwa minat baca masyarakat Indonesia sangat rendah, hanya 0,001%. Artinya, dari
                             1.000 orang Indonesia, hanya 1 orang yang rajin membaca. Hal ini diperparah dengan

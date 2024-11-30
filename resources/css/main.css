@@ -1449,7 +1449,7 @@ Location:
   font-size: var(--ztc-font-size-font-s18);
   line-height: var(--ztc-font-size-font-s18);
   font-weight: var(--ztc-weight-bold);
-  background: var(--ztc-bg-bg-1);
+  background: var(--ztc-bg-bg-17);
   color: var(--ztc-text-text-1);
   padding: 8px 16px;
   transition: all 0.4s;
@@ -1477,7 +1477,7 @@ Location:
   transition: all 0.4s;
   top: 0;
   z-index: -1;
-  background: var(--ztc-text-text-13);
+  background: var(--ztc-text-text-11);
   border-radius: 30px;
   visibility: hidden;
   opacity: 0;
@@ -1496,7 +1496,7 @@ Location:
   line-height: var(--ztc-font-size-font-s36);
   text-align: center;
   background: var(--ztc-text-text-1);
-  color: var(--ztc-text-text-4);
+  color: var(--ztc-text-text-11);
   transform: rotate(-45deg);
   position: relative;
   left: 8px;

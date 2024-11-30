@@ -16,13 +16,13 @@
                                     <ul class="dropdown-padding">
                                         <li><a href="programDispusip">Semua Program</a></li>
                                         <li><a href="detailProgramDispusip">Jelajah Literasi Asik</a></li>
-                                        <li><a href="#">Bedas Literasi Ramadhan dan Lentera Langit</a></li>
-                                        <li><a href="#">Wisata Literasi dan Perpustakaan anak</a></li>
-                                        <li><a href="#">Sasakala Dongeng Bandung Bersama Ki Badas</a></li>
-                                        <li><a href="#">Bandung Bedas Presevasi Manuskrip dan Naskah Kuno</a></li>
+                                        <li><a href="detailProgramDispusip">Bedas Literasi Ramadhan dan Lentera Langit</a></li>
+                                        <li><a href="detailProgramDispusip">Wisata Literasi dan Perpustakaan anak</a></li>
+                                        <li><a href="detailProgramDispusip">Sasakala Dongeng Bandung Bersama Ki Badas</a></li>
+                                        <li><a href="detailProgramDispusip">Bandung Bedas Presevasi Manuskrip dan Naskah Kuno</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="about">Komunitas</a></li>
+                                <li><a href="kegiatanKomunitas">Komunitas</a></li>
                                 <li><a href="#">Informasi <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
                                         <li><a href="berita">Berita</a></li>
