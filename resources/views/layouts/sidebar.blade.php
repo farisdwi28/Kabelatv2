@@ -1,5 +1,5 @@
 <header>
-    <div class="header-area homepage1 header header-sticky d-none d-lg-block" id="header">
+    <div class="header-area homepage1 header header-sticky d-none d-lg-block  bg-white fixed-top shadow" id="header">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-10 d-flex justify-content-center">
@@ -14,26 +14,33 @@
                                 <li><a href="/">Beranda</a></li>
                                 <li><a href="#">Program Dispusip <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
-                                        <li><a href="programDispusip">Semua Program</a></li>
-                                        <li><a href="detailProgramDispusip">Jelajah Literasi Asik</a></li>
-                                        <li><a href="detailProgramDispusip">Bedas Literasi Ramadhan dan Lentera Langit</a></li>
-                                        <li><a href="detailProgramDispusip">Wisata Literasi dan Perpustakaan anak</a></li>
-                                        <li><a href="detailProgramDispusip">Sasakala Dongeng Bandung Bersama Ki Badas</a></li>
-                                        <li><a href="detailProgramDispusip">Bandung Bedas Presevasi Manuskrip dan Naskah Kuno</a></li>
+                                        <li><a href="{{ route('programdispusip.index') }}">Semua Program</a></li>
+                                        @if(isset($programs) && $programs->count() > 0)
+                                          @foreach ($programs as $program)
+                                        <li>
+                                           <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                           {{ $program->nm_program }}
+                                           </a>
+                                        </li>
+                                          @endforeach
+                                          @else
+                                          <li><a href="#">Belum ada program tersedia</a></li>
+                                           @endif
                                     </ul>
                                 </li>
                                 <li><a href="kegiatanKomunitas">Komunitas</a></li>
                                 <li><a href="#">Informasi <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
                                         <li><a href="berita">Berita</a></li>
-                                        <li><a href="Pengumuman">Pengumuman</a></li>
+                                        <li><a href="pengumuman">Pengumuman</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="galeriKegiatan">Galeri Kegiatan</a></li>
                                 <li><a href="profile">Profil</a></li>
                                 <li><a href="#">Tentang <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
-                                        <li><a href="case">Tentang Dispusip</a></li>
+                                        {{-- <li><a href="case">Tentang Dispusip</a></li>
+                                        <li><a href="case-single">Hubungi Kami</a></li> --}}
                                         {{-- <li><a href="case-single">Hubungi Kami</a></li> --}}
                                         <li><a href="404">404</a></li>
                                         <form method="POST" action="{{ route('logout') }}" x-data>
@@ -53,10 +60,9 @@
                                 <a href="#"><img src="{{ URL::asset('build/img/icons/search-icons1.svg') }}"
                                         alt=""></a>
                             </div>
-                            <a href="contact" class="header-btn1">Masuk <span><i
+                            <a href="login" class="header-btn1">Masuk <span><i
                                         class="fa-solid fa-arrow-right"></i></span></a>
                         </div>
-
                         <div class="header-search-form-wrapper">
                             <div class="tx-search-close tx-close"><i class="fa-solid fa-xmark"></i></div>
                             <div class="header-search-container">
@@ -107,35 +113,42 @@
     <div class="mobile-nav mobile-nav1">
         <ul class="mobile-nav-list nav-list1">
             <li><a href="#">Beranda </a></li>
-            <li><a href="#">Program Dispusip</a>
+            <li><a href="#">Program Dispusip </i></a>
                 <ul class="sub-menu">
-                  <li><a href="programDispusip">Semua Program</a></li>
-                  <li><a href="DetailProgramDispusip">Jelajah Literasi Asik</a></li>
-                  <li><a href="service3">Bedas Literasi Ramadhan dan Lentera Langit</a></li>
-                  <li><a href="service4">Wisata Literasi dan Perpustakaan anak</a></li>
-                  <li><a href="service5">Sasakala Dongeng Bandung Bersama Ki Badas</a></li>
-                  <li><a href="service5">Bandung Bedas Presevasi Manuskrip dan Naskah Kuno</a></li>
+                    <li><a href="{{ route('programdispusip.index') }}">Semua Program</a></li>
+                    @if(isset($programs) && $programs->count() > 0)
+                      @foreach ($programs as $program)
+                    <li>
+                       <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                       {{ $program->nm_program }}
+                       </a>
+                    </li>
+                      @endforeach
+                      @else
+                      <li><a href="#">Belum ada program tersedia</a></li>
+                       @endif
                 </ul>
             </li>
-            <li><a href="#">Komunitas</a></li>
+            <li><a href="kegiatanKomunitas">Komunitas</a></li>
             <li><a href="#">Informasi</a>
                 <ul class="sub-menu">
-                  <li><a href="Berita">Berita</a></li>
-                  <li><a href="Pengumuman">Pengumuman</a></li>
+                  <li><a href="berita">Berita</a></li>
+                  <li><a href="pengumuman">Pengumuman</a></li>
                 </ul>
             </li>
             <li><a href="galeriKegiatan">Galeri Kegiatan</a></li>
             <li><a href="profile">Profil</a></li>
             <li><a href="#">Tentang</a>
                 <ul class="sub-menu">
-                  <li><a href="case">Tentang Dispusip</a></li>
+                  {{-- <li><a href="case">Tentang Dispusip</a></li>
+                  <li><a href="case-single">Hubungi Kami</a></li> --}}
                   {{-- <li><a href="case-single">Hubungi Kami</a></li> --}}
                 </ul>
             </li>
         </ul>
 
         <div class="allmobilesection">
-            <a href="contact" class="header-btn1">Masuk <span><i
+            <a href="login" class="header-btn1">Masuk <span><i
                         class="fa-solid fa-arrow-right"></i></span></a>
             <div class="single-footer">
                 <h3>Contact Info</h3>

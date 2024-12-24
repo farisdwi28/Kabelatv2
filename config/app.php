@@ -15,6 +15,8 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+    'timezone' => 'Asia/Jakarta',  // Atur sesuai zona waktu Anda
+
 
     'name' => env('APP_NAME', 'Laravel'),
 

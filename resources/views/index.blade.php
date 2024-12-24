@@ -294,89 +294,50 @@
                         <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt="" class="star2 keyframe5">
                         <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt="" class="star3 keyframe5">
                         <h2 class="text-anime-style-3">Program Dispusip</h2>
-                        <p data-aos="fade-up" data-aos-duration="1000">Telusuri berbagai program unggulan dari Dispusip yang
-                            dirancang untuk mendukung literasi, pengembangan komunitas, dan pelestarian budaya.<br
-                                class="d-md-block d-none"> Temukan program-program yang sesuai dengan minat dan kebutuhan
-                            Anda.</p>
+                        <p data-aos="fade-up" data-aos-duration="1000">
+                            Telusuri berbagai program unggulan dari Dispusip yang dirancang untuk mendukung literasi,
+                            pengembangan komunitas, dan pelestarian budaya.<br class="d-md-block d-none">
+                            Temukan program-program yang sesuai dengan minat dan kebutuhan Anda.
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
                     <div class="testimonials-slider-area owl-carousel">
-                        <div class="testimonial-boxarea">
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="pera">
-                                        <p>Indonesia tertinggal dalam hal budaya literasi. Menurut data UNESCO tahun 2017,
-                                            minat baca masyarakat Indonesia sangat rendah, hanya mencapai 0,001%</p>
-                                        <div class="space100"></div>
-                                        <div class="space30"></div>
-                                        <div class="list-area">
-                                            <div class="list">
-                                                <a href="detailProgramDispusip">Bedas Literasi Ramadhan dan Lentera Langit</a>
+                        @foreach ($programs as $program)
+                            <div class="testimonial-boxarea">
+                                <div class="row">
+                                    <!-- Konten Kiri -->
+                                    <div class="col-lg-5">
+                                        <div class="pera">
+                                            <p>{{ Str::limit($program->tentang_program, 150) }}</p>
+                                            <div class="space100"></div>
+                                            <div class="space30"></div>
+                                            <div class="list-area">
+                                                <div class="list">
+                                                    <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                                        {{ $program->nm_program }}
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="images">
-                                        <img src="{{ URL::asset('build/img/all-images/contoh1.png') }}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-boxarea">
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="pera">
-                                        <p>Besprenku atau Bandung Bedas Preservasi Manuskrip dan Naskah Kuno. Besprenku
-                                            merupakan kegiatan menjaga dan melestarikan Manuskrip dan Naskah Kuno.</p>
-                                        <div class="space100"></div>
-                                        <div class="space30"></div>
-                                        <div class="list-area">
-                                            <div class="list">
-                                                <a href="detailProgramDispusip">Bandung Bedas Preservasi Manuskrip dan Naskah Kuno</a>
-                                            </div>
+                                    <!-- Konten Kanan -->
+                                    <div class="col-lg-7">
+                                        <div class="images">
+                                            <img src="{{ $program->sampul_program }}" alt="{{ $program->nm_program }}" class="img-fluid">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-7">
-                                    <div class="images">
-                                        <img src="{{ URL::asset('build/img/all-images/contoh2.png') }}" alt="">
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-
-                        <div class="testimonial-boxarea">
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="pera">
-                                        <p>Dinas Arsip dan Perpustakaan Kabupaten Bandung mengembangkan inovasi yang diberi
-                                            nama Jelita atau Jelajah Literasi Asik.</p>
-                                        <div class="space100"></div>
-                                        <div class="space30"></div>
-                                        <div class="list-area">
-                                            <div class="list">
-                                                <a href="detailProgramDispusip">Jelajah Literasi Asik</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="images">
-                                        <img src="{{ URL::asset('build/img/all-images/contoh3.png') }}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     <!--===== TESTIMONIAL AREA ENDS =======-->
 
     <!--===== SERVICE AREA STARTS =======-->
@@ -434,7 +395,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 col-md-6">
                                 <div class="service2-auhtor2-boxarea" data-aos="zoom-out" data-aos-duration="1200">
                                     <div class="arrow">

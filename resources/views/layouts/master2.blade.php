@@ -73,6 +73,7 @@
                 </div>
             </main>
         </div>
+        <div class="body-overlay"></div>    
     </div>
     @include('layouts.footer')
     @include('layouts.footer-scripts')

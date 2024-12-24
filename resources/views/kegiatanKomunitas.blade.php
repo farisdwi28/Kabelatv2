@@ -1,7 +1,7 @@
 @extends('layouts.master2')
 @section('title', 'FAQS')
 @include('layouts.sidebar')
-<x-page-title title="Beranda" pagetitle="Kegiatan" maintitle="Komunitas Komunitas" />
+<x-page-title title="Beranda" pagetitle="Kegiatan" maintitle="Komunitas" />
 
 @section('content')
 <div class="container py-5">

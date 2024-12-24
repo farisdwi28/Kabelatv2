@@ -77,10 +77,12 @@
                   </div>
               </div>
             </div>
-          <form action="#">
-            <input type="text" placeholder="Enter Your email">
-            <button class="header-btn1"> Subscribe <span><i class="fa-solid fa-arrow-right"></i></span></button>
-          </form>
+            <div class="btn-area d-flex flex-column align-items-start">
+              <p class="mb-2">Ikuti Instagram</p>
+              <a href="https://www.instagram.com/dispusip_kab.bandung?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="header-btn1">
+                  Ikuti <span><i class="fa-solid fa-arrow-right"></i></span>
+              </a>
+          </div>          
         </div>
       </div>
     </div>

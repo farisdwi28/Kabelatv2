@@ -1,62 +1,33 @@
 @extends('layouts.master2')
-@section('title', 'FAQS')
+@section('title', 'Tambah Diskusi')
 @include('layouts.sidebar')
 <x-page-title title="Beranda" pagetitle="Tambah Diskusi" maintitle="Tambah Diskusi" />
+
 @section('content')
-
-
-<div class="contact-inner-section-area sp1">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 m-auto">
-                <div class="contact-form-area">
-                    <div class="row">
-                        <div class="col-lg-15">
-                            <div class="form-group">
-                                <label for="discussionInformation"><strong>Informasi Diskusi</strong></label>
-                                <p>Tempat bertukar pikiran dan berdiskusi mengenai buku dan literatur</p>
-                                <hr class="mt-3" style="border: 1px solid #000; margin: 5px 0 20px 0;" />
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-                            <div class="form-group">
-                                <label for="community">Pilih Komunitas *</label>
-                                <div class="input-area">
-                                    <input type="text" class="form-control" id="community" placeholder="Bunda Literasi" value="Bunda Literasi" required readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-                            <div class="form-group">
-                                <label for="discussionTitle">Judul Diskusi</label>
-                                <div class="input-area">
-                                    <input type="text" class="form-control" id="discussionTitle" placeholder="Masukan Judul Diskusi Anda">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 mb-4">
-                            <div class="form-group">
-                                <label for="discussionDescription">Deskripsi Diskusi</label>
-                                <div class="input-area">
-                                    <textarea class="form-control" id="discussionDescription" rows="4" placeholder="Masukan Deskripsi Diskusi Anda"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 text-center">
-                            <div class="input-area d-flex justify-content-end">
-                                <button type="submit" class="header-btn1 me-2">Simpan Perubahan <span><i class="fa-solid fa-arrow-right"></i></span></button>
-                            </div>
-                        </div>
-
-                    </div>
+<div class="container flex items-center justify-center min-h-screen">
+    <div class="card w-full max-w-lg border-0 shadow-md">
+        <div class="card-header text-center py-3 bg-gradient-primary text-black rounded-top position-relative">
+            <h4 class="fw-semibold py-4">Tambah Diskusi Baru</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ route('diskusi.store') }}">
+                @csrf
+                
+                <div class="mb-3">
+                    <label for="judul" class="form-label font-semibold">Judul Diskusi</label>
+                    <input type="text" class="form-control border border-gray-300 rounded-md p-2" id="judul" name="judul" placeholder="Masukkan judul diskusi" required>
                 </div>
-            </div>
+
+                <div class="mb-3">
+                    <label for="deskripsi" class="form-label font-semibold">Deskripsi</label>
+                    <textarea class="form-control border border-gray-300 rounded-md p-2" id="deskripsi" name="deskripsi" rows="5" placeholder="Tuliskan deskripsi diskusi" required></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="header-btn1 px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">Simpan Diskusi</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
 @endsection
