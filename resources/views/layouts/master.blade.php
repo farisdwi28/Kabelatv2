@@ -10,6 +10,8 @@
 
     @include('layouts.head-css')
 </head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 <body class="homepage1-body">
     {{-- {{ URL::asset('build/img/all-images/Logo Kabelat.svg') }} --}}
 @include('layouts.preloader')

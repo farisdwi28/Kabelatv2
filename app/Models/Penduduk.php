@@ -2,16 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Penduduk extends Model
 {
-    use HasFactory;
-
-    // Tentukan nama tabel jika tidak mengikuti konvensi plural
     protected $table = 'penduduk';
+    protected $primaryKey = 'kd_pen';
+    public $incrementing = false;
     
-    // Tentukan kolom yang bisa diisi
-    protected $fillable = ['no_ktp', 'nama', 'alamat']; // Sesuaikan dengan kolom yang ada di tabel penduduk
+    protected $fillable = [
+        'kd_pen',
+        'no_ktp',
+        'nm_pen',
+        'alamat',
+        'foto_pen',
+        'desa',
+        'kecamatan'
+    ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'kd_pen', 'kd_pen');
+    }
 }

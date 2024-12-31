@@ -23,6 +23,15 @@
                     <textarea class="form-control border border-gray-300 rounded-md p-2" id="deskripsi" name="deskripsi" rows="5" placeholder="Tuliskan deskripsi diskusi" required></textarea>
                 </div>
 
+                {{-- <div class="mb-3">
+                    <label for="komunitas" class="form-label font-semibold">Komunitas</label>
+                    <select class="form-control border border-gray-300 rounded-md p-2" id="komunitas" name="komunitas_id" required>>
+                        @foreach($komunitas as $k)
+                            <option value="{{ $k->id }}">{{ $k->nm_komunitas }}</option>
+                        @endforeach
+                    </select>
+                </div> --}}
+
                 <div class="text-center">
                     <button type="submit" class="header-btn1 px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">Simpan Diskusi</button>
                 </div>

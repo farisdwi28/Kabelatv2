@@ -16,7 +16,15 @@ return [
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
+        'verifyNik' => true, // Tambahkan ini
+],
+
+'controllers' => [
+    'register' => \App\Http\Controllers\Auth\RegisterController::class,
+    'verifyNik' => \App\Http\Controllers\Auth\RegisterController::class, // Tambahkan ini
+
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -111,5 +119,6 @@ return [
     */
 
     'password_timeout' => 10800,
+    
 
 ];

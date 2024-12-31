@@ -1,81 +1,91 @@
+@php
+    $isMember = false;
+    $jabatan = null; // Set jabatan to null initially
+    if (Auth::check()) {
+        $memberInfo = App\Models\MemberKomunitas::where('kd_member', Auth::user()->kd_pen)->first();
+        if ($memberInfo) {
+            $isMember = true;
+            $jabatan = $memberInfo->kd_jabatan === 'ANGGT' ? 'Anggota' : $memberInfo->kd_jabatan;
+        }
+    }
+@endphp
+
 <header>
-    <div class="header-area homepage1 header header-sticky d-none d-lg-block  bg-white fixed-top shadow" id="header">
+    <div class="header-area homepage1 header header-sticky d-none d-lg-block bg-white fixed-top shadow" id="header">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-10 d-flex justify-content-center">
                     <div class="header-elements d-flex justify-content-between align-items-center w-100">
                         <div class="site-logo">
-                            <a href="index">
-                                <img src="{{ URL::asset('build/img/all-images/Logo Kabelat.svg') }}" alt="Logo">
+                            <a href="/">
+                                <img src="{{ asset('build/img/all-images/Logo Kabelat.svg') }}" alt="Logo">
                             </a>
                         </div>
                         <div class="main-menu">
                             <ul>
                                 <li><a href="/">Beranda</a></li>
-                                <li><a href="#">Program Dispusip <i class="fa-solid fa-angle-down"></i></a>
+                                <li>
+                                    <a href="#">Program Dispusip <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
                                         <li><a href="{{ route('programdispusip.index') }}">Semua Program</a></li>
-                                        @if(isset($programs) && $programs->count() > 0)
-                                          @foreach ($programs as $program)
-                                        <li>
-                                           <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                                           {{ $program->nm_program }}
-                                           </a>
-                                        </li>
-                                          @endforeach
-                                          @else
-                                          <li><a href="#">Belum ada program tersedia</a></li>
-                                           @endif
+                                        @foreach ($programs as $program)
+                                            <li>
+                                                <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                                    {{ $program->nm_program }}
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="kegiatanKomunitas">Komunitas</a></li>
-                                <li><a href="#">Informasi <i class="fa-solid fa-angle-down"></i></a>
+                                <li><a href="{{ route('komunitas.show') }}">Komunitas</a></li>
+                                <li>
+                                    <a href="#">Informasi <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
-                                        <li><a href="berita">Berita</a></li>
-                                        <li><a href="pengumuman">Pengumuman</a></li>
+                                        <li><a href="{{ route('berita.index') }}">Berita</a></li>
+                                        <li><a href="{{ route('pengumuman.index') }}">Pengumuman</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="galeriKegiatan">Galeri Kegiatan</a></li>
-                                <li><a href="profile">Profil</a></li>
-                                <li><a href="#">Tentang <i class="fa-solid fa-angle-down"></i></a>
+                                <li><a href="{{ route('kegiatan.index') }}">Galeri Kegiatan</a></li>
+                                    <li><a href="{{ route('profile.index') }}">Profil</a></li>
+                                <li>
+                                    <a href="#">Tentang <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
-                                        {{-- <li><a href="case">Tentang Dispusip</a></li>
-                                        <li><a href="case-single">Hubungi Kami</a></li> --}}
-                                        {{-- <li><a href="case-single">Hubungi Kami</a></li> --}}
-                                        <li><a href="404">404</a></li>
-                                        <form method="POST" action="{{ route('logout') }}" x-data>
-                                            @csrf
-                                            <button type="submit"
-                                                class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                                <li>Logout</li>
-
-                                            </button>
-                                        </form>
+                                        @auth
+                                            <li>
+                                                <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <button type="submit" class="dropdown-item">Logout</button>
+                                                </form>
+                                            </li>
+                                        @endauth
                                     </ul>
                                 </li>
                             </ul>
                         </div>
+
                         <div class="btn-area">
-                            <div class="search-icon header__search header-search-btn">
-                                <a href="#"><img src="{{ URL::asset('build/img/icons/search-icons1.svg') }}"
-                                        alt=""></a>
-                            </div>
-                            <a href="login" class="header-btn1">Masuk <span><i
-                                        class="fa-solid fa-arrow-right"></i></span></a>
+                            @guest
+                                <a href="{{ route('login') }}" class="header-btn1">Masuk <span><i class="fa-solid fa-arrow-right"></i></span></a>
+                            @endguest
+
+                            @auth
+                                <div class="user-profile-dropdown d-flex align-items-center gap-3">
+                                    <div class="profile-avatar">
+                                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar"
+                                             class="profile-picture rounded-circle shadow-sm"
+                                             style="width: 60px; height: 60px; object-fit: cover;">
+                                    </div>
+                                    <div>
+                                        <span class="font-weight-bold">
+                                            {{ Str::limit(Auth::user()->name, 15, '...') }}
+                                        </span>
+                                        @if ($isMember && $jabatan)
+                                            <div class="text-muted small">{{ $jabatan }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endauth
                         </div>
-                        <div class="header-search-form-wrapper">
-                            <div class="tx-search-close tx-close"><i class="fa-solid fa-xmark"></i></div>
-                            <div class="header-search-container">
-                                <form role="search" class="search-form">
-                                    <input type="search" class="search-field" placeholder="Search …" value=""
-                                        name="s">
-                                    <button type="submit" class="search-submit"><img
-                                            src="{{ URL::asset('build/img/icons/search-icons1.svg') }}"
-                                            alt=""></button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="body-overlay"></div>
                     </div>
                 </div>
             </div>
@@ -90,8 +100,7 @@
         <div class="col-12">
             <div class="mobile-header-elements">
                 <div class="mobile-logo">
-                    <a href="index"><img src="{{ URL::asset('build/img/all-images/Logo Kabelat.svg') }}"
-                            alt=""></a>
+                    <a href="/"><img src="{{ URL::asset('build/img/all-images/Logo Kabelat.svg') }}" alt=""></a>
                 </div>
                 <div class="mobile-nav-icon dots-menu">
                     <i class="fa-solid fa-bars"></i>
@@ -112,75 +121,71 @@
     </div>
     <div class="mobile-nav mobile-nav1">
         <ul class="mobile-nav-list nav-list1">
-            <li><a href="#">Beranda </a></li>
-            <li><a href="#">Program Dispusip </i></a>
+            <li><a href="/">Beranda </a></li>
+            <li> <a href="#">Program Dispusip</a>
                 <ul class="sub-menu">
                     <li><a href="{{ route('programdispusip.index') }}">Semua Program</a></li>
-                    @if(isset($programs) && $programs->count() > 0)
-                      @foreach ($programs as $program)
-                    <li>
-                       <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                       {{ $program->nm_program }}
-                       </a>
-                    </li>
-                      @endforeach
-                      @else
-                      <li><a href="#">Belum ada program tersedia</a></li>
-                       @endif
+                    @foreach ($programs as $program)
+                        <li>
+                            <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                {{ $program->nm_program }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
-            <li><a href="kegiatanKomunitas">Komunitas</a></li>
+            <li><a href="{{ route('komunitas.show') }}">Komunitas</a></li>
             <li><a href="#">Informasi</a>
                 <ul class="sub-menu">
-                  <li><a href="berita">Berita</a></li>
-                  <li><a href="pengumuman">Pengumuman</a></li>
+                    <li><a href="{{ route('berita.index') }}">Berita</a></li>
+                    <li><a href="{{ route('pengumuman.index') }}">Pengumuman</a></li>
                 </ul>
             </li>
             <li><a href="galeriKegiatan">Galeri Kegiatan</a></li>
             <li><a href="profile">Profil</a></li>
             <li><a href="#">Tentang</a>
                 <ul class="sub-menu">
-                  {{-- <li><a href="case">Tentang Dispusip</a></li>
+                    {{-- <li><a href="case">Tentang Dispusip</a></li>
                   <li><a href="case-single">Hubungi Kami</a></li> --}}
-                  {{-- <li><a href="case-single">Hubungi Kami</a></li> --}}
+                    {{-- <li><a href="case-single">Hubungi Kami</a></li> --}}
                 </ul>
             </li>
         </ul>
 
         <div class="allmobilesection">
-            <a href="login" class="header-btn1">Masuk <span><i
-                        class="fa-solid fa-arrow-right"></i></span></a>
-            <div class="single-footer">
-                <h3>Contact Info</h3>
-                <div class="footer1-contact-info">
-                    <div class="single-footer">
-                        <h3>Lokasi</h3>
+            @guest
+                <!-- Tampilkan tombol Masuk jika belum login -->
+                <a href="{{ route('login') }}" class="header-btn1">Masuk <span><i
+                            class="fa-solid fa-arrow-right"></i></span></a>
+            @endguest
 
-                        <div class="contact-info-single">
-                            <div class="contact-info-icon">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <div class="contact-info-text">
-                                <a href="mailto:info@example.com">Perpustakaan Kabupaten Bandung Jl. Al-Fathu Pamekaran, <br> Kec. Soreang Kabupaten Bandung, Jawa Barat 40912</a>
-                            </div>
-                        </div>
-
+            @auth
+                <!-- Tampilkan profil foto dan nama jika sudah login -->
+                <div class="user-profile-dropdown d-flex align-items-center gap-3">
+                    <div class="profile-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar"
+                            class="profile-picture rounded-circle shadow-sm"
+                            style="width: 60px; height: 60px; object-fit: cover;">
                     </div>
-                    <div class="single-footer">
-                        <h3>Media Sosial</h3>
-
-                        <div class="social-links-mobile-menu">
-                            <ul>
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                            </ul>
-                        </div>
+                    <div>
+                        <span class="font-weight-bold">
+                            {{ Str::limit(Auth::user()->name, 15, '...') }}
+                        </span>
+                        @if ($isMember && $jabatan)
+                            <div class="text-muted small">{{ $jabatan }}</div>
+                        @endif
+                        <ul class="dropdown-menu mt-2">
+                            <li><a href="{{ route('profile.show', Auth::id()) }}">Profil</a></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>
+            @endauth
         </div>
     </div>
 </div>
-<!--===== MOBILE HEADER STARTS =======-->

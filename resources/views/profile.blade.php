@@ -2,171 +2,129 @@
 @section('title', 'Profile')
 
 @section('content')
-
-    <x-page-title title="Beranda" pagetitle="Profile" maintitle="Profile" />
-
-    <div class="profile-section-area sp1 py-4">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 col-md-12">
-                    <div class="profile-header-area heading2 text-center mb-5">
-                        <h5 class="text-3xl font-bold">Profile Pengguna</h5>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4">Edit Profile</h3>
+                    <div class="text-center mb-4">
+                        <img id="profilePreview" src="{{ $user->profile_photo_url ? asset('storage/' . $user->profile_photo_url) : asset('default-avatar.png') }}" alt="Profile Photo"
+                            class="rounded-circle img-thumbnail" style="width: 120px; height: 120px; object-fit: cover;">
                     </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="d-flex flex-column flex-md-row align-items-start justify-content-center" style="gap: 30px;">
-                    <div class="text-center">
-                        <div class="profile-boxarea">
-                            <div class="profile-img">
-                                <img id="profilePicture" src="{{ URL::asset('build/img/all-images/profile.png') }}"
-                                    alt="Foto Profile" class="img-fluid rounded-circle"
-                                    style="width: 200px; height: 200px; object-fit: cover;">
-                            </div>
-                            <div class="mt-3">
-                                <button class="header-btn1" id="uploadBtn">Upload Foto Baru</button>
-                                <input type="file" id="profileImageInput" style="display:none;" accept="image/*">
-                            </div>
+                    <form id="editProfileForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3 text-center">
+                            <label for="profile_photo" class="form-label btn btn-outline-primary">
+                                Ubah Foto Profil
+                            </label>
+                            <input type="file" id="profile_photo" name="profile_photo" class="form-control d-none" accept="image/*">
                         </div>
-                    </div>
-                    <div class="flex-grow-1">
-                        <div class="profile-info-area sp1">
-                            <div class="profile-header-area heading2 mb-4">
-                                <h5 class="text-left text-2xl font-semibold">Info Anda</h5>
-                            </div>
-                            <div class="profile-box p-4 border border-gray-300 rounded-lg shadow-md">
-                                <table class="table table-responsive">
-                                    <tbody>
-                                        <tr>
-                                            <td  class="text-black" style="font-size: 20px"><strong>Nama</strong></td>
-                                            <td class="text-black" style="font-size: 18px">: Wawan Setyawan</td>
-                                        </tr>
-                                        <tr>
-                                            <td  class="text-black" style="font-size: 20px"><strong>Tempat, Tanggal Lahir</strong></td>
-                                            <td class="text-black" style="font-size: 18px">: Soreang, 14 Juni 1987</td>
-                                        </tr>
-                                        <tr>
-                                            <td  class="text-black" style="font-size: 20px"><strong>Nomor Hp</strong></td>
-                                            <td class="text-black" style="font-size: 18px">: +628123456789</td>
-                                        </tr>
-                                        <tr>
-                                            <td  class="text-black" style="font-size: 20px"><strong>Email</strong></td>
-                                            <td class="text-black" style="font-size: 18px">: wawanuhuy@gmail.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td  class="text-black" style="font-size: 20px"><strong>Jenis Kelamin</strong></td>
-                                            <td class="text-black" style="font-size: 18px">: Laki-laki</td>
-                                        </tr>
-                                        <tr>
-                                            <td  class="text-black" style="font-size: 20px"><strong>Alamat Lengkap</strong></td>
-                                            <td class="text-black" style="font-size: 18px">: Jl. Pasir Kaliki No.224, RT 02/RW 10, Cihuelang, Ciparay,
-                                                Kab. Bandung, Jawa Barat.</td>
-                                        </tr>
-                                        <tr>
-                                            <td  class="text-black" style="font-size: 20px"><strong>Komunitas yang Anda Ikuti</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{ URL::asset('build/img/all-images/bundaliterasi.png') }}"
-                                                        class="profile-img-placeholder rounded-circle me-2"
-                                                        style="width: 40px; height: 40px; background-color: #ddd;">
-                                                    <div>
-                                                        <strong class="text-black" style="font-size: 18px">Bunda Literasi</strong><br>
-                                                        <small class="text-black" style="font-size: 16px">Sebagai Ketua</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <br>
-                            <a href="contact" class="header-btn1" data-bs-toggle="modal"
-                                data-bs-target="#editProfileModal">Edit <span><i
-                                        class="fa-solid fa-arrow-right"></i></span></a>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" id="name" name="name" class="form-control" value="{{ $user->name }}" required>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-gray-100 border-b border-gray-200">
-                    <h5 class="modal-title text-xl font-bold" id="editProfileModalLabel">Edit Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-5">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="nama" class="form-label font-semibold text-lg">Nama</label>
-                                    <input type="text"
-                                        class="form-control form-control-lg border border-gray-300 rounded-md p-3"
-                                        id="nama" value="Wawan Setyawan">
-                                </div>
-                                <div class="mb-4">
-                                    <label for="ttl" class="form-label font-semibold text-lg">Tempat, Tanggal
-                                        Lahir</label>
-                                    <input type="text"
-                                        class="form-control form-control-lg border border-gray-300 rounded-md p-3"
-                                        id="ttl" value="Soreang, 14 Juni 1987">
-                                </div>
-                                <div class="mb-4">
-                                    <label for="phone" class="form-label font-semibold text-lg">Nomor Hp</label>
-                                    <input type="text"
-                                        class="form-control form-control-lg border border-gray-300 rounded-md p-3"
-                                        id="phone" value="+628123456789">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="email" class="form-label font-semibold text-lg">Email</label>
-                                    <input type="email"
-                                        class="form-control form-control-lg border border-gray-300 rounded-md p-3"
-                                        id="email" value="wawanuhuy@gmail.com">
-                                </div>
-                                <div class="mb-4">
-                                    <label for="gender" class="form-label font-semibold text-lg">Jenis Kelamin</label>
-                                    <div class="d-flex align-items-center">
-                                        <div class="form-check me-3">
-                                            <input class="form-check-input" type="radio" name="gender" id="male"
-                                                value="Laki-laki" checked>
-                                            <label class="form-check-label" for="male"
-                                                style="font-weight: 500; font-size: 1.1rem;">
-                                                Laki-laki
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="female"
-                                                value="Perempuan">
-                                            <label class="form-check-label" for="female"
-                                                style="font-weight: 500; font-size: 1.1rem;">
-                                                Perempuan
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="alamat" class="form-label font-semibold text-lg">Alamat Lengkap</label>
-                                    <textarea class="form-control form-control-lg border border-gray-300 rounded-md p-3" id="alamat" rows="3">Jl. Pasir Kaliki No.224, RT 02/RW 10, Cihuelang, Ciparay, Kab. Bandung, Jawa Barat.</textarea>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" id="username" name="username" class="form-control" value="{{ $user->username }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" value="{{ $user->email }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password Baru</label>
+                            <input type="password" id="password" name="password" class="form-control">
+                            <small class="text-muted">Kosongkan jika tidak ingin mengubah password</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary px-4">Simpan</button>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer bg-gray-100 border-t border-gray-200">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary">Simpan Perubahan</button>
-                </div>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+    $('#editProfileForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        Swal.fire({
+            title: 'Memperbarui...',
+            text: 'Menunggu proses update profil...',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        $.ajax({
+            url: '{{ route("profile.update") }}',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                Swal.close();
+
+                if (response.status === 'success') {
+                    $('#name').val(response.user.name);
+                    $('#username').val(response.user.username);
+                    $('#email').val(response.user.email); // Update email field
+
+                    if (response.user.profile_photo_url) {
+                        $('#profilePreview').attr('src', '{{ asset('storage') }}/' + response.user.profile_photo_url);
+                    }
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Profil berhasil diperbarui!',
+                        text: response.message,
+                    });
+                }
+            },
+            error: function (xhr) {
+                Swal.close(); // Close loading on error as well
+
+                if (xhr.status === 422) {
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessage = '';
+                    for (let key in errors) {
+                        errorMessage += errors[key][0] + '<br>';
+                    }
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error Validasi',
+                        html: errorMessage,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Terjadi kesalahan.', // Generic error message
+                    });
+                }
+            },
+        });
+    });
+
+    // Preview image before upload
+    $('#profile_photo').change(function() {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            $('#profilePreview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+</script>
 
 @endsection
-
-
-

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Services')
+@section('title', 'Indeks Berita')
 
 @section('content')
 
@@ -9,134 +9,52 @@
     <div class="service2-section-area sp6">
         <div class="container">
             <div class="row">
+                <!-- Left Column - Featured News -->
                 <div class="col-lg-7">
-                    <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000">
-                        <div class="img1">
-                            <img src="{{ URL::asset('build/img/all-images/contohberita1.png') }}" alt="">
-                        </div>
-                        <div class="content-area">
-                            <h5>19 Jul 2024</h5>
-                            <a href="detailBerita" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
-                                kegiatan "Tradisi Wuku Taun Kampung Adat Cikondang"</a>
-                            <div class="btn-area" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="detailBerita" class="header-btn1">Lihat Selengkapnya<span><i
-                                            class="fa-solid fa-arrow-right"></i></span>
+                    @foreach($featuredNews as $berita)
+                        <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000" style="margin-bottom: 30px;">
+                            <div class="img1">
+                                <img src="{{ $berita->foto_berita ?? URL::asset('build/img/all-images/default-news.png') }}" 
+                                     alt="{{ $berita->judul_berita }}" style="width: 100%; height: 300px; object-fit: cover;">
+                            </div>
+                            <div class="content-area position-absolute bottom-0 start-0 p-3">
+                                <h5>{{ $berita->formatted_date }}</h5>
+                                <a href="{{ route('berita.show', $berita->kd_info) }}" class="text text-anime-style-3">
+                                    {{ $berita->judul_berita }}
                                 </a>
+                                <div class="btn-area mt-2">
+                                    <a href="{{ route('berita.show', $berita->kd_info) }}" class="header-btn1">
+                                        Lihat Selengkapnya <span><i class="fa-solid fa-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="arrow-area">
+                                <a href="{{ route('berita.show', $berita->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
-                        <div class="arrow-area">
-                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-
-                    <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000">
-                        <div class="img1">
-                            <img src="{{ URL::asset('build/img/all-images/contohberita1.png') }}" alt="">
-                        </div>
-                        <div class="content-area">
-                            <h5>19 Jul 2024</h5>
-                            <a href="detailBerita" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
-                                kegiatan "Tradisi Wuku Taun Kampung Adat Cikondang"</a>
-                            <div class="btn-area" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="detailBerita" class="header-btn1">Lihat Selengkapnya<span><i
-                                            class="fa-solid fa-arrow-right"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="arrow-area">
-                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-
-                    <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000">
-                        <div class="img1">
-                            <img src="{{ URL::asset('build/img/all-images/contohberita1.png') }}" alt="">
-                        </div>
-                        <div class="content-area">
-                            <h5>19 Jul 2024</h5>
-                            <a href="detailBerita" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
-                                kegiatan "Tradisi Wuku Taun Kampung Adat Cikondang"</a>
-                            <div class="btn-area" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="detailBerita" class="header-btn1">Lihat Selengkapnya<span><i
-                                            class="fa-solid fa-arrow-right"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="arrow-area">
-                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
+                <!-- Right Column - Sidebar News -->
                 <div class="col-lg-5">
                     <div class="service-all-boxes">
                         <div class="row">
-                            <div class="col-lg-12 col-md-6">
-                                <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000">
-                                    <div class="arrow">
-                                        <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
-                                    </div>
-                                    <div class="content-area">
-                                        <h5>18 Jul 2024</h5>
-                                        <a href="detailBerita">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
-                                            Dispusip Kabupaten Bandung</a>
-                                        <p>Dinas Perpustakaan dan Arsip Kab. Bandung _menerima penyerahan arsip yang berasal
-                                            dari Kecamatan</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-md-6">
-                                <div class="service2-auhtor2-boxarea" data-aos="zoom-out" data-aos-duration="1200">
-                                    <div class="arrow">
-                                        <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
-                                    </div>
-                                    <div class="content-area">
-                                        <h5>17 Jul 2024</h5>
-                                        <a href="detailBerita">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
-                                            Lomba Bertutur Tingkat Jawa Barat Tahun Anggaran 2024</a>
-                                        <p>Dinas Perpustakaan dan Arsip Kabupaten Bandung mengikuti Technical meeting dalam
-                                            rangka persiapan Lomba Bertutur Bagi Siswa-Siswi SD/MI Tingkat Provinsi Jawa
-                                            Barat Tahun 2024 melalui zoom meeting. Senin (22/07/24).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space 1"></div>
-                            <div class="row">
+                            @foreach($sidebarNews as $berita)
                                 <div class="col-lg-12 col-md-6">
-                                    <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000">
+                                    <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000" style="margin-bottom: 20px;">
                                         <div class="arrow">
-                                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
+                                            <a href="{{ route('berita.show', $berita->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
                                         </div>
                                         <div class="content-area">
-                                            <h5>18 Jul 2024</h5>
-                                            <a href="detailBerita">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
-                                                Dispusip Kabupaten Bandung</a>
-                                            <p>Dinas Perpustakaan dan Arsip Kab. Bandung _menerima penyerahan arsip yang berasal
-                                                dari Kecamatan</p>
+                                            <h5>{{ $berita->formatted_date }}</h5>
+                                            <a href="{{ route('berita.show', $berita->kd_info) }}">
+                                                {{ $berita->judul_berita }}
+                                            </a>
+                                            <p>{{ Str::limit($berita->isi_berita, 100) }}</p>
                                         </div>
                                     </div>
                                 </div>
-    
-                                <div class="col-lg-12 col-md-6">
-                                    <div class="service2-auhtor2-boxarea" data-aos="zoom-out" data-aos-duration="1200">
-                                        <div class="arrow">
-                                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
-                                        </div>
-                                        <div class="content-area">
-                                            <h5>17 Jul 2024</h5>
-                                            <a href="detailBerita">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
-                                                Lomba Bertutur Tingkat Jawa Barat Tahun Anggaran 2024</a>
-                                            <p>Dinas Perpustakaan dan Arsip Kabupaten Bandung mengikuti Technical meeting dalam
-                                                rangka persiapan Lomba Bertutur Bagi Siswa-Siswi SD/MI Tingkat Provinsi Jawa
-                                                Barat Tahun 2024 melalui zoom meeting. Senin (22/07/24).</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

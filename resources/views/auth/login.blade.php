@@ -17,9 +17,9 @@
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required>
-                        @error('username')
+                        <label for="login" class="form-label">Username atau Email</label>
+                        <input type="text" name="login" id="login" class="form-control @error('login') is-invalid @enderror" value="{{ old('login') }}" required>
+                        @error('login')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Belum punya akun? <a href="{{ route('register') }}" class="fw-bold text-dark text-decoration">Daftar</a></p>
+                        <p class="mb-0">Belum punya akun? <a href="{{ route('verify-nik') }}" class="fw-bold text-dark text-decoration">Daftar</a></p>
                     </div>
                 </form>
             </div>
@@ -57,3 +57,25 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+  // Toggle password visibility 
+  document.querySelectorAll('#toggleNikVisibility').forEach(button => {
+      button.addEventListener('click', function() {
+          const input = this.closest('.input-group').querySelector('input');
+          const icon = this.querySelector('i');
+          
+          if (input.type === 'password') {
+              input.type = 'text';
+              icon.classList.remove('fa-eye');
+              icon.classList.add('fa-eye-slash');
+          } else {
+              input.type = 'password'; 
+              icon.classList.remove('fa-eye-slash');
+              icon.classList.add('fa-eye');
+          }
+      });
+  });
+</script>
+@endpush

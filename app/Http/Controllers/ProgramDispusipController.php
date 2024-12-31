@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\ProgramDispusip;
@@ -6,59 +7,55 @@ use Illuminate\Http\Request;
 
 class ProgramDispusipController extends Controller
 {
-        protected $programs;
-
-        public function __construct()
+    public function __construct()
     {
-        // Mengambil semua program dengan status 'aktif'
-        $this->programs = ProgramDispusip::where('status_program', 'aktif')->get();
-        // Membagikan data ke semua view
-        view()->share('programs', $this->programs);
+        // Membagikan program dengan status 'aktif' ke semua view
+        $programs = ProgramDispusip::where('status_program', 'aktif')->get();
+        view()->share('programs', $programs);
     }
 
-        public function index()
-        {
-            // Mengambil semua program dengan status 'aktif' untuk halaman utama Program Dispusip
-            $programs = ProgramDispusip::where('status_program', 'aktif')->get();
-            return view('programdispusip', compact('programs'));
-        }
-
-        public function index1()
-        {
-            // Mengambil semua program dengan status 'aktif' untuk halaman index utama
-            $programs = ProgramDispusip::where('status_program', 'aktif')->get();
-            return view('index', compact('programs'));
-        }
-
-        public function detail($kd_program)
-        {
-            $program = ProgramDispusip::findOrFail($kd_program);
-            // Mengirim data program ke view detail
-            return view('detailprogramdispusip', compact('program'));
-        }
-
-        public function store(Request $request)
-        {
-            // Validasi input data
-            $request->validate([
-                'sampul_program' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-
-            // Menyimpan file gambar ke folder storage
-            $path = $request->file('sampul_program')->store('public/images');
-
-            // Menyimpan informasi program ke database
-            ProgramDispusip::create([
-                'kd_program'       => $request->kd_program,
-                'nm_program'       => $request->nm_program,
-                'tanggal_dibuat'   => now(),
-                'status_program'   => $request->status_program,
-                'tentang_program'  => $request->tentang_program,
-                'tujuan_program'   => $request->tujuan_program,
-                'sampul_program'   => basename($path),  // Menyimpan nama file
-            ]);
-
-            // Redirect dengan pesan sukses
-            return redirect()->route('programdispusip.index')->with('success', 'Program Dispusip berhasil ditambahkan');
-        }
+    public function index()
+    {
+        // Menampilkan halaman utama dengan program aktif
+        return view('programdispusip');
     }
+
+    public function index1()
+    {
+        // Menampilkan halaman index utama dengan program aktif
+        return view('index');
+    }
+
+    public function detail($kd_program)
+    {
+        // Mengambil detail program berdasarkan kode
+        $program = ProgramDispusip::findOrFail($kd_program);
+        return view('detailprogramdispusip', compact('program'));
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi dan simpan data program
+        $request->validate([
+            'sampul_program' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Menyimpan sampul program ke storage
+        $path = $request->file('sampul_program')->store('public/images');
+
+        // Menyimpan program ke database
+        ProgramDispusip::create([
+            'kd_program' => $request->kd_program,
+            'nm_program' => $request->nm_program,
+            'tanggal_dibuat' => now(),
+            'status_program' => $request->status_program,
+            'tentang_program' => $request->tentang_program,
+            'tujuan_program' => $request->tujuan_program,
+            'sampul_program' => basename($path),
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('programdispusip.index')->with('success', 'Program Dispusip berhasil ditambahkan');
+    }
+}
+ 

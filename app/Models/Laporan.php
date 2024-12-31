@@ -14,6 +14,7 @@ class Laporan extends Model
 
     public $incrementing = false; // Tidak menggunakan auto-increment
     protected $keyType = 'string'; // Tipe primary key CHAR(5)
+    public $timestamps = false;
 
     protected $fillable = [
         'kd_laporan',

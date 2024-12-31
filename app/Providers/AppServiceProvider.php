@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Models\ProgramDispusip;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
+    
     /**
      * Register any application services.
      */
@@ -22,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         \Carbon\Carbon::setLocale('id');
         Schema::defaultStringLength(191);
+        View::composer('*', function ($view) {
+            $programs = ProgramDispusip::where('status_program', 'aktif')->get();
+            $view->with('programs', $programs);
+        });
     }
 }

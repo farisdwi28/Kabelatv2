@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Berita;
+use App\Models\Komunitas;
 
 class HomeController extends Controller
 {
@@ -19,4 +21,5 @@ class HomeController extends Controller
             abort(404);
         }
     }
+    
 }

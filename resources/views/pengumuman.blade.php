@@ -2,248 +2,61 @@
 @section('title', ' Pengumuman')
 
 @section('content')
+    <x-page-title title="Beranda" pagetitle="Indeks Pengumuman" maintitle="Pengumuman" />
 
-<x-page-title title="Beranda" pagetitle="Indeks Pengumuman" maintitle="Pengumuman" />
-
-<!--===== BLOG AREA STARTS =======-->
-<div class="blog-top-area sp1">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="blog-top-boxarea">
-                    <div class="row align-items-center">
-                        <div class="col-lg-5">
-                            <div class="content-area heading2">
-                                <div class="tags-area">
-                                  <ul>
-                                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Achmad Naufal Nazheef</a></li>
-                                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">29 Juni 2024</a></li>
-                                  </ul>
-                             </div>
-                                <h2>Penutupan Layanan Dispusip Selama Hari Raya dan Cuti Bersama</h2>
-                                <div class="space8"></div>
-                                <div class="btn-area">
-                                    <a href="detailPengumuman" class="header-btn1">Lihat Selengkapnya <span><i class="fa-solid fa-arrow-right"></i></span></a>
+    <!--===== BLOG AREA STARTS =======-->
+    <div class="blog-top-area sp1">
+        <div class="container">
+            @foreach ($pengumuman as $p)
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="blog-top-boxarea">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5">
+                                    <div class="content-area heading2">
+                                        <div class="tags-area">
+                                            <ul>
+                                                <li><a href="#"><img
+                                                            src="{{ URL::asset('build/img/icons/contact1.svg') }}"
+                                                            alt="">{{ $p->author }}</a></li>
+                                                <li><a href="#"><img
+                                                            src="{{ URL::asset('build/img/icons/calender1.svg') }}"
+                                                            alt="">{{ \Carbon\Carbon::parse($p->tanggal_dibuat)->format('d F Y') }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h2>{{ $p->judul_pengumuman }}</h2>
+                                        <div class="space8"></div>
+                                        <div class="btn-area">
+                                            <a href="{{ route('pengumuman.show', $p->kd_info) }}" class="header-btn1">Lihat
+                                                Selengkapnya <span><i class="fa-solid fa-arrow-right"></i></span></a>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                        </div>
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-5">
-                            <div class="images image-anime">
-                              <a href="detailPengumuman"><img src="{{ URL::asset('build/img/all-images/pengumuman1.png') }}" alt=""></a>
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-5">
+                                    <div class="images image-anime">
+                                        <div class="images image-anime">
+                                            <a href="{{ route('pengumuman.show', $p->kd_info) }}">
+                                                @if ($p->foto_pengumuman)
+                                                    <img src="{{ $p->foto_pengumuman }}"
+                                                        alt="Pengumuman {{ $p->judul_pengumuman }}">
+                                                @else
+                                                    <img src="{{ URL::asset('build/img/all-images/pengumuman1.png') }}"
+                                                        alt="Default Pengumuman">
+                                                @endif
+                                            </a>
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
-</div>
 
-{{-- <div class="blog1-scetion-area sp1 bg2">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-6">
-          <div class="blog-author-boxarea">
-            <div class="img1">
-              <img src="{{ URL::asset('build/img/all-images/blog-img1.png') }}" alt="">
-            </div>
-            <div class="content-area">
-              <div class="tags-area">
-                <ul>
-                 <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                </ul>
-              </div>
-              <a href="blog-single">10 Essential SEO Tips to Boost Your Website's Ranking</a>
-              <p>Are you looking to improve your website's visibility and attract more organic traffic? </p>
-              <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-          <div class="space30"></div>
-        </div>
-  
-        <div class="col-lg-4 col-md-6">
-          <div class="blog-author-boxarea">
-            <div class="img1">
-              <img src="{{ URL::asset('build/img/all-images/blog-img2.png') }}" alt="">
-            </div>
-            <div class="content-area">
-              <div class="tags-area">
-                <ul>
-                 <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                </ul>
-              </div>
-              <a href="blog-single">The Power of PPC Advertising: How to Maximize Your ROI</a>
-              <p>Unlock the full potential of your digital marketing strategy with the power of PPC.</p>
-              <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-          <div class="space30"></div>
-        </div>
-  
-        <div class="col-lg-4 col-md-6">
-          <div class="blog-author-boxarea">
-            <div class="img1">
-              <img src="{{ URL::asset('build/img/all-images/blog-img3.png') }}" alt="">
-            </div>
-            <div class="content-area">
-              <div class="tags-area">
-                <ul>
-                 <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                </ul>
-              </div>
-              <a href="blog-single">The Importance of Responsive Web Design in the Mobile Age</a>
-              <p>Where mobile devices dominate internet usage, responsive web design more crucial.</p>
-              <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-          <div class="space30"></div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="blog-author-boxarea">
-            <div class="img1">
-              <img src="{{ URL::asset('build/img/all-images/blog-img15.png') }}" alt="">
-            </div>
-            <div class="content-area">
-              <div class="tags-area">
-                <ul>
-                 <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                </ul>
-              </div>
-              <a href="blog-single">The Power of Content Marketing: How to Drive Engagement...</a>
-              <p>Are you looking to improve your website's visibility and attract more organic traffic? </p>
-              <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-          <div class="space30"></div>
-        </div>
-  
-        <div class="col-lg-4 col-md-6">
-          <div class="blog-author-boxarea">
-            <div class="img1">
-              <img src="{{ URL::asset('build/img/all-images/blog-img16.png') }}" alt="">
-            </div>
-            <div class="content-area">
-              <div class="tags-area">
-                <ul>
-                 <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                </ul>
-              </div>
-              <a href="blog-single">The Importance of SEO in Digital Marketing:A Comprehensive Guide</a>
-              <p>Unlock the full potential of your digital marketing strategy with the power of PPC.</p>
-              <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-          <div class="space30"></div>
-        </div>
-  
-        <div class="col-lg-4 col-md-6">
-          <div class="blog-author-boxarea">
-            <div class="img1">
-              <img src="{{ URL::asset('build/img/all-images/blog-img3.png') }}" alt="">
-            </div>
-            <div class="content-area">
-              <div class="tags-area">
-                <ul>
-                 <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                </ul>
-              </div>
-              <a href="blog-single">The Power of Social Media Marketing: How to Build Your...</a>
-              <p>Where mobile devices dominate internet usage, responsive web design more crucial.</p>
-              <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-          <div class="space30"></div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="blog-author-boxarea">
-              <div class="img1">
-                <img src="{{ URL::asset('build/img/all-images/blog-img15.png') }}" alt="">
-              </div>
-              <div class="content-area">
-                <div class="tags-area">
-                  <ul>
-                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  </ul>
-                </div>
-                <a href="blog-single">Social Media Marketing Strategies to Drive Engagement Conversions</a>
-                <p>Are you looking to improve your website's visibility and attract more organic traffic? </p>
-                <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-            <div class="space30"></div>
-          </div>
-    
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-author-boxarea">
-              <div class="img1">
-                <img src="{{ URL::asset('build/img/all-images/blog-img18.png') }}" alt="">
-              </div>
-              <div class="content-area">
-                <div class="tags-area">
-                  <ul>
-                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  </ul>
-                </div>
-                <a href="blog-single">Content Marketing 101: How to Create Compelling Converts..</a>
-                <p>Unlock the full potential of your digital marketing strategy with the power of PPC.</p>
-                <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-            <div class="space30"></div>
-          </div>
-    
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-author-boxarea">
-              <div class="img1">
-                <img src="{{ URL::asset('build/img/all-images/blog-img17.png') }}" alt="">
-              </div>
-              <div class="content-area">
-                <div class="tags-area">
-                  <ul>
-                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">16 August 2023</a></li>
-                    <li><a href="#"><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt="">Ben Stokes</a></li>
-                  </ul>
-                </div>
-                <a href="blog-single">The Importance of Responsive Web Design in the Mobile Age</a>
-                <p>Where mobile devices dominate internet usage, responsive web design more crucial.</p>
-                <a href="blog-single" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-            <div class="space30"></div>
-          </div> --}}
-
-          <div class="col-lg-12">
-            <div class="pagination-area">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                  <li class="page-item">
-                    <a class="page-link" href="#"><i class="fa-solid fa-angle-left"></i></a>
-                  </li>
-                  <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#"><i class="fa-solid fa-angle-right"></i></a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
-<!--===== BLOG AREA ENDS =======-->
-
-
+    <!-- Pagination section remains the same -->
 @endsection

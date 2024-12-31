@@ -305,18 +305,18 @@
             <div class="row">
                 <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
                     <div class="testimonials-slider-area owl-carousel">
-                        @foreach ($programs as $program)
                             <div class="testimonial-boxarea">
                                 <div class="row">
+                                    @foreach ($programs as $program)
                                     <!-- Konten Kiri -->
                                     <div class="col-lg-5">
                                         <div class="pera">
-                                            <p>{{ Str::limit($program->tentang_program, 150) }}</p>
+                                            <p>{{ Str::limit($program->tentang_program, 200) }}</p>
                                             <div class="space100"></div>
                                             <div class="space30"></div>
                                             <div class="list-area">
                                                 <div class="list">
-                                                    <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                                    <a style="font-size: 1.25rem;" href="{{ route('programdispusip.detail', $program->kd_program) }}">
                                                         {{ $program->nm_program }}
                                                     </a>
                                                 </div>
@@ -356,63 +356,56 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="col-lg-7">
+                @foreach($News->slice(0, 3) as $berita) {{-- Featured News: Berita 0-2 --}}
+                    <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000" style="margin-bottom: 30px;">
                         <div class="img1">
-                            <img src="{{ URL::asset('build/img/all-images/contohberita1.png') }}" alt="">
+                            <img src="{{ $berita->foto_berita ?? URL::asset('build/img/all-images/default-news.png') }}" 
+                                 alt="{{ $berita->judul_berita }}" style="width: 100%; height: 300px; object-fit: cover;">
                         </div>
-                        <div class="content-area">
-                            <h5>19 Jul 2024</h5>
-                            <a href="detailBerita" class="text text-anime-style-3">Dispusip Kab. Bandung turut hadir dalam
-                                kegiatan "Tradisi Wuku Taun Kampung Adat Cikondang"</a>
-                            <div class="btn-area" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="detailBerita" class="header-btn1">Lihat Selengkapnya<span><i
-                                            class="fa-solid fa-arrow-right"></i></span>
+                        <div class="content-area position-absolute bottom-0 start-0 p-3">
+                            <h5>{{ \Carbon\Carbon::parse($berita->tanggal_dibuat)->format('d M Y') }}</h5>
+                            <a href="{{ route('berita.show', $berita->kd_info) }}" class="text text-anime-style-3">
+                                {{ $berita->judul_berita }}
+                            </a>
+                            <div class="btn-area mt-2">
+                                <a href="{{ route('berita.show', $berita->kd_info) }}" class="header-btn1">
+                                    Lihat Selengkapnya <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
                             </div>
                         </div>
                         <div class="arrow-area">
-                            <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="{{ route('berita.show', $berita->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="service-all-boxes">
-                        <div class="row">
+                @endforeach
+            </div>
+
+            <!-- Right Column - Sidebar News -->
+            <div class="col-lg-5">
+                <div class="service-all-boxes">
+                    <div class="row">
+                        @foreach($News->slice(3) as $berita) {{-- Sidebar News: Berita 3+ --}}
                             <div class="col-lg-12 col-md-6">
-                                <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000">
+                                <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000" style="margin-bottom: 20px;">
                                     <div class="arrow">
-                                        <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="{{ route('berita.show', $berita->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                     <div class="content-area">
-                                        <h5>18 Jul 2024</h5>
-                                        <a href="detailBerita">Penyerahan Arsip Kecamatan Bojongsoang dan Kecamatan Pacet ke
-                                            Dispusip Kabupaten Bandung</a>
-                                        <p>Dinas Perpustakaan dan Arsip Kab. Bandung _menerima penyerahan arsip yang berasal
-                                            dari Kecamatan
-                                        </p>
+                                        <h5>{{ \Carbon\Carbon::parse($berita->tanggal_dibuat)->format('d M Y') }}</h5>
+                                        <a href="{{ route('berita.show', $berita->kd_info) }}">
+                                            {{ $berita->judul_berita }}
+                                        </a>
+                                        <p>{{ Str::limit($berita->isi_berita, 100) }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-6">
-                                <div class="service2-auhtor2-boxarea" data-aos="zoom-out" data-aos-duration="1200">
-                                    <div class="arrow">
-                                        <a href="detailBerita"><i class="fa-solid fa-arrow-right"></i></a>
-                                    </div>
-                                    <div class="content-area">
-                                        <h5>17 Jul 2024</h5>
-                                        <a href="detailBerita">Kampanye Literasi Dispusip Kabupaten Bandung - Technical Meeting
-                                            Lomba Bertutur Tingkat Jawa Barat Tahun Anggaran 2024</a>
-                                        <p>Dinas Perpustakaan dan Arsip Kabupaten Bandung mengikuti Technical meeting dalam
-                                            rangka persiapan Lomba Bertutur Bagi Siswa-Siswi SD/MI Tingkat Provinsi Jawa
-                                            Barat Tahun 2024 melalui zoom meeting. Senin (22/07/24).</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
+            </div>
+
+                
             </div>
         </div>
     </div>
@@ -537,104 +530,59 @@
     <!--===== CASE AREA ENDS =======-->
 
     <!--===== TESTIMONIAL AREA STARTS =======-->
-    <div class="testimonial1-section-area sp6">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 m-auto">
-                    <div class="testimonial-header heading2 text-center">
-                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                            class="star2 keyframe5">
-                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                            class="star3 keyframe5">
-                        <h2 class="text-anime-style-3">Forum Komunitas</h2>
-                        <p data-aos="fade-up" data-aos-duration="1000">Jadilah bagian dari komunitas kami dan nikmati
-                            akses eksklusif ke berbagai diskusi, event, dan kolaborasi.<br class="d-md-block d-none">
-                            Bergabung sekarang untuk memperluas jaringan, belajar dari yang lain, dan berbagi pengalaman
-                            Anda.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="testimonials-slider-area owl-carousel">
-                        <div class="testimonial-boxarea">
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="pera">
-                                        <p>Bunda Literasi adalah sebuah gerakan yang bertujuan untuk meningkatkan minat baca
-                                            dan literasi di kalangan anak-anak dan remaja dengan melibatkan peran serta
-                                            aktif dari orang tua atau wali.</p>
-                                        <div class="space100"></div>
-                                        <div class="space30"></div>
-                                        <div class="list-area">
-                                            <div class="list">
-                                                <a href="joinKomunitas">KOMUNITAS BUNDA LITERASI</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="images">
-                                        <img src="{{ URL::asset('build/img/all-images/bundaliterasi.png') }}"
-                                            alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-boxarea">
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="pera">
-                                        <p>Gerakan Pemasyarakatan Minat Baca (GPMB) dengan bangga mempersembahkan Bunda
-                                            Literasi, sebuah inisiatif yang dirancang untuk meningkatkan minat baca dan
-                                            literasi di kalangan anak-anak dan remaja. </p>
-                                        <div class="space100"></div>
-                                        <div class="space30"></div>
-                                        <div class="list-area">
-                                            <div class="list">
-                                                <a href="joinKomunitas">KOMUNITAS GPMB</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="images">
-                                        <img src="{{ URL::asset('build/img/all-images/GPMB.png') }}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-boxarea">
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="pera">
-                                        <p>Komunitas Pecinta Naskah Kuno adalah sebuah wadah bagi para pencinta sejarah,
-                                            sastra, dan budaya yang memiliki minat mendalam terhadap naskah-naskah kuno.
-                                        </p>
-                                        <div class="space100"></div>
-                                        <div class="space30"></div>
-                                        <div class="list-area">
-                                            <div class="list">
-                                                <a href="joinKomunitas">KOMUNITAS PECINTA NASKAH KUNO</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="images">
-                                        <img src="{{ URL::asset('build/img/all-images/pencintanaskah.png') }}"
-                                            alt="">
-                                    </div>
-                                </div>
-                            </div>
+        <!--===== INDEX KOMUNITAS AREA STARTS =======-->
+        <div class="testimonial1-section-area sp6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 m-auto">
+                        <div class="testimonial-header heading2 text-center">
+                            <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                                class="star2 keyframe5">
+                            <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                                class="star3 keyframe5">
+                            <h2 class="text-anime-style-3">Forum Komunitas</h2>
+                            <p data-aos="fade-up" data-aos-duration="1000">Jadilah bagian dari komunitas kami dan nikmati
+                                akses eksklusif ke berbagai diskusi, event, dan kolaborasi.<br class="d-md-block d-none">
+                                Bergabung sekarang untuk memperluas jaringan, belajar dari yang lain, dan berbagi pengalaman
+                                Anda.</p>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="testimonials-slider-area owl-carousel">
+                            @foreach ($komunitasList as $item)
+                            <div class="testimonial-boxarea">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="pera">
+                                            <p class="text-muted" style="font-size: 1.1rem;">{{ $item->desk_komunitas }}</p>
+                                            <div class="space100"></div>
+                                            <div class="space30"></div>
+                                            <div class="list-area">
+                                                <div class="list">
+                                                    <!-- Pastikan route menggunakan kd_komunitas dan bukan id -->
+                                                    <a style="font-size: 1.25rem" href="{{ route('komunitas.detail', $item->kd_komunitas) }}" class="h3 text-dark font-weight-bold">
+                                                        {{ $item->nm_komunitas }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7 text-center">
+                                        <div class="images">
+                                            <img src="{{ $item->logo }}" alt="{{ $item->nm_komunitas }}" class="img-fluid rounded" style="max-width: 90%; height: auto;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>                
             </div>
         </div>
-    </div>
+    
     <!--===== TESTIMONIAL AREA ENDS =======-->
     {{-- 
     <!--===== BLOG AREA STARTS =======-->

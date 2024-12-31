@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/KomentarDiskusi.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,18 +9,26 @@ class KomentarDiskusi extends Model
 {
     use HasFactory;
 
-    protected $table = 'komentar_diskusi'; // Tabel untuk komentar
+    protected $table = 'komentar_diskusi';
     protected $primaryKey = 'kd_kom_diskusi';
+    public $incrementing = false;
+    public $timestamps = false;
 
-    // Relasi ke diskusi
+    protected $fillable = [
+        'kd_kom_diskusi',
+        'isi_kom_diskusi',
+        'kd_diskusi',
+        'id',
+        'tglpost_kom_diskusi'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id', 'id');
+    }
+
     public function diskusi()
     {
         return $this->belongsTo(Diskusi::class, 'kd_diskusi', 'kd_diskusi');
-    }
-
-    // Relasi ke user (asumsi ada tabel users)
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'kd_user', 'id');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,38 +11,56 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'username',
+        'email',
         'password',
+        'kd_lokal',
+        'kd_pen',
+        'role',
+        'foto_pen',
+        'id',
+        'kd_komunitas'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
-        // 'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function getAuthIdentifierName()
+
+    protected $attributes = [
+        'role' => 'user'
+    ];
+
+    // Allow login with username or email
+    public function findForPassport($username)
     {
-        return 'username';
+        return $this->where('username', $username)
+                    ->orWhere('email', $username)
+                    ->first();
     }
+    public function diskusi()
+    {
+        return $this->hasMany(Diskusi::class, 'id', 'id');
+    }
+
+    public function komentarDiskusi()
+    {
+        return $this->hasMany(KomentarDiskusi::class, 'id', 'id');
+    }
+    public function penduduk()
+    {
+        return $this->belongsTo(Penduduk::class, 'kd_pen', 'kd_pen');
+    }
+public function komunitas()
+{
+    return $this->belongsTo(Komunitas::class, 'kd_komunitas', 'kd_komunitas');
+}
+    
 }
