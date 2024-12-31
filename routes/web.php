@@ -12,7 +12,6 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\HomepageController;
 
 /*
 |----------------------------------------------------------------------
@@ -27,15 +26,9 @@ use App\Http\Controllers\HomepageController;
 
 Auth::routes();
 
+use App\Http\Controllers\HomepageController;
 
-
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('homepage'); // Jika sudah login, ke homepage
-    }
-    return view('welcome'); // Jika belum login, tampilkan landing page
-})->name('landing');
-
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 // Public routes (accessible by everyone)
 // Route::get('/', [ProgramDispusipController::class, 'index1'])->name('home');
 Route::get('/programdispusip', [ProgramDispusipController::class, 'index'])->name('programdispusip.index');
@@ -90,7 +83,7 @@ Route::post('/diskusi/store', [DiskusiController::class, 'store'])->name('diskus
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     });
-        
+    
 });
 
 // Catch-all route for dynamic pages

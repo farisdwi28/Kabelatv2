@@ -11,6 +11,7 @@ class HomepageController extends Controller
 {
     public function index()
     {
+        
         // Mengambil data Program Dispusip dengan status 'aktif'
         $programs = ProgramDispusip::where('status_program', 'aktif')
             ->orderBy('tanggal_dibuat', 'desc')
