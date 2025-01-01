@@ -5,6 +5,7 @@ use App\Models\Berita;
 use App\Models\KomentarInfo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class BeritaController extends Controller
@@ -71,7 +72,7 @@ class BeritaController extends Controller
         $komentar->kd_kom_info = 'KM' . Str::random(3);
         $komentar->isi_kom_info = $request->isi_kom_info;
         $komentar->kd_info = $kd_info;
-        $komentar->id = auth()->id();
+        $komentar->id = Auth::user() -> id;
         $komentar->tglpost_kom_info = Carbon::now();
         $komentar->save();
 

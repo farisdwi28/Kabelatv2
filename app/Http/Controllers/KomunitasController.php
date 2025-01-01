@@ -60,7 +60,6 @@ class KomunitasController extends Controller
     // Bergabung dengan komunitas
     public function join($kd_komunitas)
     {
-        // Periksa apakah pengguna sudah login (tidak perlu jika middleware sudah diterapkan)
         if (!Auth::check()) {
             return redirect()->route('login')
                 ->with('info', 'Silakan login untuk bergabung dengan komunitas.');
@@ -90,6 +89,7 @@ class KomunitasController extends Controller
     
             $member = new MemberKomunitas();
             $member->kd_member = $user->kd_pen;
+            $member->id = $user->id;  // Tambahkan id user
             $member->kd_komunitas = $kd_komunitas;
             $member->tgl_bergabung = Carbon::now();
             $member->kd_jabatan = 'ANGGT';
@@ -105,8 +105,6 @@ class KomunitasController extends Controller
                 ->with('error', 'Terjadi kesalahan saat bergabung dengan komunitas.');
         }
     }
-    
-
     // Mengecek join komunitas yang tertunda setelah login
     public function checkPendingJoin()
     {

@@ -9,6 +9,7 @@ use App\Http\Controllers\KomunitasController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -26,9 +27,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Auth::routes();
 
-use App\Http\Controllers\HomepageController;
-
-Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+Route::get('/', [HomepageController::class, 'index'])->name('HOME');
 // Public routes (accessible by everyone)
 // Route::get('/', [ProgramDispusipController::class, 'index1'])->name('home');
 Route::get('/programdispusip', [ProgramDispusipController::class, 'index'])->name('programdispusip.index');
