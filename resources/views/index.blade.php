@@ -376,7 +376,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="arrow-area position-absolute top-50 end-0 translate-middle-y">
+                        <div class="arrow-area">
                             <a href="{{ route('berita.show', $News[0]->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>

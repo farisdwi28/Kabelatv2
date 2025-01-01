@@ -31,7 +31,9 @@
                             <label for="file" class="form-label">Upload File  (Maks 2MB)</label>
                             <input type="file" name="file" id="file" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan Laporan</button>
+                        <div class="text-center">
+                        <button type="submit" class="header-btn1">Simpan Laporan</button>
+                    </div>
                     </form>
                     
                 </div>

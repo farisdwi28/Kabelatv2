@@ -30,7 +30,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="arrow-area position-absolute top-50 end-0 translate-middle-y">
+                            <div class="arrow-area">
                                 <a href="{{ route('berita.show', $berita->kd_info) }}" class="text-dark"><i class="fa-solid fa-arrow-right fa-lg"></i></a>
                             </div>
                         </div>

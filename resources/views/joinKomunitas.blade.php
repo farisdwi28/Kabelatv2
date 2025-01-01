@@ -33,7 +33,7 @@
                             <button type="submit" class="header-btn1">Gabung Komunitas</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}?redirect_to={{ route('komunitas.detail', $komunitas->kd_komunitas) }}" class="btn btn-primary">
+                        <a href="{{ route('login') }}?redirect_to={{ route('komunitas.detail', $komunitas->kd_komunitas) }}" class="header-btn1">
                             Login untuk Gabung Komunitas
                         </a>
                     @endauth
