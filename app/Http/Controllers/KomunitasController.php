@@ -116,4 +116,15 @@ class KomunitasController extends Controller
 
         return null;
     }
+    public function showStructure($kd_komunitas)
+    {
+        // Get the specific community data
+        $komunitas = Komunitas::where('kd_komunitas', $kd_komunitas)->first();
+        
+        if (!$komunitas) {
+            return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
+        }
+
+        return view('strukturKomunitas', compact('komunitas'));
+    }
 }

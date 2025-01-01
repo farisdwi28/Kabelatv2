@@ -1,5 +1,5 @@
 @extends('layouts.master2')
-@section('title', 'FAQS')
+@section('title', 'Struktur Komunitas')
 @include('layouts.sidebar')
 <x-page-title title="Beranda" pagetitle="Struktur" maintitle="Struktur Komunitas" />
 @section('content')
@@ -10,11 +10,18 @@
             <div class="col-lg-10 m-auto">
                 <div class="contact-form-area p-5 bg-white rounded shadow text-center">
                     <div class="mb-4">
-                        <h3 class="fw-bold">Struktur Komunitas Bunda Literasi</h3>
+                        <h3 class="fw-bold">Struktur {{ $komunitas->nm_komunitas }}</h3>
                         <hr class="mt-3" style="border: 1px solid #000; margin: 5px 0 20px 0;" />
                     </div>
                     <div class="photo-area">
-                            <img src="{{ URL::asset('build/img/all-images/struktur.png') }}" alt="">
+                        @if($komunitas->foto_struktur)
+                            <img src="{{ $komunitas->foto_struktur }}" 
+                                 alt="Struktur {{ $komunitas->nm_komunitas }}"
+                                 class="img-fluid"
+                                 style="max-width: 100%; height: auto;">
+                        @else
+                            <p>Struktur organisasi belum tersedia.</p>
+                        @endif
                     </div>
                 </div>
             </div>

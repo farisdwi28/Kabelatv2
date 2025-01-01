@@ -356,38 +356,39 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7">
-                @foreach($News->slice(0, 3) as $berita) {{-- Featured News: Berita 0-2 --}}
+            <div class="row">
+                <!-- Berita Utama -->
+                <div class="col-lg-7">
                     <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000" style="margin-bottom: 30px;">
-                        <div class="img1">
-                            <img src="{{ $berita->foto_berita ?? URL::asset('build/img/all-images/default-news.png') }}" 
-                                 alt="{{ $berita->judul_berita }}" style="width: 100%; height: 300px; object-fit: cover;">
+                        <div class="img1 position-relative">
+                          <img src="{{ $News[0]->foto_berita ?? URL::asset('build/img/all-images/default-news.png') }}" 
+                                 alt="{{ $News[0]->judul_berita }}" 
+                                 style="width: 100%; height: 300px; object-fit: cover;">
                         </div>
-                        <div class="content-area position-absolute bottom-0 start-0 p-3">
-                            <h5>{{ \Carbon\Carbon::parse($berita->tanggal_dibuat)->format('d M Y') }}</h5>
-                            <a href="{{ route('berita.show', $berita->kd_info) }}" class="text text-anime-style-3">
-                                {{ $berita->judul_berita }}
+                        <div class="content-area position-absolute bottom-0 start-0 p-3 text-white">
+                            <h5>{{ \Carbon\Carbon::parse($News[0]->tanggal_dibuat)->format('d M Y') }}</h5>
+                            <a href="{{ route('berita.show', $News[0]->kd_info) }}" class="text text-anime-style-3">
+                                {{ $News[0]->judul_berita }}
                             </a>
-                            <div class="btn-area mt-2">
-                                <a href="{{ route('berita.show', $berita->kd_info) }}" class="header-btn1">
-                                    Lihat Selengkapnya <span><i class="fa-solid fa-arrow-right"></i></span>
+                            <div class="btn-area mt-2" data-aos="fade-up" data-aos-duration="1200">
+                                <a href="{{ route('berita.show', $News[0]->kd_info) }}" class="header-btn1">
+                                    Lihat Selengkapnya<span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
                             </div>
                         </div>
-                        <div class="arrow-area">
-                            <a href="{{ route('berita.show', $berita->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
+                        <div class="arrow-area position-absolute top-50 end-0 translate-middle-y">
+                            <a href="{{ route('berita.show', $News[0]->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
-                @endforeach
-            </div>
-
-            <!-- Right Column - Sidebar News -->
-            <div class="col-lg-5">
-                <div class="service-all-boxes">
-                    <div class="row">
-                        @foreach($News->slice(3) as $berita) {{-- Sidebar News: Berita 3+ --}}
+                </div>
+            
+                <!-- Sidebar Berita Lainnya -->
+                <div class="col-lg-5">
+                    <div class="service-all-boxes">
+                        <div class="row g-3">
+                            @foreach($News->slice(1, 2) as $berita)
                             <div class="col-lg-12 col-md-6">
-                                <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000" style="margin-bottom: 20px;">
+                                <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000">
                                     <div class="arrow">
                                         <a href="{{ route('berita.show', $berita->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
@@ -396,16 +397,16 @@
                                         <a href="{{ route('berita.show', $berita->kd_info) }}">
                                             {{ $berita->judul_berita }}
                                         </a>
-                                        <p>{{ Str::limit($berita->isi_berita, 100) }}</p>
+                                        <p>
+                                            {{ Str::limit($berita->isi_berita ?? 100) }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
-
-                
             </div>
         </div>
     </div>

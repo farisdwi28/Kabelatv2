@@ -76,7 +76,8 @@ Route::post('/diskusi/store', [DiskusiController::class, 'store'])->name('diskus
     Route::post('/komunitas/join/{kd_komunitas}', [KomunitasController::class, 'join'])
     ->name('komunitas.join')
     ->middleware('auth');
-
+    Route::get('/strukturKomunitas/{kd_komunitas}', [KomunitasController::class, 'showStructure'])
+    ->name('strukturKomunitas.show');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

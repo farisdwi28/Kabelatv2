@@ -66,11 +66,11 @@
 
                     @if($user && $memberInfo)
                         <li class="nav-item">
-                            <a href="{{ url('strukturKomunitas') }}" 
-                               class="nav-link {{ Request::is('strukturKomunitas') ? 'active bg-light text-dark' : 'text-dark' }}">
-                                <i class="fa-solid fa-users me-2"></i>
-                                Struktur Komunitas
-                            </a>
+                            <a href="{{ route('strukturKomunitas.show', $komunitas->kd_komunitas) }}" 
+                                class="nav-link {{ Request::is('strukturKomunitas/*') ? 'active bg-light text-dark' : 'text-dark' }}">
+                                 <i class="fa-solid fa-users me-2"></i>
+                                 Struktur Komunitas
+                             </a>
                         </li>
 
                         <li class="nav-item">
