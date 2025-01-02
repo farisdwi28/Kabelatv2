@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\Penduduk;
+use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 USE Illuminate\Support\Facades\Storage;
 
@@ -13,65 +16,78 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('profile', compact('user'));
+        $penduduk = Penduduk::where('kd_pen', $user->kd_pen)->first();
+        return view('profile', compact('user', 'penduduk'));
     }
 
     public function edit()
     {
-        return view('profile', ['user' => Auth::user()]);
+        $user = User::find(Auth::id());
+        $penduduk = Penduduk::where('kd_pen', $user->kd_pen)->first();
+        
+        return view('profile.edit', compact('user', 'penduduk'));
     }
 
     public function update(Request $request)
     {
-        DB::beginTransaction();
+        $user = User::find(Auth::id());
+        
+        if (!$user) {
+            return redirect()->back()->with('error', 'User tidak ditemukan.');
+        }
+        
+        $penduduk = Penduduk::where('kd_pen', $user->kd_pen)->first();
+        
+        if (!$penduduk) {
+            return redirect()->back()->with('error', 'Data penduduk tidak ditemukan.');
+        }
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'profile_photo' => ['nullable', 'image', 'max:2048'], // max 2MB
+        ]);
+
         try {
-            $user = Auth::user();
-            if (!$user) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'User not authenticated',
-                ], 401);
-            }
-            
-            $validated = $request->validate([
-                'name' => 'required|max:255',
-                'username' => 'required|unique:users,username,'.$user->id,
-                'email' => 'required|email|unique:users,email,'.$user->id,
-                'password' => $request->filled('password') ? 'required|min:8|confirmed' : '',
-                'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
-            ]);
-
+            // Handle profile photo upload
             if ($request->hasFile('profile_photo')) {
-                if ($user->profile_photo_url) {
-                    Storage::delete('public/images/profiles/' . $user->profile_photo_url);
+                // Delete old photo if exists
+                if ($penduduk->foto_pen && Storage::exists('public/images/profiles/' . $penduduk->foto_pen)) {
+                    Storage::delete('public/images/profiles/' . $penduduk->foto_pen);
                 }
-                $filename = time() . '_' . Str::random(10) . '.' . $request->profile_photo->extension();
-                $request->profile_photo->storeAs('public/images/profiles', $filename);
-                $user->profile_photo_url = $filename;
+
+                $photo = $request->file('profile_photo');
+                $photoName = time() . '_' . $user->kd_pen . '.' . $photo->getClientOriginalExtension();
+                $photo->storeAs('public/images/profiles', $photoName);
+                
+                // Update foto in penduduk table
+                $penduduk->foto_pen = $photoName;
+                $penduduk->save();
             }
 
+            // Update user information
             $user->name = $validated['name'];
             $user->username = $validated['username'];
             $user->email = $validated['email'];
-
+            
             if ($request->filled('password')) {
-                $user->password = Hash::make($request->password);
+                $user->password = Hash::make($validated['password']);
             }
 
             $user->save();
-            DB::commit();
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Profile berhasil diperbarui',
-                'user' => $user
-            ]);
+            // Update penduduk information
+            $penduduk->nm_pen = $validated['name'];
+            $penduduk->save();
+
+            return redirect()->back()->with('success', 'Profile berhasil diperbarui!');
+
         } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 500);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan saat memperbarui profile. ' . $e->getMessage());
         }
     }
 }

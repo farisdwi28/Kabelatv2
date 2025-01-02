@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="detailKegiatan">
+                <a href="">
                     <div class="carousel-item" data-bs-interval="2000">
                         <img src="{{ URL::asset('build/img/all-images/carousel2.png') }}" class="d-block w-100"
                             alt="...">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="detailKegiatan">
+                <a href="">
                     <div class="carousel-item" data-bs-interval="1000">
                         <img src="{{ URL::asset('build/img/all-images/carousel1.png') }}" class="d-block w-100"
                             alt="...">

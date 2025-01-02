@@ -1,12 +1,20 @@
 @php
     $isMember = false;
-    $jabatan = null; // Set jabatan to null initially
+    $jabatan = null;
+    $profilePhoto = null;
+    
     if (Auth::check()) {
         $memberInfo = App\Models\MemberKomunitas::where('kd_member', Auth::user()->kd_pen)->first();
         if ($memberInfo) {
             $isMember = true;
             $jabatan = $memberInfo->kd_jabatan === 'ANGGT' ? 'Anggota' : $memberInfo->kd_jabatan;
         }
+        
+        // Get profile photo
+        $penduduk = App\Models\Penduduk::where('kd_pen', Auth::user()->kd_pen)->first();
+        $profilePhoto = $penduduk && $penduduk->foto_pen 
+            ? asset('storage/images/profiles/' . $penduduk->foto_pen) 
+            : asset('default-avatar.png');
     }
 @endphp
 
@@ -47,19 +55,6 @@
                                 </li>
                                 <li><a href="{{ route('kegiatan.index') }}">Galeri Kegiatan</a></li>
                                 <li><a href="{{ route('profile.index') }}">Profil</a></li>
-                                {{-- <li>
-                                    <a href="#">Tentang <i class="fa-solid fa-angle-down"></i></a>
-                                    <ul class="dropdown-padding">
-                                        @auth
-                                            <li>
-                                                <form method="POST" action="{{ route('logout') }}">
-                                                    @csrf
-                                                    <button type="submit" class="dropdown-item">Logout</button>
-                                                </form>
-                                            </li>
-                                        @endauth
-                                    </ul>
-                                </li> --}}
                             </ul>
                         </div>
 
@@ -72,7 +67,7 @@
                             @auth
                             <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
                                 <div class="profile-avatar">
-                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar"
+                                    <img src="{{ $profilePhoto }}" alt="User Avatar"
                                          class="profile-picture rounded-circle shadow-sm"
                                          style="width: 60px; height: 60px; object-fit: cover;">
                                 </div>
@@ -84,13 +79,19 @@
                                         <div class="text-muted small">{{ $jabatan }}</div>
                                     @endif
                                 </div>
+                                <div class="dropdown">
                                     <button class="btn btn-link dropdown-toggle p-0" type="button" id="sidebarDropdownMenuButton" 
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #040404;"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
                                         aria-labelledby="sidebarDropdownMenuButton">
-                                        {{-- <li><a class="dropdown-item" href="{{ route('profile.show', Auth::id()) }}">Profil</a></li> --}}
+                                        <li>
+                                            <form action="POST" action="{{ route('profile.index') }}">
+                                                @csrf
+                                                <button type="sumbit" class="dropdown-item">Profile</button>
+                                            </form>
+                                        </li>
                                         <li>
                                             <form method="POST" action="{{ route('logout') }}">
                                                 @csrf
@@ -100,7 +101,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        @endauth
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -108,7 +109,6 @@
         </div>
     </div>
 </header>
-<!--=====HEADER END =======-->
 
 <!--===== MOBILE HEADER STARTS =======-->
 <div class="mobile-header mobile-haeder1 d-block d-lg-none">
@@ -169,7 +169,7 @@
             @auth
             <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
                 <div class="profile-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar"
+                    <img src="{{ $profilePhoto }}" alt="User Avatar"
                          class="profile-picture rounded-circle shadow-sm"
                          style="width: 60px; height: 60px; object-fit: cover;">
                 </div>
@@ -182,11 +182,12 @@
                     @endif
                 </div>
                 <div class="dropdown">
-                    <button class="btn btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" 
+                            data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #007bff;"></i>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="{{ route('profile.show', Auth::id()) }}">Profil</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
+                        aria-labelledby="dropdownMenuButton">
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

@@ -160,20 +160,29 @@
                 @foreach ($relatedNews as $related)
                     <div class="col-lg-4 col-md-6">
                         <div class="blog-author-boxarea">
-                            <div class="img1">
-                                @if ($related->foto_berita)
-                                    <img src="{{ $related->foto_berita }}" alt="{{ $related->judul_berita }}">
-                                @else
-                                    <img src="{{ URL::asset('build/img/all-images/default-news.png') }}" alt="Default">
-                                @endif
+                            <div class="img1" style="position: relative; overflow: hidden; border-radius: 8px;">
+                                <a href="{{ route('berita.show', $related->kd_info) }}">
+                                    @if ($related->foto_berita)
+                                        <img src="{{ $related->foto_berita }}" alt="{{ $related->judul_berita }}" 
+                                             style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;">
+                                    @else
+                                        <img src="{{ URL::asset('build/img/all-images/default-news.png') }}" alt="Default" 
+                                             style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;">
+                                    @endif
+                                </a>
+                            </div>
+                            <div class="content-area">
+                                <h5 class="post-title mt-3"><a href="{{ route('berita.show', $related->kd_info) }}">
+                                    {{ Str::limit($related->judul_berita, 50) }}
+                                </a></h5>
                             </div>
                         </div>
-                        <div class="space30 d-lg-none d-block"></div>
                     </div>
                 @endforeach
             </div>
         </div>
     </div>
+    
 @endsection
 
 @section('scripts')

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
@@ -16,20 +17,20 @@ class BeritaController extends Controller
     }
 
     public function listBerita()
-{
-    $featuredNews = Berita::where('status_info', 'terbit')
-        ->orderBy('tanggal_dibuat', 'desc')
-        ->take(3)
-        ->get();
+    {
+        $featuredNews = Berita::where('status_info', 'terbit')
+            ->orderBy('tanggal_dibuat', 'desc')
+            ->take(3)
+            ->get();
 
-    $sidebarNews = Berita::where('status_info', 'terbit')
-        ->orderBy('tanggal_dibuat', 'desc')
-        ->skip(3)
-        ->take(4)
-        ->get();
+        $sidebarNews = Berita::where('status_info', 'terbit')
+            ->orderBy('tanggal_dibuat', 'desc')
+            ->skip(3)
+            ->take(4)
+            ->get();
 
-    return view('index', compact('featuredNews', 'sidebarNews'));
-}
+        return view('index', compact('featuredNews', 'sidebarNews'));
+    }
 
     public function index()
     {
@@ -72,7 +73,7 @@ class BeritaController extends Controller
         $komentar->kd_kom_info = 'KM' . Str::random(3);
         $komentar->isi_kom_info = $request->isi_kom_info;
         $komentar->kd_info = $kd_info;
-        $komentar->id = Auth::user() -> id;
+        $komentar->id = Auth::user()->id;
         $komentar->tglpost_kom_info = Carbon::now();
         $komentar->save();
 

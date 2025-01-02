@@ -17,34 +17,34 @@ class KomunitasController extends Controller
         $komunitasList = Komunitas::all();
         view()->share('komunitasList', $komunitasList);
     }
-    
+
     public function show($kd_komunitas = null)
     {
         // Jika ada ID komunitas yang diberikan, ambil komunitas spesifik tersebut
         if ($kd_komunitas) {
             $komunitas = Komunitas::where('kd_komunitas', $kd_komunitas)->first();
-    
+
             // Jika komunitas tidak ditemukan, arahkan ke beranda dengan pesan error
             if (!$komunitas) {
                 return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
             }
-    
+
             // Tampilkan detail komunitas
             return view('galeriKomunitas', compact('komunitas'));
         }
-    
+
         // Jika tidak ada ID komunitas yang diberikan, gunakan data yang dibagikan
         return view('galeriKomunitas');
     }
-    
+
     // Menampilkan daftar komunitas
     public function index()
-{
-    // Ambil data komunitas
-    $komunitasList = Komunitas::all();
-    return view('index', compact('komunitasList'));
-}
-   
+    {
+        // Ambil data komunitas
+        $komunitasList = Komunitas::all();
+        return view('index', compact('komunitasList'));
+    }
+
 
     // Menampilkan detail komunitas
     public function detail($kd_komunitas)
@@ -54,7 +54,6 @@ class KomunitasController extends Controller
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
         return view('joinKomunitas', compact('komunitas'));
-        
     }
 
     // Bergabung dengan komunitas
@@ -64,29 +63,29 @@ class KomunitasController extends Controller
             return redirect()->route('login')
                 ->with('info', 'Silakan login untuk bergabung dengan komunitas.');
         }
-    
+
         // Pastikan komunitas ada
         $komunitas = Komunitas::where('kd_komunitas', $kd_komunitas)->first();
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
-    
+
         try {
             $user = Auth::user();
-    
+
             // Cek apakah sudah menjadi anggota
             $existingMember = MemberKomunitas::where('kd_member', $user->kd_pen)
                 ->where('kd_komunitas', $kd_komunitas)
                 ->first();
-    
+
             if ($existingMember) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
                     ->with('error', 'Anda sudah menjadi anggota komunitas ini.');
             }
-    
+
             // Proses join
             DB::beginTransaction();
-    
+
             $member = new MemberKomunitas();
             $member->kd_member = $user->kd_pen;
             $member->id = $user->id;  // Tambahkan id user
@@ -94,9 +93,9 @@ class KomunitasController extends Controller
             $member->tgl_bergabung = Carbon::now();
             $member->kd_jabatan = 'ANGGT';
             $member->save();
-    
+
             DB::commit();
-    
+
             return redirect()->route('komunitas.detail', $kd_komunitas)
                 ->with('success', 'Berhasil bergabung dengan komunitas!');
         } catch (\Exception $e) {
@@ -120,7 +119,7 @@ class KomunitasController extends Controller
     {
         // Get the specific community data
         $komunitas = Komunitas::where('kd_komunitas', $kd_komunitas)->first();
-        
+
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }

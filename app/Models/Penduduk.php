@@ -9,7 +9,7 @@ class Penduduk extends Model
     protected $table = 'penduduk';
     protected $primaryKey = 'kd_pen';
     public $incrementing = false;
-    
+    public $timestamps = false;
     protected $fillable = [
         'kd_pen',
         'no_ktp',

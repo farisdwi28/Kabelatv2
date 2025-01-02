@@ -58,4 +58,3 @@ class ProgramDispusipController extends Controller
         return redirect()->route('programdispusip.index')->with('success', 'Program Dispusip berhasil ditambahkan');
     }
 }
- 

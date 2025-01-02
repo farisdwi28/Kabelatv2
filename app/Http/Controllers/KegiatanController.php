@@ -12,10 +12,12 @@ class KegiatanController extends Controller
     public function index(Request $request)
     {
         $activeTab = $request->query('tab', 'dispusip'); // Default to dispusip tab
-        
+        $perPage = 6; // Items per page
+
+
         $kegiatanDispusip = collect([]);
         $kegiatanKomunitas = collect([]);
-        
+
         if ($activeTab === 'dispusip') {
             $kegiatanDispusip = Kegiatan::with('photos')
                 ->orderBy('tgl_mulai', 'desc')
@@ -40,18 +42,16 @@ class KegiatanController extends Controller
         return view('detailKegiatan', compact('activity'));
     }
     public function photos()
-{
-    return $this->hasMany(FotoKegiatan::class, 'kd_kegiatan', 'kd_kegiatan');
-}
-public function footerGaleri()
-{
-    $kegiatanDispusip = Kegiatan::with('photos')
-        ->orderBy('tgl_mulai', 'desc')
-        ->take(3)
-        ->get();
+    {
+        return $this->hasMany(FotoKegiatan::class, 'kd_kegiatan', 'kd_kegiatan');
+    }
+    public function footerGaleri()
+    {
+        $kegiatanDispusip = Kegiatan::with('photos')
+            ->orderBy('tgl_mulai', 'desc')
+            ->take(3)
+            ->get();
 
-    return view('layouts.footer', compact('kegiatanDispusip'));
-}
-
-
+        return view('layouts.footer', compact('kegiatanDispusip'));
+    }
 }

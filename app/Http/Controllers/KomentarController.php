@@ -23,7 +23,7 @@ class KomentarController extends Controller
         $lastKomentar = KomentarInfo::orderBy('kd_kom_info', 'desc')->first();
         $lastNumber = $lastKomentar ? intval(substr($lastKomentar->kd_kom_info, 2)) : 0; // Ambil angka setelah 'KM'
         $newKode = 'KM' . str_pad($lastNumber + 1, 2, '0', STR_PAD_LEFT); // Format KM01
-        
+
         // Simpan komentar ke dalam database
         $komentar = KomentarInfo::create([
             'kd_kom_info' => $newKode,

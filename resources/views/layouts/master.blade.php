@@ -26,7 +26,7 @@
 
     <!-- Main Content -->
     @yield('content')
-
+    <script src="{{ asset('js/profile.js') }}"></script>
     @include('layouts.footer')
     @include('layouts.footer-scripts')
     @yield('scripts')
