@@ -30,11 +30,11 @@ class KomunitasController extends Controller
             }
     
             // Tampilkan detail komunitas
-            return view('galerikomunitas', compact('komunitas'));
+            return view('galeriKomunitas', compact('komunitas'));
         }
     
         // Jika tidak ada ID komunitas yang diberikan, gunakan data yang dibagikan
-        return view('galerikomunitas');
+        return view('galeriKomunitas');
     }
     
     // Menampilkan daftar komunitas
@@ -53,7 +53,7 @@ class KomunitasController extends Controller
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
-        return view('joinkomunitas', compact('komunitas'));
+        return view('joinKomunitas', compact('komunitas'));
         
     }
 

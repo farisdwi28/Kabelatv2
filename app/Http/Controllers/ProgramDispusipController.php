@@ -17,7 +17,7 @@ class ProgramDispusipController extends Controller
     public function index()
     {
         // Menampilkan halaman utama dengan program aktif
-        return view('programdispusip');
+        return view('programDispusip');
     }
 
     public function index1()
@@ -30,7 +30,7 @@ class ProgramDispusipController extends Controller
     {
         // Mengambil detail program berdasarkan kode
         $program = ProgramDispusip::findOrFail($kd_program);
-        return view('detailprogramdispusip', compact('program'));
+        return view('detailProgramDispusip', compact('program'));
     }
 
     public function store(Request $request)

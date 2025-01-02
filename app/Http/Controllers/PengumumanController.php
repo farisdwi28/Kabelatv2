@@ -20,6 +20,6 @@ public function index()
     public function show($id)
     {
         $pengumuman = InformasiPengumuman::findOrFail($id);
-        return view('detailpengumuman', compact('pengumuman'));
+        return view('detailPengumuman', compact('pengumuman'));
     }
 }

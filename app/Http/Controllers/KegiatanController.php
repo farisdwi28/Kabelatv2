@@ -26,7 +26,7 @@ class KegiatanController extends Controller
                 ->paginate(6);
         }
 
-        return view('galerikegiatan', compact('kegiatanDispusip', 'kegiatanKomunitas', 'activeTab'));
+        return view('galeriKegiatan', compact('kegiatanDispusip', 'kegiatanKomunitas', 'activeTab'));
     }
 
     public function detail($type, $id)
@@ -37,7 +37,7 @@ class KegiatanController extends Controller
             $activity = KegiatanKomunitas::with('photos')->where('kd_kegiatan2', $id)->firstOrFail();
         }
 
-        return view('detailkegiatan', compact('activity'));
+        return view('detailKegiatan', compact('activity'));
     }
     public function photos()
 {

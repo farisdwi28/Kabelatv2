@@ -10,7 +10,7 @@ class LaporanController extends Controller
 {
     public function create()
     {
-        return view('tambahlaporan');
+        return view('tambahLaporan');
     }
      
     public function store(Request $request)
@@ -55,6 +55,6 @@ class LaporanController extends Controller
 public function index()
 {
     $laporans = Laporan::all();
-    return view('riwayatlaporan', compact('laporans'));
+    return view('riwayatLaporan', compact('laporans'));
 }
 }

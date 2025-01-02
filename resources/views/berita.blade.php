@@ -15,7 +15,7 @@
                         <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000" style="margin-bottom: 30px;">
                             <div class="img1 position-relative">
                                 <img src="{{ $berita->foto_berita ?? URL::asset('build/img/all-images/default-news.png') }}" 
-                                     alt="{{ $berita->judul_berita }}" style="width: 100%; height: 300px; object-fit: cover;">
+                                     alt="{{ Str::limit($berita->judul_berita ?? 100) }}" style="width: 100%; height: 300px; object-fit: cover;">
                                 <!-- Gradient Overlay for Style -->
                                 <div class="overlay-gradient"></div>
                             </div>

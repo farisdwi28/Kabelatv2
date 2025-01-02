@@ -39,13 +39,13 @@ class DiskusiController extends Controller
             ->orderBy('tglpost_diskusi', 'desc')
             ->get();
             
-        return view('forumdiskusi', compact('diskusi'));
+        return view('forumDiskusi', compact('diskusi'));
     }
     public function create()
     {
         // Get logged-in user's community data
         $komunitas = Komunitas::where('kd_komunitas', Auth::user()->kd_komunitas)->first();
-        return view('tambahdiskusi', compact('komunitas'));
+        return view('tambahDiskusi', compact('komunitas'));
     }
 
     public function store(Request $request)
@@ -94,7 +94,7 @@ class DiskusiController extends Controller
             abort(403, 'Unauthorized action.');
         }
     
-        return view('detaildiskusi', compact('diskusi'));
+        return view('detailDiskusi', compact('diskusi'));
     }
     public function storeComment(Request $request, $id)
 {
@@ -110,7 +110,7 @@ class DiskusiController extends Controller
     $komentar->tglpost_kom_diskusi = now();
     $komentar->save();
 
-    return redirect()->route('detaildiskusi', ['id' => $id])
+    return redirect()->route('detailDiskusi', ['id' => $id])
         ->with('success', '');
 }
 
