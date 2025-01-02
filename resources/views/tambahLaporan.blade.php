@@ -7,14 +7,13 @@
 <div class="container py-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-lg-8">
-            <div class="card border-0 shadow-lg rounded-4">
+            <div class="card border-0 shadow-lg rounded-4" style="margin-left: -150px;">
                 <div class="card-header text-center py-3 bg-gradient-primary text-black rounded-top position-relative">
                     <h3 class="fw-semibold mb-0">Tambah Laporan</h3>
                 </div>
                 <div class="card-body px-5 py-4">
                     <form action="{{ route('laporan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <!-- Form Fields -->
                         <div class="mb-4">
                             <label for="judul" class="form-label">Judul</label>
                             <input type="text" name="judul" id="judul" class="form-control" required>

@@ -5,17 +5,17 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow-lg border-0 rounded">
+            <div class="card shadow-lg border-0 rounded" style="margin-top: 150px;">
                 <div class="card-body p-4">
                     <h3 class="text-center mb-4">Edit Profile</h3>
                     <div class="text-center mb-4">
-                        <img id="profilePreview" src="{{ $user->profile_photo_url ? asset('storage/' . $user->profile_photo_url) : asset('default-avatar.png') }}" alt="Profile Photo"
-                            class="rounded-circle img-thumbnail" style="width: 120px; height: 120px; object-fit: cover;">
+                        <img id="profilePreview" src="{{ $user->profile_photo_url ?? asset('default-avatar.png') }}" alt="Profile Photo" 
+                             class="rounded-circle img-thumbnail" style="width: 120px; height: 120px; object-fit: cover;">
                     </div>
                     <form id="editProfileForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3 text-center">
-                            <label for="profile_photo" class="form-label btn btn-outline-primary">
+                            <label for="profile_photo" class="form-label header-btn1">
                                 Ubah Foto Profil
                             </label>
                             <input type="file" id="profile_photo" name="profile_photo" class="form-control d-none" accept="image/*">
@@ -42,7 +42,7 @@
                             <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary px-4">Simpan</button>
+                            <button type="submit" class="header-btn1">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -50,81 +50,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    $('#editProfileForm').on('submit', function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(this);
-
-        Swal.fire({
-            title: 'Memperbarui...',
-            text: 'Menunggu proses update profil...',
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
-
-        $.ajax({
-            url: '{{ route("profile.update") }}',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                Swal.close();
-
-                if (response.status === 'success') {
-                    $('#name').val(response.user.name);
-                    $('#username').val(response.user.username);
-                    $('#email').val(response.user.email); // Update email field
-
-                    if (response.user.profile_photo_url) {
-                        $('#profilePreview').attr('src', '{{ asset('storage') }}/' + response.user.profile_photo_url);
-                    }
-
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Profil berhasil diperbarui!',
-                        text: response.message,
-                    });
-                }
-            },
-            error: function (xhr) {
-                Swal.close(); // Close loading on error as well
-
-                if (xhr.status === 422) {
-                    let errors = xhr.responseJSON.errors;
-                    let errorMessage = '';
-                    for (let key in errors) {
-                        errorMessage += errors[key][0] + '<br>';
-                    }
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error Validasi',
-                        html: errorMessage,
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Terjadi kesalahan.', // Generic error message
-                    });
-                }
-            },
-        });
-    });
-
-    // Preview image before upload
-    $('#profile_photo').change(function() {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-            $('#profilePreview').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(this.files[0]);
-    });
-</script>
 
 @endsection

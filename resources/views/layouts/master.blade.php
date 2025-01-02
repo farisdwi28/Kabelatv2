@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') | SEOC - Digital Marketing Agency</title>
-     <!--=====FAB ICON=======-->
-     <link rel="shortcut icon" href="{{ URL::asset('build/img/logo/fav-logo1.png') }}" type="image/x-icon">
 
-     @yield('css')
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ URL::asset('build/img/logo/fav-logo1.png') }}" type="image/x-icon">
 
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    @yield('css')
     @include('layouts.head-css')
 </head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <body class="homepage1-body">
-    {{-- {{ URL::asset('build/img/all-images/Logo Kabelat.svg') }} --}}
-@include('layouts.preloader')
+    <!-- Preloader -->
+    @include('layouts.preloader')
 
-@include('layouts.sidebar')
+    <!-- Sidebar -->
+    @include('layouts.sidebar')
 
-@yield('content')
+    <!-- Main Content -->
+    @yield('content')
 
-
-@include('layouts.footer')
-@include('layouts.footer-scripts')
-@yield('scripts')
-
+    @include('layouts.footer')
+    @include('layouts.footer-scripts')
+    @yield('scripts')
 </body>
+
 </html>

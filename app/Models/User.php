@@ -62,5 +62,8 @@ public function komunitas()
 {
     return $this->belongsTo(Komunitas::class, 'kd_komunitas', 'kd_komunitas');
 }
-    
+public function getProfilePhotoUrlAttribute($value)
+{
+    return $value ? asset('storage/images/profiles/' . $value) : null;
+}
 }

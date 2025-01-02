@@ -71,29 +71,26 @@
 
                             @auth
                             <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
-                                <!-- Profile Avatar -->
                                 <div class="profile-avatar">
                                     <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar"
                                          class="profile-picture rounded-circle shadow-sm"
                                          style="width: 60px; height: 60px; object-fit: cover;">
                                 </div>
-                                <!-- User Name and Position -->
                                 <div class="me-2">
                                     <span class="font-weight-bold">
-                                        {{ Str::limit(Auth::user()->name, 15, '...') }}
+                                        {{ Str::limit(Auth::user()->username, 15, '...') }}
                                     </span>
                                     @if ($isMember && $jabatan)
                                         <div class="text-muted small">{{ $jabatan }}</div>
                                     @endif
                                 </div>
-                                <!-- Dropdown Menu for Logout -->
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="dropdown-icon">
-                                            <path d="M19 9l-7 7-7-7" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
+                                    <button class="btn btn-link dropdown-toggle p-0" type="button" id="sidebarDropdownMenuButton" 
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #040404;"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" aria-labelledby="dropdownMenuButton">
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
+                                        aria-labelledby="sidebarDropdownMenuButton">
+                                        {{-- <li><a class="dropdown-item" href="{{ route('profile.show', Auth::id()) }}">Profil</a></li> --}}
                                         <li>
                                             <form method="POST" action="{{ route('logout') }}">
                                                 @csrf
@@ -104,7 +101,6 @@
                                 </div>
                             </div>
                         @endauth
-                        
                         </div>
                     </div>
                 </div>
@@ -120,8 +116,7 @@
         <div class="col-12">
             <div class="mobile-header-elements">
                 <div class="mobile-logo">
-                    <a href="/"><img src="{{ URL::asset('build/img/all-images/Logo Kabelat.svg') }}"
-                            alt=""></a>
+                    <a href="/"><img src="{{ URL::asset('build/img/all-images/Logo Kabelat.svg') }}" alt=""></a>
                 </div>
                 <div class="mobile-nav-icon dots-menu">
                     <i class="fa-solid fa-bars"></i>
@@ -164,43 +159,31 @@
             </li>
             <li><a href="galeriKegiatan">Galeri Kegiatan</a></li>
             <li><a href="profile">Profil</a></li>
-            {{-- <li><a href="#">Tentang</a>
-                <ul class="sub-menu">
-                     <li><a href="case">Tentang Dispusip</a></li>
-                  <li><a href="case-single">Hubungi Kami</a></li>
-                    <li><a href="case-single">Hubungi Kami</a></li>
-                </ul>
-            </li> --}}
         </ul>
 
         <div class="allmobilesection">
             @guest
-                <!-- Tampilkan tombol Masuk jika belum login -->
-                <a href="{{ route('login') }}" class="header-btn1">Masuk <span><i
-                            class="fa-solid fa-arrow-right"></i></span></a>
+                <a href="{{ route('login') }}" class="header-btn1">Masuk <span><i class="fa-solid fa-arrow-right"></i></span></a>
             @endguest
 
             @auth
             <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
-                <!-- Profile Avatar -->
                 <div class="profile-avatar">
                     <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar"
                          class="profile-picture rounded-circle shadow-sm"
                          style="width: 60px; height: 60px; object-fit: cover;">
                 </div>
-                <!-- User Name and Position -->
                 <div class="me-2">
                     <span class="font-weight-bold">
-                        {{ Str::limit(Auth::user()->name, 15, '...') }}
+                        {{ Str::limit(Auth::user()->username, 15, '...') }}
                     </span>
                     @if ($isMember && $jabatan)
                         <div class="text-muted small">{{ $jabatan }}</div>
                     @endif
                 </div>
-                <!-- Dropdown Menu for Logout -->
                 <div class="dropdown">
                     <button class="btn btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #007bff;"></i> <!-- Larger and colored icon -->
+                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #007bff;"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" aria-labelledby="dropdownMenuButton">
                         <li><a class="dropdown-item" href="{{ route('profile.show', Auth::id()) }}">Profil</a></li>
@@ -213,9 +196,7 @@
                     </ul>
                 </div>
             </div>
-        @endauth
-        
-
+            @endauth
         </div>
     </div>
 </div>

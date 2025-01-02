@@ -48,6 +48,7 @@ Route::get('/komunitas/{kd_komunitas?}', [KomunitasController::class, 'show'])->
 
 
 
+
 // Routes for guests (login and register)
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -82,6 +83,7 @@ Route::post('/diskusi/store', [DiskusiController::class, 'store'])->name('diskus
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     });
     
 });

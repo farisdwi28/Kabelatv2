@@ -77,6 +77,20 @@
                   </div>
               </div>
             </div>
+            {{-- <div class="col-lg-2 col-md-6">
+              <div class="footer-logo-area3">
+                  <h3>Galeri Kegiatan</h3>
+                  <div class="row mt-4">
+                      @foreach ($kegiatanDispusip as $kegiatan)
+                          <div class="col-6 col-md-4 mb-4">
+                              <div class="card border-0 rounded-3 shadow">
+                                  <img src="{{ $kegiatan->getMainPhotoUrl() }}" 
+                                       alt="{{ $kegiatan->judul_kegiatan }}" 
+                                       class="img-fluid">
+                              </div>
+                          </div>
+                      @endforeach
+                  </div> --}}
             <div class="btn-area d-flex flex-column align-items-start">
               <p class="mb-2">Ikuti Instagram</p>
               <a href="https://www.instagram.com/dispusip_kab.bandung?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="header-btn1">

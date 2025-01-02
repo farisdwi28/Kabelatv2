@@ -43,6 +43,15 @@ class KegiatanController extends Controller
 {
     return $this->hasMany(FotoKegiatan::class, 'kd_kegiatan', 'kd_kegiatan');
 }
+public function footerGaleri()
+{
+    $kegiatanDispusip = Kegiatan::with('photos')
+        ->orderBy('tgl_mulai', 'desc')
+        ->take(3)
+        ->get();
+
+    return view('layouts.footer', compact('kegiatanDispusip'));
+}
 
 
 }

@@ -108,7 +108,7 @@
 
                             @if ($berita->komentar->count() > 3)
                                 <div class="text-center">
-                                    <a href="javascript:void(0);" onclick="showAllComments()" class="btn btn-link">Lihat
+                                    <a href="javascript:void(0);" onclick="showAllComments()" class="header-btn1">Lihat
                                         Semua Komentar</a>
                                 </div>
                             @endif

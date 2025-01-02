@@ -8,7 +8,7 @@
     <div class="blog-top-area sp1">
         <div class="container">
             @foreach ($pengumuman as $p)
-                <div class="row">
+                <div class="row mb-4"> <!-- Menambahkan margin bawah -->
                     <div class="col-lg-12">
                         <div class="blog-top-boxarea">
                             <div class="row align-items-center">
@@ -39,7 +39,7 @@
                                         <div class="images image-anime">
                                             <a href="{{ route('pengumuman.show', $p->kd_info) }}">
                                                 @if ($p->foto_pengumuman)
-                                                    <img src="{{ $p->foto_pengumuman }}"
+                                                    <img src="{{ $p->foto_pengumuman }} "
                                                         alt="Pengumuman {{ $p->judul_pengumuman }}">
                                                 @else
                                                     <img src="{{ URL::asset('build/img/all-images/pengumuman1.png') }}"
@@ -47,13 +47,12 @@
                                                 @endif
                                             </a>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div> <!-- Akhir div card -->
             @endforeach
         </div>
     </div>
