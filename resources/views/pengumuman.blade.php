@@ -38,32 +38,32 @@
     </div>
     
     <!-- Pagination area -->
-    <div class="col-lg-12">
+    {{-- <div class="col-lg-12">
         <div class="pagination-area mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center pagination-rounded">
                     {{-- Previous Page Link --}}
-                    @if ($pengumuman->onFirstPage())
+                    {{-- @if ($pengumuman->onFirstPage())
                         <li class="page-item disabled">
                             <span class="page-link"><i class="fa-solid fa-angle-left"></i></span>
                         </li>
                     @else
-                        <li class="page-item">
-                            <a class="page-link" href="{{ $pengumuman->previousPageUrl() }}">
+                        <li class="page-item"> --}}
+                            {{-- <a class="page-link" href="{{ $pengumuman->previousPageUrl() }}">
                                 <i class="fa-solid fa-angle-left"></i>
                             </a>
                         </li>
-                    @endif
-    
+                    @endif --}}
+     
                     {{-- Page Number Links --}}
-                    @foreach ($pengumuman->links()->elements[0] as $page => $url)
+                    {{-- @foreach ($pengumuman->links()->elements[0] as $page => $url)
                         <li class="page-item {{ $pengumuman->currentPage() == $page ? 'active' : '' }}">
                             <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                         </li>
                     @endforeach
     
                     {{-- Next Page Link --}}
-                    @if ($pengumuman->hasMorePages())
+                    {{-- @if ($pengumuman->hasMorePages())
                         <li class="page-item">
                             <a class="page-link" href="{{ $pengumuman->nextPageUrl() }}">
                                 <i class="fa-solid fa-angle-right"></i>
@@ -74,10 +74,10 @@
                             <span class="page-link"><i class="fa-solid fa-angle-right"></i></span>
                         </li>
                     @endif
-                </ul>
-            </nav>
+                </ul> --}} --}}
+            {{-- </nav>
         </div>
     </div>
-    
+     --}}
     <!--===== BLOG AREA ENDS =======-->
 @endsection

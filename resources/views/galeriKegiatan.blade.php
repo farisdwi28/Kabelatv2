@@ -110,12 +110,12 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div class="col-lg-12">
+                    {{-- <div class="col-lg-12">
                         <div class="pagination-area">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     {{-- Previous Page Link --}}
-                                    @if ($activeTab === 'dispusip' && !$kegiatanDispusip->onFirstPage() || $activeTab === 'komunitas' && !$kegiatanKomunitas->onFirstPage())
+                                    {{-- @if ($activeTab === 'dispusip' && !$kegiatanDispusip->onFirstPage() || $activeTab === 'komunitas' && !$kegiatanKomunitas->onFirstPage())
                                         <li class="page-item">
                                             <a class="page-link" href="{{ $activeTab === 'dispusip' ? $kegiatanDispusip->previousPageUrl() : $kegiatanKomunitas->previousPageUrl() }}">
                                                 <i class="fa-solid fa-angle-left"></i>
@@ -128,24 +128,41 @@
                                     @endif
 
                                     {{-- Page Number Links --}}
-                                    @foreach ($activeTab === 'dispusip' ? $kegiatanDispusip->links()->elements[0] : $kegiatanKomunitas->links()->elements[0] as $page => $url)
+                                    {{-- @foreach ($activeTab === 'dispusip' ? $kegiatanDispusip->links()->elements[0] : $kegiatanKomunitas->links()->elements[0] as $page => $url)
                                         <li class="page-item {{ ($activeTab === 'dispusip' ? $kegiatanDispusip->currentPage() : $kegiatanKomunitas->currentPage()) == $page ? 'active' : '' }}">
                                             <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                         </li>
-                                    @endforeach
+                                    @endforeach --}}
 
                                     {{-- Next Page Link --}}
-                                    @if ($activeTab === 'dispusip' && $kegiatanDispusip->hasMorePages() || $activeTab === 'komunitas' && $kegiatanKomunitas->hasMorePages())
+                                    {{-- @if ($activeTab === 'dispusip' && $kegiatanDispusip->hasMorePages() || $activeTab === 'komunitas' && $kegiatanKomunitas->hasMorePages())
                                         <li class="page-item">
                                             <a class="page-link" href="{{ $activeTab === 'dispusip' ? $kegiatanDispusip->nextPageUrl() : $kegiatanKomunitas->nextPageUrl() }}">
                                                 <i class="fa-solid fa-angle-right"></i>
                                             </a>
                                         </li>
-                                    @else
-                                        <li class="page-item disabled">
+                                    @else --}} 
+                                        {{-- <li class="page-item disabled">
                                             <span class="page-link"><i class="fa-solid fa-angle-right"></i></span>
                                         </li>
                                     @endif
+                                </ul>
+                            </nav>
+                        </div> --}}
+                    {{-- </div> --}} 
+                    <div class="col-lg-12">
+                        <div class="pagination-area">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#"><i class="fa-solid fa-angle-left"></i></a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#"><i class="fa-solid fa-angle-right"></i></a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
