@@ -21,13 +21,21 @@ class Berita extends Model
         'foto_berita',
         'author',
         'tanggal_dibuat',
+        'likes',
         'views',
-        'likes'
+    ];
+
+    protected $attributes = [
+        'likes' => 0,
+        'views' => 0
     ];
 
     protected $casts = [
-        'tanggal_dibuat' => 'date'
+        'tanggal_dibuat' => 'date',
+        'likes' => 'integer',
+        'views' => 'integer'
     ];
+
 
     // Get formatted date
     public function getFormattedDateAttribute()

@@ -18,7 +18,9 @@ class KomentarInfo extends Model
         'isi_kom_info',
         'kd_info',
         'id',
-        'tglpost_kom_info'
+        'tglpost_kom_info',
+        'likes',
+        'views',
     ];
 
     public function user()

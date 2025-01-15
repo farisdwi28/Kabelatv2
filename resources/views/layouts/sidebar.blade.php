@@ -184,7 +184,7 @@
                 <div class="dropdown">
                     <button class="btn btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" 
                             data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #007bff;"></i>
+                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #0c0c0c;"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
                         aria-labelledby="dropdownMenuButton">

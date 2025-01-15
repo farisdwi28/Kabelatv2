@@ -80,17 +80,51 @@ class BeritaController extends Controller
         return redirect()->back()->with('success', 'Komentar berhasil ditambahkan');
     }
 
-    public function like($kd_info)
+    public function like(Request $request, $kd_info)
     {
-        $berita = Berita::findOrFail($kd_info);
-        $berita->increment('likes');
-        return response()->json(['success' => true]);
+        try {
+            $berita = Berita::findOrFail($kd_info);
+            
+            // Initialize likes if null
+            if ($berita->likes === null) {
+                $berita->likes = 0;
+            }
+            
+            $berita->increment('likes');
+            
+            return response()->json([
+                'success' => true,
+                'likes' => $berita->likes
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating likes: ' . $e->getMessage()
+            ], 500);
+        }
     }
-
-    public function view($kd_info)
+    
+    public function view(Request $request, $kd_info)
     {
-        $berita = Berita::findOrFail($kd_info);
-        $berita->increment('views');
-        return response()->json(['success' => true]);
+        try {
+            $berita = Berita::findOrFail($kd_info);
+            
+            // Initialize views if null
+            if ($berita->views === null) {
+                $berita->views = 0;
+            }
+            
+            $berita->increment('views');
+            
+            return response()->json([
+                'success' => true,
+                'views' => $berita->views
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating views: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }

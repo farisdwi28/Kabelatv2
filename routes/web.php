@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -47,8 +49,6 @@ Route::get('/galeriKomunitas', [KomunitasController::class, 'show'])->name('gale
 Route::get('/komunitas/{kd_komunitas?}', [KomunitasController::class, 'show'])->name('komunitas.show');
 
 
-
-
 // Routes for guests (login and register)
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -57,6 +57,8 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/register', [RegisterController::class, 'register']);
     Route::get('/verify-nik', [RegisterController::class, 'showVerifyNikForm'])->name('verify-nik');
     Route::post('/verify-nik', [RegisterController::class, 'verifyNik']);
+    Route::get('forgot-password', [ForgotPasswordController::class, 'showResetForm'])->name('password.request');
+    Route::post('forgot-password', [ForgotPasswordController::class, 'reset'])->name('password.reset');
 });
 
 // Routes for authenticated users
@@ -71,21 +73,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/berita/{kd_info}/like', [BeritaController::class, 'like'])->name('berita.like');
     Route::post('/berita/{kd_info}/view', [BeritaController::class, 'view'])->name('berita.view');
     Route::post('/forumdiskusi/{id}/komentar', [DiskusiController::class, 'storeComment']);
-Route::get('/diskusi', [DiskusiController::class, 'create'])->name('diskusi.create'); // Perbaikan pada URL
-Route::post('/diskusi/store', [DiskusiController::class, 'store'])->name('diskusi.store');  
+    Route::get('/diskusi', [DiskusiController::class, 'create'])->name('diskusi.create'); // Perbaikan pada URL
+    Route::post('/diskusi/store', [DiskusiController::class, 'store'])->name('diskusi.store');
     Route::get('/join-check', [KomunitasController::class, 'checkPendingJoin'])->name('join.checkPending');
     Route::post('/komunitas/join/{kd_komunitas}', [KomunitasController::class, 'join'])
-    ->name('komunitas.join')
-    ->middleware('auth');
+        ->name('komunitas.join')
+        ->middleware('auth');
     Route::get('/strukturKomunitas/{kd_komunitas}', [KomunitasController::class, 'showStructure'])
-    ->name('strukturKomunitas.show');
+        ->name('strukturKomunitas.show');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     });
-    
 });
 
 // Catch-all route for dynamic pages

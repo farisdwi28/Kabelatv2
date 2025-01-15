@@ -46,6 +46,9 @@
                     <div class="mt-4 text-center">
                         <p class="mb-0">Belum punya akun? <a href="{{ route('verify-nik') }}" class="fw-bold text-dark text-decoration">Daftar</a></p>
                     </div>
+                    <div class="mt-3 text-center">
+                        <a href="{{ route('password.request') }}" class="text-dark">Lupa Password?</a>
+                    </div>
                 </form>
             </div>
         </div>

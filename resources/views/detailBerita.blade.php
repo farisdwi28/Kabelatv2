@@ -118,7 +118,8 @@
                         <div class="contact-form-area">
                             <h4 class="mb-4">Berikan Komentar</h4> <!-- Added margin bottom -->
                             @auth
-                                <form id="comment-form" method="POST" action="{{ route('berita.komentar', $berita->kd_info) }}">
+                                <form id="comment-form" method="POST"
+                                    action="{{ route('berita.komentar', $berita->kd_info) }}">
                                     @csrf
                                     <div class="col-lg-12">
                                         <div class="input-area">
@@ -135,12 +136,14 @@
                                     </div>
                                 </form>
                             @else
-                                <div class="alert alert-info text-center" style="font-size: 18px; padding: 20px; border-radius: 8px; background-color: #f9f9ff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                    <strong>Silakan <a href="{{ route('login') }}" class="font-bold text-blue-600">login</a></strong> untuk memberikan komentar.
+                                <div class="alert alert-info text-center"
+                                    style="font-size: 18px; padding: 20px; border-radius: 8px; background-color: #f9f9ff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                    <strong>Silakan <a href="{{ route('login') }}"
+                                            class="font-bold text-blue-600">login</a></strong> untuk memberikan komentar.
                                 </div>
                             @endauth
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -163,18 +166,18 @@
                             <div class="img1" style="position: relative; overflow: hidden; border-radius: 8px;">
                                 <a href="{{ route('berita.show', $related->kd_info) }}">
                                     @if ($related->foto_berita)
-                                        <img src="{{ $related->foto_berita }}" alt="{{ $related->judul_berita }}" 
-                                             style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;">
+                                        <img src="{{ $related->foto_berita }}" alt="{{ $related->judul_berita }}"
+                                            style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;">
                                     @else
-                                        <img src="{{ URL::asset('build/img/all-images/default-news.png') }}" alt="Default" 
-                                             style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;">
+                                        <img src="{{ URL::asset('build/img/all-images/default-news.png') }}" alt="Default"
+                                            style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;">
                                     @endif
                                 </a>
                             </div>
                             <div class="content-area">
                                 <h5 class="post-title mt-3"><a href="{{ route('berita.show', $related->kd_info) }}">
-                                    {{ Str::limit($related->judul_berita, 50) }}
-                                </a></h5>
+                                        {{ Str::limit($related->judul_berita, 50) }}
+                                    </a></h5>
                             </div>
                         </div>
                     </div>
@@ -182,41 +185,110 @@
             </div>
         </div>
     </div>
-    
+
 @endsection
 
 @section('scripts')
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the buttons
+            const likeButton = document.getElementById('like-button');
+            const viewButton = document.getElementById('view-button');
+
+            // Add data attributes to buttons
+            if (likeButton) {
+                likeButton.setAttribute('data-article-id', '{{ $berita->kd_info }}');
+            }
+            if (viewButton) {
+                viewButton.setAttribute('data-article-id', '{{ $berita->kd_info }}');
+            }
+
+            // Check if user has already liked
+            const articleId = likeButton.getAttribute('data-article-id');
+            const hasLiked = localStorage.getItem(`liked_${articleId}`);
+
+            if (hasLiked) {
+                likeButton.classList.add('active');
+            }
+
+            // Increment views on page load (once per session)
+            const hasViewed = sessionStorage.getItem(`viewed_${articleId}`);
+            if (!hasViewed) {
+                incrementViews();
+                sessionStorage.setItem(`viewed_${articleId}`, 'true');
+            }
+        });
+
         function incrementLikes(event) {
             event.preventDefault();
-            fetch("{{ route('berita.like', $berita->kd_info) }}", {
+
+            const likeButton = document.getElementById('like-button');
+            const articleId = likeButton.getAttribute('data-article-id');
+
+            // Check if already liked
+            if (localStorage.getItem(`liked_${articleId}`)) {
+                return;
+            }
+
+            // Disable button temporarily
+            likeButton.style.pointerEvents = 'none';
+
+            fetch(`/berita/${articleId}/like`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
-                }).then(response => response.json())
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.success) {
-                        document.getElementById('like-count').textContent = data.likes;
+                        // Update like count
+                        const likeCount = document.getElementById('like-count');
+                        likeCount.textContent = parseInt(likeCount.textContent) + 1;
+
+                        // Mark as liked
+                        localStorage.setItem(`liked_${articleId}`, 'true');
+                        likeButton.classList.add('active');
                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                })
+                .finally(() => {
+                    // Re-enable button after 1 second
+                    setTimeout(() => {
+                        likeButton.style.pointerEvents = 'auto';
+                    }, 1000);
                 });
         }
 
         function incrementViews() {
-            fetch("{{ route('berita.view', $berita->kd_info) }}", {
+            const viewButton = document.getElementById('view-button');
+            const articleId = viewButton.getAttribute('data-article-id');
+
+            fetch(`/berita/${articleId}/view`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
-                }).then(response => response.json())
+                })
+                .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        document.getElementById('view-count').textContent = data.views;
+                        const viewCount = document.getElementById('view-count');
+                        viewCount.textContent = parseInt(viewCount.textContent) + 1;
                     }
-                });
+                })
+                .catch(error => console.error('Error:', error));
         }
+
 
         function showAllComments() {
             // Show all comments if the user clicks "Lihat Semua"
@@ -224,9 +296,9 @@
                 comment.style.display = 'block';
             });
             document.querySelector('.btn-link').textContent =
-            'Sembunyikan Komentar'; // Change button text to "Hide Comments"
+                'Sembunyikan Komentar'; // Change button text to "Hide Comments"
             document.querySelector('.btn-link').setAttribute('onclick',
-            'hideComments()'); // Set the button's onclick to hide comments
+                'hideComments()'); // Set the button's onclick to hide comments
         }
 
         function hideComments() {
@@ -237,9 +309,9 @@
                 }
             });
             document.querySelector('.btn-link').textContent =
-            'Lihat Semua Komentar'; // Change button text to "Show All Comments"
+                'Lihat Semua Komentar'; // Change button text to "Show All Comments"
             document.querySelector('.btn-link').setAttribute('onclick',
-            'showAllComments()'); // Set the button's onclick to show all comments
+                'showAllComments()'); // Set the button's onclick to show all comments
         }
 
         document.addEventListener("DOMContentLoaded", () => {

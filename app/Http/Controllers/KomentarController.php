@@ -39,4 +39,5 @@ class KomentarController extends Controller
             'komentar' => $komentar->load('user') // Memuat relasi dengan user
         ]);
     }
+    
 }
