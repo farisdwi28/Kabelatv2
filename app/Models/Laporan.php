@@ -25,4 +25,10 @@ class Laporan extends Model
         'file',
         'kd_member',
     ];
+    protected $dates = ['tgl_dibuat'];
+    // Model Laporan
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'kd_member');
+    }
 }

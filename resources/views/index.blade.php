@@ -305,39 +305,40 @@
             <div class="row">
                 <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
                     <div class="testimonials-slider-area owl-carousel">
-                            <div class="testimonial-boxarea">
-                                <div class="row">
-                                    @foreach ($programs as $program)
-                                    <!-- Konten Kiri -->
-                                    <div class="col-lg-5">
-                                        <div class="pera">
-                                            <p>{{ Str::limit($program->tentang_program, 200) }}</p>
-                                            <div class="space100"></div>
-                                            <div class="space30"></div>
-                                            <div class="list-area">
-                                                <div class="list">
-                                                    <a style="font-size: 1.25rem;" href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                                                        {{ $program->nm_program }}
-                                                    </a>
-                                                </div>
+                        @foreach ($programs as $program)
+                        <div class="testimonial-boxarea shadow-lg rounded-4 p-4">
+                            <div class="row align-items-center">
+                                <!-- Konten Bersama -->
+                                <div class="col-lg-5">
+                                    <div class="pera" style="min-height: 150px;"> <!-- Minimum height untuk deskripsi -->
+                                        <p>{{ Str::limit($program->tentang_program, 200) }}</p>
+                                        <div class="space100"></div>
+                                        <div class="space30"></div>
+                                        <div class="list-area">
+                                            <div class="list">
+                                                <a style="font-size: 1.25rem;" href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                                    {{ $program->nm_program }}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Konten Kanan -->
-                                    <div class="col-lg-7">
-                                        <div class="images">
-                                            <img src="{{ $program->sampul_program }}" alt="{{ $program->nm_program }}" class="img-fluid">
-                                        </div>
+                                </div>
+                                <!-- Konten Bersama -->
+                                <div class="col-lg-7 text-center">
+                                    <div class="images">
+                                        <img src="{{ $program->sampul_program }}" 
+                                            alt="{{ $program->nm_program }}" 
+                                            class="img-fluid rounded-3"
+                                            style="object-fit: cover; width: 100%; height: 200px;">
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
+            
     <!--===== TESTIMONIAL AREA ENDS =======-->
 
     <!--===== SERVICE AREA STARTS =======-->
@@ -555,14 +556,14 @@
                             @foreach ($komunitasList as $item)
                             <div class="testimonial-boxarea">
                                 <div class="row">
+                                    <!-- Konten Bersama -->
                                     <div class="col-lg-5">
                                         <div class="pera">
-                                            <p class="text-muted" style="font-size: 1.1rem;">{{ $item->desk_komunitas }}</p>
+                                            <p class="text-muted" style="font-size: 1.1rem;">{{ Str::limit($item->desk_komunitas, 150) ?: 'No description available' }}</p>
                                             <div class="space100"></div>
                                             <div class="space30"></div>
                                             <div class="list-area">
                                                 <div class="list">
-                                                    <!-- Pastikan route menggunakan kd_komunitas dan bukan id -->
                                                     <a style="font-size: 1.25rem" href="{{ route('komunitas.detail', $item->kd_komunitas) }}" class="h3 text-dark font-weight-bold">
                                                         {{ $item->nm_komunitas }}
                                                     </a>
@@ -570,6 +571,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Konten Bersama -->
                                     <div class="col-lg-7 text-center">
                                         <div class="images">
                                             <img src="{{ $item->logo }}" alt="{{ $item->nm_komunitas }}" class="img-fluid rounded" style="max-width: 90%; height: auto;">
@@ -580,9 +582,8 @@
                             @endforeach
                         </div>
                     </div>
-                </div>                
-            </div>
-        </div>
+                </div>
+                
     
     <!--===== TESTIMONIAL AREA ENDS =======-->
     {{-- 
@@ -699,30 +700,38 @@
                         <div class="space32"></div>
                         <div class="contact-auhtor-box">
                             <div class="icons">
-                                <img src="{{ URL::asset('build/img/icons/location2.svg') }}" alt="">
+                                <a href="https://www.google.com/maps?q=Perpustakaan+Kabupaten+Bandung,+Jl.+Al-Fathu+Pamekaran,+Kabupaten+Bandung" target="_blank"> <img src="{{ URL::asset('build/img/icons/location2.svg') }}" alt=""></a>
                             </div>
                             <div class="content">
                                 <h4>Lokasi</h4>
-                                <a href="#">Perpustakaan Kabupaten Bandung <br class="d-lg-block d-none"> Jl.
-                                    Al-Fathu Pamekaran, Kabupaten Bandung</a>
+                                <!-- Mengarahkan ke Google Maps dengan alamat yang sesuai -->
+                                <a href="https://www.google.com/maps?q=Perpustakaan+Kabupaten+Bandung,+Jl.+Al-Fathu+Pamekaran,+Kabupaten+Bandung" target="_blank">
+                                    Perpustakaan Kabupaten Bandung <br class="d-lg-block d-none"> Jl. Al-Fathu Pamekaran, Kabupaten Bandung
+                                </a>
                             </div>
                         </div>
-
+                        
                         <div class="space40"></div>
+                        
                         <div class="contact-auhtor-box">
                             <div class="icons">
                                 <img src="{{ URL::asset('build/img/icons/phone2.svg') }}" alt="">
                             </div>
                             <div class="content">
-                                <h4>Kontak</h4>
-                                <h6 class="text-white">Telepon</h6>
-                                <a href="tel:02258998875">(022)58998875<br></a>
-                                <h6 class="text-white">Website</h6>
-                                <a href="tel:02258998875">dispusip@bandungkab.go.id<br></a>
-                                {{-- <h6 class="text-white">WhatsApp</h6>
-                                <a href="https://wa.link/wu4nxi" target="_blank">+62-821-1837-2435<br></a> --}}
+                                <h6 class="text-white mb-2">Telepon</h6> <!-- margin bottom untuk memberi jarak antar elemen -->
+                                <!-- Opsi Telepon dan WhatsApp -->
+                                <a href="tel:+6285922549352" class="text-white mb-3">(0859) 2254 9352<br></a>
+                            
+                                <h6 class="text-white mb-2">WhatsApp</h6> <!-- margin bottom untuk memberi jarak antar elemen -->
+                                <!-- Mengarahkan ke WhatsApp -->
+                                <a href="https://wa.me/6285922549352" target="_blank" class="text-white mb-3">Hubungi via WhatsApp</a>
+                            
+                                <h6 class="text-white mb-2">Website</h6> <!-- margin bottom untuk memberi jarak antar elemen -->
+                                <a href="http://dispusip.bandungkab.go.id" target="_blank" class="text-white">dispusip@bandungkab.go.id</a>
                             </div>
+                            
                         </div>
+                        
 
                         {{-- <div class="space40"></div>
                         <div class="contact-auhtor-box">

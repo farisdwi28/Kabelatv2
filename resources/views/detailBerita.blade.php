@@ -63,57 +63,62 @@
                                 $comments = $berita->komentar;
                                 $commentsToShow = $comments->take(3);
                             @endphp
-
+                        
                             @foreach ($commentsToShow as $komentar)
-                                <div class="comment-box p-3 border rounded shadow-sm mb-4"
-                                    style="margin-bottom: 20px; background-color: #f9f9ff;">
+                                <div class="comment-box p-3 border rounded shadow-sm mb-4" style="margin-bottom: 20px; background-color: #f9f9ff;">
                                     <div class="d-flex align-items-center">
                                         <div class="comment-avatar">
-                                            <img src="{{ URL::asset('build/img/all-images/comments-img1.png') }}"
-                                                alt="User Avatar" class="rounded-circle" style="width: 50px;">
+                                            <img src="{{ $komentar->user->penduduk && $komentar->user->penduduk->foto_pen 
+                                                    ? asset('storage/images/profiles/' . $komentar->user->penduduk->foto_pen) 
+                                                    : asset('build/img/all-images/comments-img1.png') }}" 
+                                                 alt="{{ $komentar->user->name ?? 'User' }}" 
+                                                 class="rounded-circle" 
+                                                 style="width: 50px; height: 50px; object-fit: cover;">
                                         </div>
                                         <div class="comment-info ms-3">
                                             <h6 class="mb-0">
                                                 <strong>{{ $komentar->user->name ?? 'User' }}</strong>
                                             </h6>
-                                            <small class="text-muted">
-                                                {{ \Carbon\Carbon::parse($komentar->created_at)->format('d M Y H:i') }}
+                                            <small class="text-muted" title="{{ \Carbon\Carbon::parse($komentar->created_at)->translatedFormat('l, d F Y - H:i') }}">
+                                                {{ \Carbon\Carbon::parse($komentar->created_at)->diffForHumans() }}
                                             </small>
                                         </div>
                                     </div>
                                     <p class="mt-3 mb-0">{{ $komentar->isi_kom_info }}</p>
                                 </div>
                             @endforeach
-
+                        
                             @foreach ($comments->skip(3) as $komentar)
-                                <div class="comment-box p-3 border rounded shadow-sm mb-4"
-                                    style="margin-bottom: 20px; background-color: #f9f9ff; display: none;">
+                                <div class="comment-box p-3 border rounded shadow-sm mb-4" style="margin-bottom: 20px; background-color: #f9f9ff; display: none;">
                                     <div class="d-flex align-items-center">
                                         <div class="comment-avatar">
-                                            <img src="{{ URL::asset('build/img/all-images/comments-img1.png') }}"
-                                                alt="User Avatar" class="rounded-circle" style="width: 50px;">
+                                            <img src="{{ $komentar->user->penduduk && $komentar->user->penduduk->foto_pen 
+                                                    ? asset('storage/images/profiles/' . $komentar->user->penduduk->foto_pen) 
+                                                    : asset('build/img/all-images/comments-img1.png') }}" 
+                                                 alt="{{ $komentar->user->name ?? 'User' }}" 
+                                                 class="rounded-circle" 
+                                                 style="width: 50px; height: 50px; object-fit: cover;">
                                         </div>
                                         <div class="comment-info ms-3">
                                             <h6 class="mb-0">
                                                 <strong>{{ $komentar->user->name ?? 'User' }}</strong>
                                             </h6>
-                                            <small class="text-muted">
-                                                {{ \Carbon\Carbon::parse($komentar->created_at)->format('d M Y H:i') }}
+                                            <small class="text-muted" title="{{ \Carbon\Carbon::parse($komentar->created_at)->translatedFormat('l, d F Y - H:i') }}">
+                                                {{ \Carbon\Carbon::parse($komentar->created_at)->diffForHumans() }}
                                             </small>
                                         </div>
                                     </div>
                                     <p class="mt-3 mb-0">{{ $komentar->isi_kom_info }}</p>
                                 </div>
                             @endforeach
-
+                        
                             @if ($berita->komentar->count() > 3)
                                 <div class="text-center">
-                                    <a href="javascript:void(0);" onclick="showAllComments()" class="header-btn1">Lihat
-                                        Semua Komentar</a>
+                                    <a href="javascript:void(0);" onclick="showAllComments()" class="header-btn1">Lihat Semua Komentar</a>
                                 </div>
                             @endif
                         </div>
-
+                        
                         <div class="space50"></div>
                         <div class="contact-form-area">
                             <h4 class="mb-4">Berikan Komentar</h4> <!-- Added margin bottom -->

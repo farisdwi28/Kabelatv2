@@ -13,23 +13,26 @@
                     <p class="mb-4 text-dark">Masukkan username/email dan password baru Anda</p>
                 </div>
 
+                {{-- Notifikasi Sukses atau Error --}}
                 @if (session('success'))
-                    <div class="alert alert-success mb-3">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
                 @if (session('error'))
-                    <div class="alert alert-danger mb-3">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
-                <form action="{{ route('password.reset') }}" method="POST">
+                <form id="resetPasswordForm" action="{{ route('password.reset') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="login" class="form-label">Username atau Email</label>
-                        <input type="text" name="login" id="login" class="form-control @error('login') is-invalid @enderror" required>
+                        <input type="text" name="login" id="login" class="form-control @error('login') is-invalid @enderror" value="{{ old('login') }}" required>
                         @error('login')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -38,7 +41,7 @@
                     <div class="mb-3">
                         <label for="password" class="form-label">Password Baru</label>
                         <div class="input-group">
-                            <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
+                            <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required>
                             <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
@@ -56,6 +59,9 @@
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         </div>
+                        @error('password_confirmation')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="d-grid gap-2">
@@ -67,7 +73,7 @@
         </div>
 
         <div class="col-lg-6 d-flex justify-content-center align-items-center">
-            <img src="{{ asset('build/img/logo/img.png') }}" class="img-fluid" alt="Gambar Kabelat" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <img src="{{ asset('build/img/logo/img.png') }}" class="img-fluid" alt="Gambar Kabelat">
         </div>
     </div>
 </div>
@@ -75,12 +81,13 @@
 
 @push('scripts')
 <script>
-    function togglePasswordVisibility(inputId, buttonId) {
-        const input = document.getElementById(inputId);
-        const button = document.getElementById(buttonId);
-        const icon = button.querySelector('i');
+document.addEventListener('DOMContentLoaded', function () {
+    // Toggle Password Visibility
+    ['togglePassword', 'togglePasswordConfirmation'].forEach(id => {
+        document.getElementById(id).addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const icon = this.querySelector('i');
 
-        button.addEventListener('click', function() {
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.classList.remove('fa-eye');
@@ -91,10 +98,7 @@
                 icon.classList.add('fa-eye');
             }
         });
-    }
-
-    togglePasswordVisibility('password', 'togglePassword');
-    togglePasswordVisibility('password_confirmation', 'togglePasswordConfirmation');
+    });
+});
 </script>
 @endpush
-

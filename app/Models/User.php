@@ -42,8 +42,8 @@ class User extends Authenticatable
     public function findForPassport($username)
     {
         return $this->where('username', $username)
-                    ->orWhere('email', $username)
-                    ->first();
+            ->orWhere('email', $username)
+            ->first();
     }
     public function diskusi()
     {
@@ -58,12 +58,18 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Penduduk::class, 'kd_pen', 'kd_pen');
     }
-public function komunitas()
-{
-    return $this->belongsTo(Komunitas::class, 'kd_komunitas', 'kd_komunitas');
-}
-public function getProfilePhotoUrlAttribute($value)
-{
-    return $value ? asset('storage/images/profiles/' . $value) : null;
-}
+    public function komunitas()
+    {
+        return $this->belongsTo(Komunitas::class, 'kd_komunitas', 'kd_komunitas');
+    }
+
+    // Model User
+    public function laporan()
+    {
+        return $this->hasMany(Laporan::class, 'kd_member');
+    }
+    public function memberKomunitas()
+    {
+        return $this->hasOne(MemberKomunitas::class, 'id', 'id');
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\Berita;
 use App\Models\KomentarInfo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -32,20 +33,20 @@ class BeritaController extends Controller
         return view('index', compact('featuredNews', 'sidebarNews'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $featuredNews = Berita::where('status_info', 'terbit')
-            ->orderBy('tanggal_dibuat', 'desc')
-            ->take(3)
-            ->get();
-
-        $sidebarNews = Berita::where('status_info', 'terbit')
-            ->orderBy('tanggal_dibuat', 'desc')
-            ->skip(3)
-            ->take(4)
-            ->get();
-
-        return view('berita', compact('featuredNews', 'sidebarNews'));
+        $query = Berita::where('status_info', 'terbit');
+        
+        if ($request->has('search')) {
+            $searchTerm = $request->search;
+            $query->where('judul_berita', 'LIKE', "%{$searchTerm}%");
+        }
+        
+        $featuredNews = $query->orderBy('tanggal_dibuat', 'desc')
+                             ->paginate(15)
+                             ->withQueryString();
+        
+        return view('berita', compact('featuredNews'));
     }
 
     public function show($kd_info)
@@ -85,7 +86,6 @@ class BeritaController extends Controller
         try {
             $berita = Berita::findOrFail($kd_info);
             
-            // Initialize likes if null
             if ($berita->likes === null) {
                 $berita->likes = 0;
             }
@@ -109,7 +109,6 @@ class BeritaController extends Controller
         try {
             $berita = Berita::findOrFail($kd_info);
             
-            // Initialize views if null
             if ($berita->views === null) {
                 $berita->views = 0;
             }
@@ -126,5 +125,26 @@ class BeritaController extends Controller
                 'message' => 'Error updating views: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+        
+        if (empty($query)) {
+            $berita = Berita::where('status_info', 'terbit')
+                ->orderBy('tanggal_dibuat', 'desc')
+                ->get();
+        } else {
+            $berita = Berita::where('status_info', 'terbit')
+                ->where('judul_berita', 'like', '%' . $query . '%')
+                ->orderBy('tanggal_dibuat', 'desc')
+                ->get();
+        }
+    
+        return response()->json([
+            'berita' => $berita,
+            'count' => $berita->count()
+        ]);
     }
 }

@@ -14,27 +14,30 @@ class KomunitasController extends Controller
     public function __construct()
     {
         // Membagikan data komunitas ke semua view
-        $komunitasList = Komunitas::all();
+        $komunitasList = Komunitas::paginate(6); // Add pagination
         view()->share('komunitasList', $komunitasList);
     }
 
     public function show($kd_komunitas = null)
     {
-        // Jika ada ID komunitas yang diberikan, ambil komunitas spesifik tersebut
         if ($kd_komunitas) {
             $komunitas = Komunitas::where('kd_komunitas', $kd_komunitas)->first();
-
-            // Jika komunitas tidak ditemukan, arahkan ke beranda dengan pesan error
             if (!$komunitas) {
                 return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
             }
-
-            // Tampilkan detail komunitas
             return view('galeriKomunitas', compact('komunitas'));
         }
-
-        // Jika tidak ada ID komunitas yang diberikan, gunakan data yang dibagikan
-        return view('galeriKomunitas');
+    
+        $query = Komunitas::query();
+        
+        if (request('search')) {
+            $search = request('search');
+            $query->where('nm_komunitas', 'like', "%{$search}%")
+                  ->orWhere('desk_komunitas', 'like', "%{$search}%");
+        }
+    
+        $komunitasList = $query->paginate(6);
+        return view('galeriKomunitas', compact('komunitasList'));
     }
 
     // Menampilkan daftar komunitas

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Case Study')
+@section('title', 'Detail Program Dispusip')
 
 @section('content')
     <x-page-title title="Beranda" pagetitle="Program Dispusip" maintitle="Detail Program Dispusip" />

@@ -2,49 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Diskusi;
 use App\Models\Komunitas;
 use App\Models\KomentarDiskusi;
+use App\Models\MemberKomunitas;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 
 class DiskusiController extends Controller
 {
-    use HasFactory;
-
-    protected $table = 'diskusi'; // Pastikan nama tabel sesuai
-    protected $primaryKey = 'kd_diskusi'; // Primary key sesuai
-    public $incrementing = false; // Jika primary key bukan auto increment
-    public $timestamps = false; // Jika tabel tidak menggunakan kolom timestamps
-
-    // Relasi ke KomentarDiskusi
-    public function komentars()
+    public function __construct()
     {
-        return $this->hasMany(KomentarDiskusi::class, 'kd_diskusi', 'kd_diskusi');
+        $this->middleware('auth');
     }
-    public function index()
+
+    public function index(Request $request)
     {
-        // Ambil id user yang login
         $userId = Auth::id();
-        
-        // Cari kd_komunitas user dari tabel member_komunitas
-        $userKomunitas = \App\Models\MemberKomunitas::where('id', $userId)
+        $userKomunitas = MemberKomunitas::where('id', $userId)
             ->pluck('kd_komunitas')
             ->first();
-        
-        $diskusi = Diskusi::with('komunitas')
-            ->where('kd_komunitas', $userKomunitas)
-            ->orderBy('tglpost_diskusi', 'desc')
-            ->get();
-            
+    
+        $query = Diskusi::with(['komunitas', 'user', 'komentars'])
+            ->where('kd_komunitas', $userKomunitas);
+    
+        if ($request->has('search')) {
+            $searchTerm = $request->search;
+            $query->where('topik_diskusi', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('isi_diskusi', 'LIKE', "%{$searchTerm}%");
+        }
+    
+        $diskusi = $query->orderBy('tglpost_diskusi', 'desc')
+                         ->paginate(10)
+                         ->withQueryString();
+    
         return view('forumDiskusi', compact('diskusi'));
     }
+
     public function create()
     {
-        // Get logged-in user's community data
-        $komunitas = Komunitas::where('kd_komunitas', Auth::user()->kd_komunitas)->first();
+        $userId = Auth::id();
+        $komunitas = MemberKomunitas::where('id', $userId)
+            ->with('komunitas')
+            ->first();
+
         return view('tambahDiskusi', compact('komunitas'));
     }
 
@@ -54,25 +57,25 @@ class DiskusiController extends Controller
             'judul' => 'required|string|max:250',
             'deskripsi' => 'required|string',
         ]);
-    
-        // Dapatkan id user yang login
+
         $userId = Auth::id();
-        
-        // Ambil kd_komunitas dari member_komunitas
-        $userKomunitas = \App\Models\MemberKomunitas::where('id', $userId)
+        $userKomunitas = MemberKomunitas::where('id', $userId)
             ->pluck('kd_komunitas')
             ->first();
-        
+
+        if (!$userKomunitas) {
+            return back()->with('error', 'Anda harus bergabung dengan komunitas terlebih dahulu.');
+        }
+
         $diskusi = new Diskusi();
         $diskusi->kd_diskusi = Str::random(5);
         $diskusi->topik_diskusi = $validated['judul'];
         $diskusi->isi_diskusi = $validated['deskripsi'];
-        $diskusi->tglpost_diskusi = now();
+        $diskusi->tglpost_diskusi = Carbon::now();
         $diskusi->id = $userId;
         $diskusi->kd_komunitas = $userKomunitas;
-    
         $diskusi->save();
-    
+
         return redirect()->route('diskusi.index')
             ->with('success', 'Diskusi berhasil ditambahkan!');
     }
@@ -80,43 +83,46 @@ class DiskusiController extends Controller
     public function show($id)
     {
         $userId = Auth::id();
-        
-        // Ambil kd_komunitas dari member_komunitas
-        $userKomunitas = \App\Models\MemberKomunitas::where('id', $userId)
+        $userKomunitas = MemberKomunitas::where('id', $userId)
             ->pluck('kd_komunitas')
             ->first();
-            
-        $diskusi = Diskusi::with(['komentars', 'komunitas', 'user'])
+    
+        $diskusi = Diskusi::with(['komentars.user', 'komunitas', 'user'])
             ->findOrFail($id);
-            
-        // Check if user belongs to the same community
+    
         if ($diskusi->kd_komunitas !== $userKomunitas) {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Anda tidak memiliki akses ke diskusi ini.');
         }
     
         return view('detailDiskusi', compact('diskusi'));
     }
+
     public function storeComment(Request $request, $id)
-{
-    $request->validate([
-        'isi_kom_diskusi' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'isi_kom_diskusi' => 'required|string',
+        ]);
 
-    $komentar = new KomentarDiskusi();
-    $komentar->kd_kom_diskusi = Str::random(5);
-    $komentar->isi_kom_diskusi = $request->isi_kom_diskusi;
-    $komentar->kd_diskusi = $id;
-    $komentar->id = Auth::id(); // Pastikan menyimpan id user yang login
-    $komentar->tglpost_kom_diskusi = now();
-    $komentar->save();
+        $diskusi = Diskusi::findOrFail($id);
+        $userId = Auth::id();
+        
+        $userKomunitas = MemberKomunitas::where('id', $userId)
+            ->pluck('kd_komunitas')
+            ->first();
 
-    return redirect()->route('detailDiskusi', ['id' => $id])
-        ->with('success', '');
-}
+        if ($diskusi->kd_komunitas !== $userKomunitas) {
+            abort(403, 'Anda tidak memiliki akses untuk berkomentar.');
+        }
 
-    // In DiskusiController constructor
-public function __construct()
-{
-    $this->middleware('auth')->only(['storeComment']);
-}
+        $komentar = new KomentarDiskusi();
+        $komentar->kd_kom_diskusi = Str::random(5);
+        $komentar->isi_kom_diskusi = $request->isi_kom_diskusi;
+        $komentar->kd_diskusi = $id;
+        $komentar->id = $userId;
+        $komentar->tglpost_kom_diskusi = Carbon::now();
+        $komentar->save();
+
+        return redirect()->route('diskusi.detail', $id)
+            ->with('success');
+    }
 }

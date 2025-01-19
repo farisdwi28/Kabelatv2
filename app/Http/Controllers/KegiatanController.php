@@ -21,12 +21,13 @@ class KegiatanController extends Controller
         if ($activeTab === 'dispusip') {
             $kegiatanDispusip = Kegiatan::with('photos')
                 ->orderBy('tgl_mulai', 'desc')
-                ->paginate(6);
+                ->paginate(6); // Pastikan menggunakan paginate, bukan get
         } else {
             $kegiatanKomunitas = KegiatanKomunitas::with('photos')
                 ->orderBy('tgl_mulai', 'desc')
-                ->paginate(6);
+                ->paginate(6); // Pastikan menggunakan paginate, bukan get
         }
+        
 
         return view('galeriKegiatan', compact('kegiatanDispusip', 'kegiatanKomunitas', 'activeTab'));
     }

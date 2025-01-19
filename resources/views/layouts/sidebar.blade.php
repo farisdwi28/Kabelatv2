@@ -80,24 +80,32 @@
                                     @endif
                                 </div>
                                 <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle p-0" type="button" id="sidebarDropdownMenuButton" 
+                                    <button class="btn btn-link  p-0" type="button" id="sidebarDropdownMenuButton" 
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #040404;"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
                                         aria-labelledby="sidebarDropdownMenuButton">
-                                        <li>
-                                            <form action="POST" action="{{ route('profile.index') }}">
+                                        {{-- <li>
+                                            <form action="POST" action=<a href="{{ route('profile.index') }}"></a>
                                                 @csrf
                                                 <button type="sumbit" class="dropdown-item">Profile</button>
                                             </form>
-                                        </li>
+                                        </li> --}}
                                         <li>
                                             <form method="POST" action="{{ route('logout') }}">
                                                 @csrf
-                                                <button type="submit" class="dropdown-item">Logout</button>
+                                                <button 
+                                                    type="submit" 
+                                                    class="dropdown-item" 
+                                                    style="background-color: transparent; color: #040404; border: none; outline: none; transition: background-color 0.3s;"
+                                                    onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#666';"
+                                                    onmouseout="this.style.backgroundColor='transparent'; this.style.color='#040404';">
+                                                    Logout
+                                                </button>
                                             </form>
                                         </li>
+                                                                                                                   
                                     </ul>
                                 </div>
                             </div>

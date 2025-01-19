@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') | Komunitas</title>
-    <link rel="shortcut icon" href="{{ URL::asset('build/img/logo/fav-logo1.png') }}" type="image/x-icon">
-    @yield('css')
-    @include('layouts.head-css')
-</head>
-
-<body class="homepage1-body">
-    @include('layouts.preloader')
-   
-    @php
+       @php
         $user = Auth::user();
         $memberInfo = null;
         $komunitas = null;
@@ -27,12 +13,13 @@
         $isLeadership = $memberInfo && in_array($memberInfo->kd_jabatan, ['KETUA', 'WAKIL', 'SEKRE', 'BENDA']);
     @endphp
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-6 col-md-2 d-md-block bg-white border-end min-vh-100 p-3">
-                <a href="/" class="d-flex align-items-center mb-3 text-dark text-decoration-none">
-                    <span class="fs-5 fw-bold">
-                        @if($komunitas)
+   <div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar Section -->
+        <nav class="col-12 col-md-6 d-md-block bg-white border-end min-vh-100 p-4">
+            <a href="/" class="d-flex align-items-center mb-3 text-dark text-decoration-none">
+                <span class="fs-5 fw-bold">
+                          @if($komunitas)
                             {{ $komunitas->nama_komunitas }}
                         @else
                             Galeri Komunitas
@@ -113,18 +100,3 @@
                     @endif
                 </ul>
             </nav>
-
-            <main class="col-md-10 ms-sm-auto px-md-4">
-                <div class="pt-3 pb-2 mb-3">
-                    @yield('content')
-                </div>
-            </main>
-        </div>
-        <div class="body-overlay"></div>
-    </div>
-
-    @include('layouts.footer')
-    @include('layouts.footer-scripts')
-    @yield('scripts')
-</body>
-</html>

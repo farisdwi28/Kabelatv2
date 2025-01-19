@@ -44,4 +44,9 @@ class MemberKomunitas extends Model
     {
         return $this->belongsTo(Komunitas::class, 'kd_komunitas', 'kd_komunitas');
     }
+    public function laporan()
+    {
+        return $this->hasMany(Laporan::class, 'kd_member', 'kd_member');
+    }
+
 }

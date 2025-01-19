@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Models\ProgramDispusip;
+use App\Http\Controllers\FooterController;
 use App\Models\Kegiatan;
 use Illuminate\Support\Facades\View;
 
@@ -38,5 +39,7 @@ class AppServiceProvider extends ServiceProvider
     
             $view->with('kegiatanDispusip', $kegiatanDispusip);
         });
+        $this->app->singleton(FooterController::class);
+        $this->app->make(FooterController::class);
     }
 }

@@ -27,8 +27,9 @@ class KomunitasMiddleware
         // Add member info to the request for use in views
         $request->attributes->add([
             'memberInfo' => $memberInfo,
-            'isLeadership' => in_array($memberInfo->kd_jabatan, ['KETUA', 'WAKIL', 'SEKRE', 'BENDA']),
+            'isLeadership' => $memberInfo->kd_jabatan !== 'ANGGT', // Memberikan akses ke semua struktur kecuali anggota
         ]);
+
 
         return $next($request);
     }

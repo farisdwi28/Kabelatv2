@@ -1,10 +1,24 @@
 @extends('layouts.master')
 
-@section('title', 'Detail Diskusi')
-@include('layouts.sidebar')
+@section('title', 'Detail Diskusi') 
 @section('content')
 
-<x-page-title title="Beranda" pagetitle="Detail Diskusi" maintitle="Detail Diskusi" />
+<div class="container-fluid py-5 px-4">
+    {{-- Updated Page Title Section --}}
+    <div class="about-header-area" style="background-image: url({{ URL::asset('build/img/bg/header1.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center; margin: -24px -24px  -24px;">
+        <img src="{{ URL::asset('build/img/elements/elements1.png') }}" alt="" class="elements1 aniamtion-key-1">
+        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt="" class="star2 keyframe5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 m-auto">
+                    <div class="about-inner-header heading9 text-center">
+                        <h1>Detail Diskusi</h1>
+                        <a href="index">Beranda <i class="fa-solid fa-angle-right"></i> <span>Detail Diskusi</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <div class="forum-discussion-section py-5">
     <div class="container">
@@ -12,17 +26,22 @@
             <div class="col-lg-8 m-auto">
                 <div class="forum-header d-flex align-items-center mb-4 shadow-sm p-3 rounded" style="background-color: #f9f9f9;">
                     <div class="forum-logo me-3">
-                        <img src="{{ $diskusi->komunitas->logo }}" alt="{{ $diskusi->komunitas->nm_komunitas }}" style="height: 50px;">
+                        <img src="{{ optional($diskusi->komunitas)->logo }}" 
+                             alt="{{ optional($diskusi->komunitas)->nm_komunitas }}" 
+                             style="height: 50px; width: 50px; object-fit: cover;">
                     </div>
                     <div class="forum-title">
-                        <h4 class="m-0" style="font-weight: 600;">{{ $diskusi->komunitas->nm_komunitas }}</h4>
+                        <h4 class="m-0" style="font-weight: 600;">{{ optional($diskusi->komunitas)->nm_komunitas }}</h4>
                         <h5 class="text-muted" style="font-size: 14px;">FORUM DISKUSI</h5>
                     </div>
                 </div>
+                
                 <div class="admin-question p-4 mb-4" style="background-color: #f0f8ff;">
                     <h5 class="m-0"><strong>{{ $diskusi->topik_diskusi }}</strong></h5>
                     <p class="mt-2">{{ $diskusi->isi_diskusi }}</p>
-                    <small class="text-muted">Posted: {{ \Carbon\Carbon::parse($diskusi->tglpost_diskusi)->format('d M Y H:i') }}</small>
+                    <small class="text-muted" title="{{ \Carbon\Carbon::parse($diskusi->tglpost_diskusi)->translatedFormat('l, d F Y - H:i') }}">
+                        {{ \Carbon\Carbon::parse($diskusi->tglpost_diskusi)->diffForHumans() }}
+                    </small>
                 </div>
 
                 <h3 class="mb-3">Komentar ({{ count($diskusi->komentars) }})</h3>
@@ -31,11 +50,18 @@
                     <div class="comment-box p-3 border rounded mb-3 shadow-sm">
                         <div class="d-flex align-items-center">
                             <div class="comment-avatar">
-                                <img src="{{ URL::asset('build/img/all-images/comments-img1.png') }}" alt="User Avatar" class="rounded-circle" style="width: 50px;">
+                                <img src="{{ $komentar->user->penduduk && $komentar->user->penduduk->foto_pen 
+                                        ? asset('storage/images/profiles/' . $komentar->user->penduduk->foto_pen) 
+                                        : asset('build/img/all-images/comments-img1.png') }}" 
+                                     alt="{{ $komentar->user->name }}" 
+                                     class="rounded-circle" 
+                                     style="width: 50px; height: 50px; object-fit: cover;">
                             </div>
                             <div class="comment-info ms-3">
                                 <h6 class="mb-0"><strong>{{ $komentar->user->name }}</strong></h6>
-                                <small class="text-muted">{{ \Carbon\Carbon::parse($komentar->tglpost_kom_diskusi)->format('d M Y H:i') }}</small>
+                                <small class="text-muted" title="{{ \Carbon\Carbon::parse($komentar->tglpost_kom_diskusi)->translatedFormat('l, d F Y - H:i') }}">
+                                    {{ \Carbon\Carbon::parse($komentar->tglpost_kom_diskusi)->diffForHumans() }}
+                                </small>
                             </div>
                         </div>
                         <p class="mt-3 mb-0">{{ $komentar->isi_kom_diskusi }}</p>

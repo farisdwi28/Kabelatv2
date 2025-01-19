@@ -7,18 +7,16 @@ use Illuminate\Http\Request;
 
 class ProgramDispusipController extends Controller
 {
-    public function __construct()
-    {
-        // Membagikan program dengan status 'aktif' ke semua view
-        $programs = ProgramDispusip::where('status_program', 'aktif')->get();
-        view()->share('programs', $programs);
-    }
 
     public function index()
     {
-        // Menampilkan halaman utama dengan program aktif
-        return view('programDispusip');
+        // Membatasi program menjadi 6 per halaman
+        $programs = ProgramDispusip::where('status_program', 'aktif');
+
+        // Mengirim data program ke view
+        return view('programDispusip', compact('programs'));
     }
+
 
     public function index1()
     {
@@ -57,4 +55,25 @@ class ProgramDispusipController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('programdispusip.index')->with('success', 'Program Dispusip berhasil ditambahkan');
     }
-}
+    public function search(Request $request)
+    {
+        // Ambil query pencarian dari input
+        $query = $request->input('search');
+        
+        // Jika query kosong, kembalikan semua program aktif
+        if (empty($query)) {
+            $programs = ProgramDispusip::where('status_program', 'aktif')->get();
+        } else {
+            // Cari program berdasarkan judul saja (nm_program)
+            $programs = ProgramDispusip::where('status_program', 'aktif')
+                ->where('nm_program', 'like', '%' . $query . '%')
+                ->get();  // Menggunakan get() karena tidak perlu paginate di sini
+        }
+    
+        // Kembalikan data pencarian dalam bentuk JSON
+        return response()->json([
+            'programs' => $programs,
+            'count' => $programs->count()
+        ]);
+    }
+}    
