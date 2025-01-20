@@ -90,8 +90,13 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="form-group text-end">
-                            <button type="submit" class="btn btn-primary">Kirim Komentar</button>
+                        <div class="col-lg-12">
+                            <div class="space24"></div>
+                            <div class="input-area">
+                                <button type="submit" class="header-btn1">
+                                    Kirim <span><i class="fa-solid fa-arrow-right"></i></span>
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>

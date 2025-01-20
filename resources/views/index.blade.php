@@ -305,12 +305,11 @@
             <div class="row">
                 <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
                     <div class="testimonials-slider-area owl-carousel">
-                        @foreach ($programs as $program)
+                        @foreach ($programs->take(3) as $program)
                         <div class="testimonial-boxarea shadow-lg rounded-4 p-4">
                             <div class="row align-items-center">
-                                <!-- Konten Bersama -->
                                 <div class="col-lg-5">
-                                    <div class="pera" style="min-height: 150px;"> <!-- Minimum height untuk deskripsi -->
+                                    <div class="pera" style="min-height: 150px;">
                                         <p>{{ Str::limit($program->tentang_program, 200) }}</p>
                                         <div class="space100"></div>
                                         <div class="space30"></div>
@@ -323,7 +322,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Konten Bersama -->
                                 <div class="col-lg-7 text-center">
                                     <div class="images">
                                         <img src="{{ $program->sampul_program }}" 
@@ -338,7 +336,8 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
     <!--===== TESTIMONIAL AREA ENDS =======-->
 
     <!--===== SERVICE AREA STARTS =======-->
@@ -553,7 +552,7 @@
                 <div class="row">
                     <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
                         <div class="testimonials-slider-area owl-carousel">
-                            @foreach ($komunitasList as $item)
+                            @foreach ($komunitasList->take(5) as $item)
                             <div class="testimonial-boxarea">
                                 <div class="row">
                                     <!-- Konten Bersama -->
@@ -583,8 +582,6 @@
                         </div>
                     </div>
                 </div>
-                
-    
     <!--===== TESTIMONIAL AREA ENDS =======-->
     {{-- 
     <!--===== BLOG AREA STARTS =======-->

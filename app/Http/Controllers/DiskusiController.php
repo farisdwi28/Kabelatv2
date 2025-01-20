@@ -71,7 +71,7 @@ class DiskusiController extends Controller
         $diskusi->kd_diskusi = Str::random(5);
         $diskusi->topik_diskusi = $validated['judul'];
         $diskusi->isi_diskusi = $validated['deskripsi'];
-        $diskusi->tglpost_diskusi = Carbon::now();
+        $diskusi->tglpost_diskusi = Carbon::now()->format('Y-m-d H:i:s');
         $diskusi->id = $userId;
         $diskusi->kd_komunitas = $userKomunitas;
         $diskusi->save();

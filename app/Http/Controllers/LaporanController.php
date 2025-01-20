@@ -53,8 +53,7 @@ class LaporanController extends Controller
             $laporan = new Laporan();
             $laporan->kd_laporan = $kd_laporan;
             $laporan->judul = $validated['judul'];
-            $laporan->tgl_dibuat = Carbon::now();
-            $laporan->tgl_dibuat = $validated['tgl_dibuat'];
+            $laporan->tgl_dibuat = now();
             $laporan->desk_lap = $validated['desk_lap'];
             $laporan->status_periksa = 'belum diperiksa';
             $laporan->kd_member = $memberKomunitas->kd_member;

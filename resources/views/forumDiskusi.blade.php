@@ -27,7 +27,7 @@
 
                 <!-- Discussion List Container -->
                 <div class="discussion-container"
-                    style="max-height: 700px; 
+                    style="max-height: 800px; 
             overflow-y: scroll; 
             padding-right: 15px; 
             min-height: 700px; 
@@ -119,6 +119,34 @@
         .discussion-container {
             scrollbar-width: auto;
             scrollbar-color: #104041 #e0e0e0;
+        }
+
+        <style>
+
+        /* Common styles for all screens */
+        .hover-shadow {
+            transition: all 0.3s ease;
+        }
+
+        .hover-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1rem;
+            }
+
+            .discussion-list {
+                max-height: 500px;
+            }
+
+            .btn-sm {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
         }
     </style>
 @endsection

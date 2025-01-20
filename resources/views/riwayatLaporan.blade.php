@@ -9,7 +9,7 @@
             @include('layouts.master2')
         </aside>
 
-        <div class="col-lg-7 col-md-8" style="margin-left: -100px;">
+        <div class="col-lg-7 col-md-8" style="margin-left: -100px;  margin-top:30px">
             <div class="card shadow-sm border-0 rounded-3">
                 <div class="card-header bg-gradient-light text-black">
                     <h4 class="mb-0 text-center fw-semibold">Riwayat Laporan</h4>
@@ -83,25 +83,31 @@
 </div>
 
 <style>
-    .container-fluid div::-webkit-scrollbar {
-        width: 12px;
-        display: block;
+    /* Common styles for all screens */
+    .hover-shadow {
+        transition: all 0.3s ease;
     }
     
-    .container-fluid div::-webkit-scrollbar-track {
-        background: #e0e0e0;
-        border-radius: 6px;
+    .hover-shadow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
     }
     
-    .container-fluid div::-webkit-scrollbar-thumb {
-        background: #104041;
-        border-radius: 6px;
-        border: 2px solid #e0e0e0;
-        min-height: 40px;
+    /* Mobile-specific styles */
+    @media (max-width: 768px) {
+        .card-body {
+            padding: 1rem;
+        }
+        
+        .discussion-list {
+            max-height: 500px;
+        }
+        
+        .btn-sm {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
     }
+    </style>
+    @endsection
     
-    .container-fluid div::-webkit-scrollbar-thumb:hover {
-        background: #0a2626;
-    }
-</style>
-@endsection

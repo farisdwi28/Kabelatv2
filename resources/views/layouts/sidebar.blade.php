@@ -35,14 +35,18 @@
                                 <li>
                                     <a href="#">Program Dispusip <i class="fa-solid fa-angle-down"></i></a>
                                     <ul class="dropdown-padding">
-                                        <li><a href="{{ route('programdispusip.index') }}">Semua Program</a></li>
+                                        @php $programCount = 0; @endphp
                                         @foreach ($programs as $program)
+                                            @if ($programCount < 3)
                                             <li>
                                                 <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
                                                     {{ $program->nm_program }}
                                                 </a>
                                             </li>
+                                            @endif
+                                        @php $programCount++; @endphp
                                         @endforeach
+                                        <li><a href="{{ route('programdispusip.index') }}">Semua Program</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{ route('komunitas.show') }}">Komunitas</a></li>
@@ -176,11 +180,11 @@
 
             @auth
             <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
-                <div class="profile-avatar">
-                    <img src="{{ $profilePhoto }}" alt="User Avatar"
-                         class="profile-picture rounded-circle shadow-sm"
-                         style="width: 60px; height: 60px; object-fit: cover;">
-                </div>
+                <button class="btn btn-link p-0" type="button" data-bs-toggle="dropdown">
+                    <img src="{{ $profilePhoto }}" alt="Profile" 
+                         class="rounded-circle" 
+                         style="width: 40px; height: 40px; object-fit: cover;">
+                </button>
                 <div class="me-2">
                     <span class="font-weight-bold">
                         {{ Str::limit(Auth::user()->username, 15, '...') }}
@@ -190,12 +194,12 @@
                     @endif
                 </div>
                 <div class="dropdown">
-                    <button class="btn btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" 
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #0c0c0c;"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
-                        aria-labelledby="dropdownMenuButton">
+                      <button class="btn btn-link  p-0" type="button" id="sidebarDropdownMenuButton" 
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #040404;"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
+                                        aria-labelledby="sidebarDropdownMenuButton">
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

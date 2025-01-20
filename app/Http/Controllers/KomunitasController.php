@@ -75,17 +75,24 @@ class KomunitasController extends Controller
 
         try {
             $user = Auth::user();
-
-            // Cek apakah sudah menjadi anggota
+    
+            // Cek apakah user sudah menjadi anggota di komunitas manapun
+            $existingMembership = MemberKomunitas::where('id', $user->id)->first();
+    
+            if ($existingMembership) {
+                return redirect()->route('komunitas.detail', $kd_komunitas)
+                    ->with('error', 'Anda sudah menjadi anggota komunitas lain. Tidak dapat bergabung dengan lebih dari satu komunitas.');
+            }
+    
+            // Cek apakah sudah menjadi anggota di komunitas ini
             $existingMember = MemberKomunitas::where('kd_member', $user->kd_pen)
                 ->where('kd_komunitas', $kd_komunitas)
                 ->first();
-
+    
             if ($existingMember) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
                     ->with('error', 'Anda sudah menjadi anggota komunitas ini.');
             }
-
             // Proses join
             DB::beginTransaction();
 
