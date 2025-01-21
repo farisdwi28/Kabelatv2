@@ -32,8 +32,7 @@ class KomunitasController extends Controller
         
         if (request('search')) {
             $search = request('search');
-            $query->where('nm_komunitas', 'like', "%{$search}%")
-                  ->orWhere('desk_komunitas', 'like', "%{$search}%");
+            $query->where('nm_komunitas', 'like', "%{$search}%");
         }
     
         $komunitasList = $query->paginate(6);
@@ -81,7 +80,7 @@ class KomunitasController extends Controller
     
             if ($existingMembership) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
-                    ->with('error', 'Anda sudah menjadi anggota komunitas lain. Tidak dapat bergabung dengan lebih dari satu komunitas.');
+                    ->with('error', 'Anda sudah menjadi anggota komunitas. Tidak dapat bergabung lebih dari satu komunitas.');
             }
     
             // Cek apakah sudah menjadi anggota di komunitas ini

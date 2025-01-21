@@ -2,7 +2,7 @@
 @section('title', 'Komunitas')
 
 @section('content')
-<x-page-title title="Beranda" pagetitle="Galeri" maintitle="Komunitas" />
+<x-page-title title="Beranda" pagetitle="Galeri Komunitas" maintitle=" Galeri Komunitas" />
 <div class="container-fluid py-5">
     <div class="row">
         <!-- Sidebar Section -->
@@ -97,8 +97,11 @@
     </div>
 </div>
 
+
+@endsection
+
 <style>
-    /* Specific scrollbar styling for community container */
+    /* Original styles */
     .community-container::-webkit-scrollbar {
         width: 12px;
         height: 12px;
@@ -121,11 +124,41 @@
         background: #0a2626;
     }
 
-    /* Firefox */
     .community-container {
         scrollbar-width: auto;
         scrollbar-color: #104041 #e0e0e0;
     }
-</style>
 
-@endsection
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        section {
+            margin-left: 0 !important;
+        }
+
+        .community-container {
+            padding-right: 0;
+        }
+
+        .form-control {
+            max-width: 100% !important;
+        }
+
+        .text-end {
+            text-align: left !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            margin: 0 10px;
+        }
+        
+        .card-body {
+            padding: 1rem !important;
+        }
+
+        .card-footer {
+            padding: 1rem !important;
+        }
+    }
+</style>

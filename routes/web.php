@@ -93,5 +93,6 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+
 // Catch-all route for dynamic pages
 Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);

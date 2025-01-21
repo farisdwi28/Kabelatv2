@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MemberKomunitas;
 use Illuminate\Support\Facades\Auth;
 
-class KomunitasMiddleware
+class KomunitasMiddleware   
 {
     public function handle(Request $request, Closure $next)
     {
@@ -15,22 +15,27 @@ class KomunitasMiddleware
             return redirect()->route('login')
                 ->with('error', 'Silakan login terlebih dahulu.');
         }
-
+    
         $user = Auth::user();
         $memberInfo = MemberKomunitas::where('kd_member', $user->kd_pen)->first();
-
+    
         if (!$memberInfo) {
             return redirect()->route('komunitas.show')
                 ->with('error', 'Anda harus menjadi anggota komunitas terlebih dahulu.');
         }
-
-        // Add member info to the request for use in views
+    
+        // Tambahkan informasi member ke dalam request
         $request->attributes->add([
             'memberInfo' => $memberInfo,
-            'isLeadership' => $memberInfo->kd_jabatan !== 'ANGGT', // Memberikan akses ke semua struktur kecuali anggota
+            'isLeadership' => $memberInfo->kd_jabatan !== 'ANGGT', // Jabatan selain anggota
         ]);
-
-
+    
+        // Batasi akses halaman tertentu
+        if (!$memberInfo->jabatan || !$memberInfo->jabatan->isLeadershipRole()) {
+            return redirect()->route('dashboard')
+                ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
         return $next($request);
     }
+    
 }

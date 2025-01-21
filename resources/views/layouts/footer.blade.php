@@ -8,10 +8,14 @@
           <img src="{{ URL::asset('build/img/logo/KabBandung.png') }}" alt="">
           <p>Jelajahi dunia berita dengan Kabelat App! Dapatkan berita terkini, baca Program Dispusip, dan tetap terhubung dengan informasi terbaru.</p>
           <ul>
-            <li><a href="#"><img src="{{ URL::asset('build/img/icons/facebook.svg') }}" alt=""></a></li>
-            <li><a href="#"><img src="{{ URL::asset('build/img/icons/instagram.svg') }}" alt=""></a></li>
-            <li><a href="#"><img src="{{ URL::asset('build/img/icons/linkedin.svg') }}" alt=""></a></li>
-            <li><a href="#"><img src="{{ URL::asset('build/img/icons/youtube.svg') }}" alt=""></a></li>
+            <li><a href="https://www.facebook.com/perpuskabbdg" target="_blank">
+              <img src="{{ URL::asset('build/img/icons/facebook.svg') }}" alt=""></a></li>
+            <li><a href="https://www.instagram.com/dispusip_kab.bandung" target="_blank">
+              <img src="{{ URL::asset('build/img/icons/instagram.svg') }}" alt=""></a></li>
+            {{-- <li><a href="https://www.linkedin.com/company/dinas-perpustakaan-dan-arsip-kabupaten-bandung" target="_blank">
+              <img src="{{ URL::asset('build/img/icons/linkedin.svg') }}" alt=""></a></li> --}}
+              <li><a href="https://www.youtube.com/@dispusipchannel408" target="_blank">
+              <img src="{{ URL::asset('build/img/icons/youtube.svg') }}" alt=""></a></li>
           </ul>
         </div>
       </div>

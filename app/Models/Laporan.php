@@ -31,4 +31,9 @@ class Laporan extends Model
     {
         return $this->belongsTo(User::class, 'kd_member');
     }
+    public function komunitas()
+{
+    return $this->belongsTo(Komunitas::class, 'kd_komunitas', 'kd_komunitas');
 }
+}
+

@@ -10,16 +10,15 @@
         }
     }
     
-    $isLeadership = $memberInfo && in_array($memberInfo->kd_jabatan, ['KETUA', 'WAKIL', 'SEKRE', 'BENDA']);
+    $isLeadership = $memberInfo && $memberInfo->jabatan && $memberInfo->jabatan->isLeadershipRole();
 @endphp
 
 <div class="container-fluid p-0">
     <div class="row g-0">
         <!-- Mobile Toggle Button -->
         <div class="d-lg-none w-100 bg-white border-bottom p-3">
-            <button class="btn btn-link text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSidebar" aria-expanded="false" aria-controls="mobileSidebar">
+            <button class="btn btn-link text-dark mobile-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSidebar" aria-expanded="false" aria-controls="mobileSidebar">
                 <i class="fa-solid fa-bars me-2"></i>
-                Menu
             </button>
         </div>
 
@@ -70,7 +69,7 @@
                                      <span>Struktur Komunitas</span>
                                 </a>
                             </li>
-
+                            
                             <li class="nav-item">
                                 <a href="{{ url('forumDiskusi') }}" 
                                    class="nav-link d-flex align-items-center {{ Request::is('forumDiskusi') ? 'active bg-light text-dark' : 'text-dark' }}">
@@ -205,15 +204,36 @@
 </style>
 
 <script>
-    // Add smooth collapse animation for mobile
-    document.addEventListener('DOMContentLoaded', function() {
-        const mobileToggle = document.querySelector('[data-bs-toggle="collapse"]');
-        const mobileSidebar = document.getElementById('mobileSidebar');
-
-        if (mobileToggle && mobileSidebar) {
-            mobileToggle.addEventListener('click', function() {
-                mobileSidebar.classList.toggle('show');
-            });
-        }
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the button and sidebar elements
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const mobileSidebar = document.getElementById('mobileSidebar');
+    
+    if (mobileToggle && mobileSidebar) {
+        // Initialize Bootstrap collapse
+        const bsCollapse = new bootstrap.Collapse(mobileSidebar, {
+            toggle: false
+        });
+        
+        // Add click event listener
+        mobileToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            bsCollapse.toggle();
+            
+            // Toggle aria-expanded attribute
+            const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+            mobileToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+        
+        // Optional: Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileSidebar.contains(e.target) && 
+                !mobileToggle.contains(e.target) && 
+                mobileSidebar.classList.contains('show')) {
+                bsCollapse.hide();
+                mobileToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+});
 </script>

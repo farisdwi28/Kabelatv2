@@ -82,37 +82,60 @@ class LaporanController extends Controller
     
     public function index()
     {
-        // Get current user's member status
-        $memberKomunitas = MemberKomunitas::where('id', Auth::id())->first();
-        
-        if ($memberKomunitas) {
-            // If user is a member, show their reports
-            $laporans = Laporan::where('kd_member', $memberKomunitas->kd_member)->get();
-        } else {
-            // If user is not a member, show empty collection
-            $laporans = collect();
+        $user = Auth::user();
+        $memberKomunitas = MemberKomunitas::where('id', $user->id)->first();
+
+        if (!$memberKomunitas) {
+            return back()->with('error', 'Anda harus menjadi member komunitas terlebih dahulu.');
         }
-        
+
+        // Get all member IDs from the same community
+        $communityMembers = MemberKomunitas::where('kd_komunitas', $memberKomunitas->kd_komunitas)
+            ->pluck('kd_member');
+
+        if ($memberKomunitas && $memberKomunitas->jabatan->isLeadershipRole()) {
+            // If user has leadership role, show all reports from community members
+            $laporans = Laporan::whereIn('kd_member', $communityMembers)
+                ->orderBy('tgl_dibuat', 'desc')
+                ->get();
+        } else {
+            // If not, only show user's own reports
+            $laporans = Laporan::where('kd_member', $memberKomunitas->kd_member)
+                ->orderBy('tgl_dibuat', 'desc')
+                ->get();
+        }
+    
         return view('riwayatLaporan', compact('laporans'));
     }
-
+    
     public function download($kd_laporan)
     {
-        $laporan = Laporan::where('kd_laporan', $kd_laporan)->firstOrFail();
-        
-        // Check if user has permission to download
-        $memberKomunitas = MemberKomunitas::where('id', Auth::id())->first();
-        
-        if (!$memberKomunitas || $laporan->kd_member !== $memberKomunitas->kd_member) {
+        $user = Auth::user();
+        $memberKomunitas = MemberKomunitas::where('id', $user->id)->first();
+    
+        if (!$memberKomunitas) {
             return back()->with('error', 'Anda tidak memiliki akses untuk mengunduh file ini.');
         }
-        
+
+        // Get all member IDs from the same community
+        $communityMembers = MemberKomunitas::where('kd_komunitas', $memberKomunitas->kd_komunitas)
+            ->pluck('kd_member');
+    
+        $laporan = Laporan::whereIn('kd_member', $communityMembers)
+            ->where('kd_laporan', $kd_laporan)
+            ->firstOrFail();
+    
+        if (!$memberKomunitas->jabatan->isLeadershipRole()) {
+            return back()->with('error', 'Hanya pengguna dengan jabatan kepemimpinan yang dapat mengunduh file ini.');
+        }
+    
         if ($laporan->file) {
             $filePath = public_path('storage/laporan_files/' . $laporan->file);
             if (file_exists($filePath)) {
                 return response()->download($filePath);
             }
         }
-        return back()->with('error', 'File tidak ditemukan');
+    
+        return back()->with('error', 'File tidak ditemukan.');
     }
 }

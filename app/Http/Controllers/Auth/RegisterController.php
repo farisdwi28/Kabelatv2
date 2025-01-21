@@ -99,6 +99,13 @@ class RegisterController extends Controller
 
             $memberData = session('member_data');
 
+            if (User::where('kd_pen', $memberData['kd_pen'])->exists()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'NIK ini sudah terdaftar dengan akun lain.'
+                ], 422);
+            }
+
             DB::beginTransaction();
 
             $user = User::create([

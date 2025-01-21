@@ -30,8 +30,7 @@ class DiskusiController extends Controller
     
         if ($request->has('search')) {
             $searchTerm = $request->search;
-            $query->where('topik_diskusi', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('isi_diskusi', 'LIKE', "%{$searchTerm}%");
+            $query->where('topik_diskusi', 'LIKE', "%{$searchTerm}%");  
         }
     
         $diskusi = $query->orderBy('tglpost_diskusi', 'desc')

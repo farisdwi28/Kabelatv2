@@ -67,7 +67,7 @@
                             @foreach ($featuredNews as $index => $berita)
                                 @if ($index % 3 != 0)
                                     <div class="blog-author-boxarea mb-4" data-aos="zoom-out" data-aos-duration="1000"
-                                        style="background: linear-gradient(145deg, #f8f9fa, #e9ecef); border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                                        style="background: linear-gradient(145deg,#88beea, #e4e8f3); border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                                         <div class="content-area p-4">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <h6 class="text-muted">

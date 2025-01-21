@@ -14,7 +14,7 @@ class MemberKomunitas extends Model
 
     // Primary key
     protected $primaryKey = 'kd_member';
-    
+
     // Primary key is not auto-incrementing and is a string
     public $incrementing = false;
     protected $keyType = 'string';
@@ -48,5 +48,8 @@ class MemberKomunitas extends Model
     {
         return $this->hasMany(Laporan::class, 'kd_member', 'kd_member');
     }
-
+    public function jabatan()
+    {
+        return $this->belongsTo(StrukturJabatan::class, 'kd_jabatan', 'kd_jabatan');
+    }
 }

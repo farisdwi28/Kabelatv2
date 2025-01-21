@@ -102,7 +102,7 @@
                 const alerts = document.querySelectorAll('[style*="animation: slideIn"]');
                 alerts.forEach(alert => {
                     setTimeout(() => {
-                        alert.style.animation = 'slideOut 0.5s forwards';
+                        alert.style.animation = 'slideOut 0.9s forwards';
                         setTimeout(() => {
                             alert.remove();
                         }, 500);

@@ -11,15 +11,24 @@
                     <div class="blog-auhtor-sidebar-area heading2">
 
                         <div class="tags-area">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt="">
+                            <ul class="list-unstyled d-flex flex-column">
+                                <li class="mb-2">
+                                    <a href="#" class="d-flex align-items-center">
+                                        <img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt=""
+                                            class="me-2">
                                         {{ $berita->formatted_date }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex align-items-center">
+                                        <img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt=""
+                                            class="me-2">
+                                        {{ $berita->author }}
                                     </a>
                                 </li>
                             </ul>
                         </div>
+
                         <h2>{{ $berita->judul_berita }}</h2>
                         <div class="space34"></div>
                         <div class="img1">
@@ -61,25 +70,28 @@
                         <div class="comments-container mt-3">
                             @php
                                 $comments = $berita->komentar;
-                                $commentsToShow = $comments->take(3);
+                                $visibleComments = $comments->take(5);
+                                $hiddenComments = $comments->slice(5);
+                                $totalComments = $comments->count();
                             @endphp
-                        
-                            @foreach ($commentsToShow as $komentar)
-                                <div class="comment-box p-3 border rounded shadow-sm mb-4" style="margin-bottom: 20px; background-color: #f9f9ff;">
+
+                            @foreach ($visibleComments as $komentar)
+                                <div class="comment-box p-3 border rounded shadow-sm mb-4"
+                                    style="margin-bottom: 20px; background-color: #f9f9ff;">
                                     <div class="d-flex align-items-center">
                                         <div class="comment-avatar">
-                                            <img src="{{ $komentar->user->penduduk && $komentar->user->penduduk->foto_pen 
-                                                    ? asset('storage/images/profiles/' . $komentar->user->penduduk->foto_pen) 
-                                                    : asset('build/img/all-images/comments-img1.png') }}" 
-                                                 alt="{{ $komentar->user->name ?? 'User' }}" 
-                                                 class="rounded-circle" 
-                                                 style="width: 50px; height: 50px; object-fit: cover;">
+                                            <img src="{{ $komentar->user->penduduk && $komentar->user->penduduk->foto_pen
+                                                ? asset('storage/images/profiles/' . $komentar->user->penduduk->foto_pen)
+                                                : asset('build/img/all-images/comments-img1.png') }}"
+                                                alt="{{ $komentar->user->name ?? 'User' }}" class="rounded-circle"
+                                                style="width: 50px; height: 50px; object-fit: cover;">
                                         </div>
                                         <div class="comment-info ms-3">
                                             <h6 class="mb-0">
                                                 <strong>{{ $komentar->user->name ?? 'User' }}</strong>
                                             </h6>
-                                            <small class="text-muted" title="{{ \Carbon\Carbon::parse($komentar->created_at)->translatedFormat('l, d F Y - H:i') }}">
+                                            <small class="text-muted"
+                                                title="{{ \Carbon\Carbon::parse($komentar->created_at)->translatedFormat('l, d F Y - H:i') }}">
                                                 {{ \Carbon\Carbon::parse($komentar->created_at)->diffForHumans() }}
                                             </small>
                                         </div>
@@ -87,41 +99,49 @@
                                     <p class="mt-3 mb-0">{{ $komentar->isi_kom_info }}</p>
                                 </div>
                             @endforeach
-                        
-                            @foreach ($comments->skip(3) as $komentar)
-                                <div class="comment-box p-3 border rounded shadow-sm mb-4" style="margin-bottom: 20px; background-color: #f9f9ff; display: none;">
-                                    <div class="d-flex align-items-center">
-                                        <div class="comment-avatar">
-                                            <img src="{{ $komentar->user->penduduk && $komentar->user->penduduk->foto_pen 
-                                                    ? asset('storage/images/profiles/' . $komentar->user->penduduk->foto_pen) 
-                                                    : asset('build/img/all-images/comments-img1.png') }}" 
-                                                 alt="{{ $komentar->user->name ?? 'User' }}" 
-                                                 class="rounded-circle" 
-                                                 style="width: 50px; height: 50px; object-fit: cover;">
+
+                            <!-- Hidden comments section -->
+                            <div id="hiddenComments" style="display: none;">
+                                @foreach ($hiddenComments as $komentar)
+                                    <div class="comment-box p-3 border rounded shadow-sm mb-4"
+                                        style="margin-bottom: 20px; background-color: #f9f9ff;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="comment-avatar">
+                                                <img src="{{ $komentar->user->penduduk && $komentar->user->penduduk->foto_pen
+                                                    ? asset('storage/images/profiles/' . $komentar->user->penduduk->foto_pen)
+                                                    : asset('build/img/all-images/comments-img1.png') }}"
+                                                    alt="{{ $komentar->user->name ?? 'User' }}" class="rounded-circle"
+                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                            </div>
+                                            <div class="comment-info ms-3">
+                                                <h6 class="mb-0">
+                                                    <strong>{{ $komentar->user->name ?? 'User' }}</strong>
+                                                </h6>
+                                                <small class="text-muted"
+                                                    title="{{ \Carbon\Carbon::parse($komentar->created_at)->translatedFormat('l, d F Y - H:i') }}">
+                                                    {{ \Carbon\Carbon::parse($komentar->created_at)->diffForHumans() }}
+                                                </small>
+                                            </div>
                                         </div>
-                                        <div class="comment-info ms-3">
-                                            <h6 class="mb-0">
-                                                <strong>{{ $komentar->user->name ?? 'User' }}</strong>
-                                            </h6>
-                                            <small class="text-muted" title="{{ \Carbon\Carbon::parse($komentar->created_at)->translatedFormat('l, d F Y - H:i') }}">
-                                                {{ \Carbon\Carbon::parse($komentar->created_at)->diffForHumans() }}
-                                            </small>
-                                        </div>
+                                        <p class="mt-3 mb-0">{{ $komentar->isi_kom_info }}</p>
                                     </div>
-                                    <p class="mt-3 mb-0">{{ $komentar->isi_kom_info }}</p>
-                                </div>
-                            @endforeach
-                        
-                            @if ($berita->komentar->count() > 3)
-                                <div class="text-center">
-                                    <a href="javascript:void(0);" onclick="showAllComments()" class="header-btn1">Lihat Semua Komentar</a>
-                                </div>
+                                @endforeach
+                            </div>
+
+                            @if($totalComments > 5)
+                            <div class="text-center mb-4">
+                                <button id="toggleComments" 
+                                        class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" 
+                                        onclick="toggleComments()">
+                                    <span id="buttonText">Tampilkan Komentar Lainnya</span>
+                                </button>
+                            </div>   
                             @endif
                         </div>
-                        
+
                         <div class="space50"></div>
                         <div class="contact-form-area">
-                            <h4 class="mb-4">Berikan Komentar</h4> <!-- Added margin bottom -->
+                            <h4 class="mb-4">Berikan Komentar</h4>
                             @auth
                                 <form id="comment-form" method="POST"
                                     action="{{ route('berita.komentar', $berita->kd_info) }}">
@@ -155,52 +175,46 @@
         </div>
     </div>
 
-    <div class="blog1-scetion-area sp2 bg2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 m-auto">
-                    <div class="blog-hedaer-area heading2 text-center">
-                        <h2>Berita Lainnya</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                @foreach ($relatedNews as $related)
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-author-boxarea">
-                            <div class="img1" style="position: relative; overflow: hidden; border-radius: 8px;">
-                                <a href="{{ route('berita.show', $related->kd_info) }}">
-                                    @if ($related->foto_berita)
-                                        <img src="{{ $related->foto_berita }}" alt="{{ $related->judul_berita }}"
-                                            style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;">
-                                    @else
-                                        <img src="{{ URL::asset('build/img/all-images/default-news.png') }}" alt="Default"
-                                            style="width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease;">
-                                    @endif
-                                </a>
-                            </div>
-                            <div class="content-area">
-                                <h5 class="post-title mt-3"><a href="{{ route('berita.show', $related->kd_info) }}">
-                                        {{ Str::limit($related->judul_berita, 50) }}
-                                    </a></h5>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
+    <!-- Rest of your existing code for related news section -->
 
 @endsection
 
 @section('scripts')
+<style>
+    #toggleComments {
+        border-width: 2px;
+        color: #0a0a0b; /* Warna teks default */
+        background-color: transparent; /* Latar belakang transparan */
+        transition: all 0.3s ease;
+        border-color: #6c757d;
+        
+    }
+
+    #toggleComments:hover {
+        background-color: #6c757d; /* Hover background color abu-abu */
+        color: white; /* Warna teks tetap putih saat hover */
+
+    }
+</style>
     <script>
+        function toggleComments() {
+            const hiddenComments = document.getElementById('hiddenComments');
+            const toggleButton = document.getElementById('toggleComments');
+            
+            if (hiddenComments.style.display === 'none') {
+                hiddenComments.style.display = 'block';
+                toggleButton.textContent = 'Sembunyikan Komentar';
+            } else {
+                hiddenComments.style.display = 'none';
+                toggleButton.textContent = 'Tampilkan Komentar Lainnya';
+            }
+        }
+
+        // Your existing scripts
         document.addEventListener('DOMContentLoaded', function() {
-            // Get the buttons
             const likeButton = document.getElementById('like-button');
             const viewButton = document.getElementById('view-button');
 
-            // Add data attributes to buttons
             if (likeButton) {
                 likeButton.setAttribute('data-article-id', '{{ $berita->kd_info }}');
             }
@@ -208,7 +222,6 @@
                 viewButton.setAttribute('data-article-id', '{{ $berita->kd_info }}');
             }
 
-            // Check if user has already liked
             const articleId = likeButton.getAttribute('data-article-id');
             const hasLiked = localStorage.getItem(`liked_${articleId}`);
 
@@ -216,7 +229,6 @@
                 likeButton.classList.add('active');
             }
 
-            // Increment views on page load (once per session)
             const hasViewed = sessionStorage.getItem(`viewed_${articleId}`);
             if (!hasViewed) {
                 incrementViews();
@@ -230,12 +242,10 @@
             const likeButton = document.getElementById('like-button');
             const articleId = likeButton.getAttribute('data-article-id');
 
-            // Check if already liked
             if (localStorage.getItem(`liked_${articleId}`)) {
                 return;
             }
 
-            // Disable button temporarily
             likeButton.style.pointerEvents = 'none';
 
             fetch(`/berita/${articleId}/like`, {
@@ -253,11 +263,8 @@
                 })
                 .then(data => {
                     if (data.success) {
-                        // Update like count
                         const likeCount = document.getElementById('like-count');
                         likeCount.textContent = parseInt(likeCount.textContent) + 1;
-
-                        // Mark as liked
                         localStorage.setItem(`liked_${articleId}`, 'true');
                         likeButton.classList.add('active');
                     }
@@ -266,7 +273,6 @@
                     console.error('Error:', error);
                 })
                 .finally(() => {
-                    // Re-enable button after 1 second
                     setTimeout(() => {
                         likeButton.style.pointerEvents = 'auto';
                     }, 1000);
@@ -293,41 +299,6 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
-
-
-        function showAllComments() {
-            // Show all comments if the user clicks "Lihat Semua"
-            document.querySelectorAll('.comment-box').forEach((comment) => {
-                comment.style.display = 'block';
-            });
-            document.querySelector('.btn-link').textContent =
-                'Sembunyikan Komentar'; // Change button text to "Hide Comments"
-            document.querySelector('.btn-link').setAttribute('onclick',
-                'hideComments()'); // Set the button's onclick to hide comments
-        }
-
-        function hideComments() {
-            // Hide all comments except the first 3
-            document.querySelectorAll('.comment-box').forEach((comment, index) => {
-                if (index >= 3) {
-                    comment.style.display = 'none';
-                }
-            });
-            document.querySelector('.btn-link').textContent =
-                'Lihat Semua Komentar'; // Change button text to "Show All Comments"
-            document.querySelector('.btn-link').setAttribute('onclick',
-                'showAllComments()'); // Set the button's onclick to show all comments
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            // Initial load - Hide comments beyond the first 3
-            document.querySelectorAll('.comment-box').forEach((comment, index) => {
-                if (index >= 3) {
-                    comment.style.display = 'none';
-                }
-            });
-        });
-
 
         document.addEventListener("DOMContentLoaded", () => incrementViews());
     </script>

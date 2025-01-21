@@ -6,14 +6,14 @@
     <div class="container-fluid py-4">
         <div class="row">
             {{-- Sidebar --}}
-            <aside class="col-lg-4 col-md-4 mb-4" style="padding-right: 0;">
+            <aside class="col-lg-4 col-md-4 mb-4">
                 @include('layouts.master2')
             </aside>
 
             {{-- Main Content --}}
-            <div class="col-lg-5 col-md-10" style="padding-left: 0; margin-left: -75px; margin-top:50px;">
+            <div class="col-lg-5 col-md-10 offset-lg-0 offset-md-1 py-3">
                 <div class="card border-0 shadow-lg rounded-4">
-                    <div class="card-header text-center py-3 bg-gradient-light text-black rounded-top">
+                    <div class="card-header text-center py-3 text-black rounded-top" style="background-color: #7ca1b5;">
                         <h3 class="fw-semibold mb-0">Tambah Diskusi</h3>
                     </div>
                     <div class="card-body px-5 py-4">
@@ -48,22 +48,5 @@
             transform: translateY(-2px);
             box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
         }
-
-        /* Mobile-specific styles */
-        @media (max-width: 768px) {
-            .card-body {
-                padding: 1rem;
-            }
-
-            .discussion-list {
-                max-height: 500px;
-            }
-
-            .btn-sm {
-                width: 100%;
-                margin-top: 0.5rem;
-            }
-        }
     </style>
-
 @endsection

@@ -2,19 +2,20 @@
     $isMember = false;
     $jabatan = null;
     $profilePhoto = null;
-    
+
     if (Auth::check()) {
         $memberInfo = App\Models\MemberKomunitas::where('kd_member', Auth::user()->kd_pen)->first();
         if ($memberInfo) {
             $isMember = true;
             $jabatan = $memberInfo->kd_jabatan === 'ANGGT' ? 'Anggota' : $memberInfo->kd_jabatan;
         }
-        
+
         // Get profile photo
         $penduduk = App\Models\Penduduk::where('kd_pen', Auth::user()->kd_pen)->first();
-        $profilePhoto = $penduduk && $penduduk->foto_pen 
-            ? asset('storage/images/profiles/' . $penduduk->foto_pen) 
-            : asset('default-avatar.png');
+        $profilePhoto =
+            $penduduk && $penduduk->foto_pen
+                ? asset('storage/images/profiles/' . $penduduk->foto_pen)
+                : asset('default-avatar.png');
     }
 @endphp
 
@@ -38,13 +39,14 @@
                                         @php $programCount = 0; @endphp
                                         @foreach ($programs as $program)
                                             @if ($programCount < 3)
-                                            <li>
-                                                <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                                                    {{ $program->nm_program }}
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a
+                                                        href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                                        {{ $program->nm_program }}
+                                                    </a>
+                                                </li>
                                             @endif
-                                        @php $programCount++; @endphp
+                                            @php $programCount++; @endphp
                                         @endforeach
                                         <li><a href="{{ route('programdispusip.index') }}">Semua Program</a></li>
                                     </ul>
@@ -69,50 +71,48 @@
                             @endguest
 
                             @auth
-                            <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
-                                <div class="profile-avatar">
-                                    <img src="{{ $profilePhoto }}" alt="User Avatar"
-                                         class="profile-picture rounded-circle shadow-sm"
-                                         style="width: 60px; height: 60px; object-fit: cover;">
-                                </div>
-                                <div class="me-2">
-                                    <span class="font-weight-bold">
-                                        {{ Str::limit(Auth::user()->username, 15, '...') }}
-                                    </span>
-                                    @if ($isMember && $jabatan)
-                                        <div class="text-muted small">{{ $jabatan }}</div>
-                                    @endif
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link  p-0" type="button" id="sidebarDropdownMenuButton" 
+                                <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
+                                    <div class="profile-avatar">
+                                        <img src="{{ $profilePhoto }}" alt="User Avatar"
+                                            class="profile-picture rounded-circle shadow-sm"
+                                            style="width: 60px; height: 60px; object-fit: cover;">
+                                    </div>
+                                    <div class="me-2">
+                                        <span class="font-weight-bold">
+                                            {{ Str::limit(Auth::user()->username, 15, '...') }}
+                                        </span>
+                                        @if ($isMember && $jabatan)
+                                            <div class="text-muted small">{{ $jabatan }}</div>
+                                        @endif
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-link  p-0" type="button" id="sidebarDropdownMenuButton"
                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #040404;"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
-                                        aria-labelledby="sidebarDropdownMenuButton">
-                                        {{-- <li>
+                                            <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #040404;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn"
+                                            aria-labelledby="sidebarDropdownMenuButton">
+                                            {{-- <li>
                                             <form action="POST" action=<a href="{{ route('profile.index') }}"></a>
                                                 @csrf
                                                 <button type="sumbit" class="dropdown-item">Profile</button>
                                             </form>
                                         </li> --}}
-                                        <li>
-                                            <form method="POST" action="{{ route('logout') }}">
-                                                @csrf
-                                                <button 
-                                                    type="submit" 
-                                                    class="dropdown-item" 
-                                                    style="background-color: transparent; color: #040404; border: none; outline: none; transition: background-color 0.3s;"
-                                                    onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#666';"
-                                                    onmouseout="this.style.backgroundColor='transparent'; this.style.color='#040404';">
-                                                    Logout
-                                                </button>
-                                            </form>
-                                        </li>
-                                                                                                                   
-                                    </ul>
+                                            <li>
+                                                <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <button type="submit" class="dropdown-item"
+                                                        style="background-color: transparent; color: #040404; border: none; outline: none; transition: background-color 0.3s;"
+                                                        onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#666';"
+                                                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#040404';">
+                                                        Logout
+                                                    </button>
+                                                </form>
+                                            </li>
+
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
                             @endauth
                         </div>
                     </div>
@@ -128,7 +128,8 @@
         <div class="col-12">
             <div class="mobile-header-elements">
                 <div class="mobile-logo">
-                    <a href="/"><img src="{{ URL::asset('build/img/all-images/Logo Kabelat.svg') }}" alt=""></a>
+                    <a href="/"><img src="{{ URL::asset('build/img/all-images/Logo Kabelat.svg') }}"
+                            alt=""></a>
                 </div>
                 <div class="mobile-nav-icon dots-menu">
                     <i class="fa-solid fa-bars"></i>
@@ -175,40 +176,45 @@
 
         <div class="allmobilesection">
             @guest
-                <a href="{{ route('login') }}" class="header-btn1">Masuk <span><i class="fa-solid fa-arrow-right"></i></span></a>
+                <a href="{{ route('login') }}" class="header-btn1">Masuk <span><i
+                            class="fa-solid fa-arrow-right"></i></span></a>
             @endguest
 
             @auth
-            <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
-                <button class="btn btn-link p-0" type="button" data-bs-toggle="dropdown">
-                    <img src="{{ $profilePhoto }}" alt="Profile" 
-                         class="rounded-circle" 
-                         style="width: 40px; height: 40px; object-fit: cover;">
-                </button>
-                <div class="me-2">
-                    <span class="font-weight-bold">
-                        {{ Str::limit(Auth::user()->username, 15, '...') }}
-                    </span>
-                    @if ($isMember && $jabatan)
-                        <div class="text-muted small">{{ $jabatan }}</div>
-                    @endif
-                </div>
-                <div class="dropdown">
-                      <button class="btn btn-link  p-0" type="button" id="sidebarDropdownMenuButton" 
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #040404;"></i>
+                <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
+                    <button class="btn btn-link p-0" type="button" data-bs-toggle="dropdown">
+                        <img src="{{ $profilePhoto }}" alt="Profile" class="rounded-circle"
+                            style="width: 40px; height: 40px; object-fit: cover;">
+                    </button>
+                    <div class="me-2">
+                        <span class="font-weight-bold">
+                            {{ Str::limit(Auth::user()->username, 15, '...') }}
+                        </span>
+                        @if ($isMember && $jabatan)
+                            <div class="text-muted small">{{ $jabatan }}</div>
+                        @endif
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-link  p-0" type="button" id="sidebarDropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-caret-down" style="font-size: 20px; color: #040404;"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn"
+                            aria-labelledby="sidebarDropdownMenuButton">
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item"
+                                        style="background-color: transparent; color: #040404; border: none; outline: none; transition: background-color 0.3s;"
+                                        onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#666';"
+                                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#040404';">
+                                        Logout
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 rounded-3 animated fadeIn" 
-                                        aria-labelledby="sidebarDropdownMenuButton">
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
             @endauth
         </div>
     </div>

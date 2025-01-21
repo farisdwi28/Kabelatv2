@@ -289,8 +289,8 @@
     <div class="testimonial1-section-area sp6">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 m-auto">
-                    <div class="testimonial-header heading2 text-center">
+                <div class="col-12 text-center">
+                    <div class="testimonial-header heading2">
                         <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt="" class="star2 keyframe5">
                         <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt="" class="star3 keyframe5">
                         <h2 class="text-anime-style-3">Program Dispusip</h2>
@@ -303,14 +303,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
+                <div class="col-12 col-md-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
                     <div class="testimonials-slider-area owl-carousel">
                         @foreach ($programs->take(3) as $program)
                         <div class="testimonial-boxarea shadow-lg rounded-4 p-4">
                             <div class="row align-items-center">
-                                <div class="col-lg-5">
+                                <div class="col-12 col-lg-5">
                                     <div class="pera" style="min-height: 150px;">
-                                        <p>{{ Str::limit($program->tentang_program, 200) }}</p>
+                                        <p>{{ Str::limit($program->tentang_program, 150) }}</p>
                                         <div class="space100"></div>
                                         <div class="space30"></div>
                                         <div class="list-area">
@@ -322,7 +322,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-7 text-center">
+                                <div class="col-12 col-lg-7 text-center">
                                     <div class="images">
                                         <img src="{{ $program->sampul_program }}" 
                                             alt="{{ $program->nm_program }}" 
@@ -338,6 +338,7 @@
             </div>
         </div>
     </div>
+    
     <!--===== TESTIMONIAL AREA ENDS =======-->
 
     <!--===== SERVICE AREA STARTS =======-->
@@ -365,9 +366,9 @@
                                  alt="{{ $News[0]->judul_berita }}" 
                                  style="width: 100%; height: 300px; object-fit: cover;">
                         </div>
-                        <div class="content-area position-absolute bottom-0 start-0 p-3 text-white">
-                            <h5>{{ \Carbon\Carbon::parse($News[0]->tanggal_dibuat)->format('d M Y') }}</h5>
-                            <a href="{{ route('berita.show', $News[0]->kd_info) }}" class="text text-anime-style-3">
+                        <div class="content-area position-absolute bottom-0 start-0 p-3 text-white text-white">
+                            <h5 class="d-lg-none" style="color: white;">{{ \Carbon\Carbon::parse($News[0]->tanggal_dibuat)->format('d M Y') }}</h5>
+                            <a href="{{ route('berita.show', $News[0]->kd_info) }}" class="text text-anime-style-3 fs-5 text-white">
                                 {{ $News[0]->judul_berita }}
                             </a>
                             <div class="btn-area mt-2" data-aos="fade-up" data-aos-duration="1200">
@@ -388,7 +389,7 @@
                         <div class="row g-3">
                             @foreach($News->slice(1, 2) as $berita)
                             <div class="col-lg-12 col-md-6">
-                                <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000">
+                                <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000"   style="background: linear-gradient(145deg, #88beea, #e4e8f3);">
                                     <div class="arrow">
                                         <a href="{{ route('berita.show', $berita->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
@@ -551,14 +552,14 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="testimonials-slider-area owl-carousel">
+                        <div class="testimonials-slider-area owl-carousel ">
                             @foreach ($komunitasList->take(5) as $item)
-                            <div class="testimonial-boxarea">
+                            <div class="testimonial-boxarea rounded-5">
                                 <div class="row">
                                     <!-- Konten Bersama -->
                                     <div class="col-lg-5">
                                         <div class="pera">
-                                            <p class="text-muted" style="font-size: 1.1rem;">{{ Str::limit($item->desk_komunitas, 150) ?: 'No description available' }}</p>
+                                            <p class="text-muted" style="font-size: 1.1rem;">{{ Str::limit($item->desk_komunitas, 100) ?: 'No description available' }}</p>
                                             <div class="space100"></div>
                                             <div class="space30"></div>
                                             <div class="list-area">
