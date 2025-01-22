@@ -98,7 +98,7 @@
 </div>
 
 
-@endsection
+
 
 <style>
     /* Original styles */
@@ -162,3 +162,4 @@
         }
     }
 </style>
+@endsection

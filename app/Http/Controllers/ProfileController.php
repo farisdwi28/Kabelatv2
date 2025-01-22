@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use App\Models\Penduduk;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
-USE Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -36,12 +37,14 @@ class ProfileController extends Controller
             return redirect()->back()->with('error', 'User tidak ditemukan.');
         }
         
+        // Get penduduk data for checking
         $penduduk = Penduduk::where('kd_pen', $user->kd_pen)->first();
         
         if (!$penduduk) {
             return redirect()->back()->with('error', 'Data penduduk tidak ditemukan.');
         }
 
+        // Validate request data
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
@@ -50,7 +53,25 @@ class ProfileController extends Controller
             'profile_photo' => ['nullable', 'image', 'max:2048'], // max 2MB
         ]);
 
+        // Check if any changes were made
+        $hasChanges = false;
+
+        if ($request->name !== $user->name || 
+            $request->username !== $user->username || 
+            $request->email !== $user->email || 
+            $request->filled('password') || 
+            $request->hasFile('profile_photo')) {
+            $hasChanges = true;
+        }
+
+        if (!$hasChanges) {
+            return redirect()->back()
+                ->with('warning', 'Tidak ada perubahan yang dilakukan pada profil.');
+        }
+
         try {
+            DB::beginTransaction();
+
             // Handle profile photo upload
             if ($request->hasFile('profile_photo')) {
                 // Delete old photo if exists
@@ -78,16 +99,16 @@ class ProfileController extends Controller
 
             $user->save();
 
-            // Update penduduk information
-            $penduduk->nm_pen = $validated['name'];
-            $penduduk->save();
+            DB::commit();
 
             return redirect()->back()->with('success', 'Profile berhasil diperbarui!');
 
         } catch (\Exception $e) {
+            DB::rollBack();
+
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan saat memperbarui profile. ' . $e->getMessage());
+                ->with('error', 'Terjadi kesalahan saat memperbarui profile. Silakan coba lagi.');
         }
     }
 }

@@ -4,12 +4,109 @@
 @section('content')
     <x-page-title title="Beranda" pagetitle="Berita" maintitle="Detail Berita" />
 
+    <!-- Alert Container -->
+    @if (session('success') || session('error'))
+        <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
+            @if (session('success'))
+                <div
+                    style="background: linear-gradient(135deg, #28a745, #20c997); 
+                            color: white; 
+                            padding: 20px; 
+                            border-radius: 10px; 
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
+                            margin-bottom: 10px; 
+                            border-left: 5px solid #1e7e34; 
+                            display: flex; 
+                            align-items: center; 
+                            justify-content: space-between;
+                            animation: slideIn 0.5s forwards;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-check-circle" style="font-size: 24px;"></i>
+                        <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">{{ session('success') }}</p>
+                    </div>
+                    <button onclick="this.parentElement.remove()"
+                        style="background: transparent; 
+                                   border: none; 
+                                   color: white; 
+                                   font-size: 20px; 
+                                   cursor: pointer; 
+                                   opacity: 0.8; 
+                                   padding: 0; 
+                                   margin-left: 15px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div
+                    style="background: linear-gradient(135deg, #dc3545, #f86d7d); 
+                            color: white; 
+                            padding: 20px; 
+                            border-radius: 10px; 
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
+                            margin-bottom: 10px; 
+                            border-left: 5px solid #bd2130; 
+                            display: flex; 
+                            align-items: center; 
+                            justify-content: space-between;
+                            animation: slideIn 0.5s forwards;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-exclamation-circle" style="font-size: 24px;"></i>
+                        <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">{{ session('error') }}</p>
+                    </div>
+                    <button onclick="this.parentElement.remove()"
+                        style="background: transparent; 
+                                   border: none; 
+                                   color: white; 
+                                   font-size: 20px; 
+                                   cursor: pointer; 
+                                   opacity: 0.8; 
+                                   padding: 0; 
+                                   margin-left: 15px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            @endif
+        </div>
+
+        <!-- Inline Keyframe Animation -->
+        <style>
+            @keyframes slideIn {
+                from {
+                    transform: translateX(120%);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        </style>
+
+        <!-- Auto-remove alerts after 5 seconds -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const alerts = document.querySelectorAll('[style*="animation: slideIn"]');
+                alerts.forEach(alert => {
+                    setTimeout(() => {
+                        alert.style.animation = 'slideOut 0.9s forwards';
+                        setTimeout(() => {
+                            alert.remove();
+                        }, 500);
+                    }, 5000);
+                });
+            });
+        </script>
+    @endif
+
+    <!--===== DETAIL BERITA AREA STARTS =======-->
     <div class="blog-auhtor-section-area sp1">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 m-auto">
                     <div class="blog-auhtor-sidebar-area heading2">
-
                         <div class="tags-area">
                             <ul class="list-unstyled d-flex flex-column">
                                 <li class="mb-2">
@@ -61,7 +158,6 @@
                                 </ul>
                             </div>
                         </div>
-
 
                         <div class="space50"></div>
                         <h3>Komentar ({{ $berita->komentar->count() }})</h3>
@@ -128,14 +224,14 @@
                                 @endforeach
                             </div>
 
-                            @if($totalComments > 5)
-                            <div class="text-center mb-4">
-                                <button id="toggleComments" 
-                                        class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" 
+                            @if ($totalComments > 5)
+                                <div class="text-center mb-4">
+                                    <button id="toggleComments"
+                                        class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm"
                                         onclick="toggleComments()">
-                                    <span id="buttonText">Tampilkan Komentar Lainnya</span>
-                                </button>
-                            </div>   
+                                        <span id="buttonText">Tampilkan Komentar Lainnya</span>
+                                    </button>
+                                </div>
                             @endif
                         </div>
 
@@ -168,39 +264,146 @@
                                 </div>
                             @endauth
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Rest of your existing code for related news section -->
-
 @endsection
 
 @section('scripts')
-<style>
-    #toggleComments {
-        border-width: 2px;
-        color: #0a0a0b; /* Warna teks default */
-        background-color: transparent; /* Latar belakang transparan */
-        transition: all 0.3s ease;
-        border-color: #6c757d;
-        
-    }
+    <style>
+        #toggleComments {
+            border-width: 2px;
+            color: #0a0a0b;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            border-color: #6c757d;
+        }
 
-    #toggleComments:hover {
-        background-color: #6c757d; /* Hover background color abu-abu */
-        color: white; /* Warna teks tetap putih saat hover */
+        #toggleComments:hover {
+            background-color: #6c757d;
+            color: white;
+        }
 
-    }
-</style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+        }
+    </style>
     <script>
+        function showAlert(message, type = 'error') {
+            // Get or create the container
+            let containerDiv = document.querySelector('.alert-container');
+            if (!containerDiv) {
+                containerDiv = document.createElement('div');
+                containerDiv.classList.add('alert-container');
+                containerDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+            max-width: 400px;
+            pointer-events: none; // Allow clicking through the container
+        `;
+                document.body.appendChild(containerDiv);
+            }
+
+            // Create alert element
+            const alertDiv = document.createElement('div');
+            const isSuccess = type === 'success';
+            const bgColor = isSuccess ? 'linear-gradient(135deg, #28a745, #20c997)' :
+                'linear-gradient(135deg, #dc3545, #f86d7d)';
+            const borderColor = isSuccess ? '#1e7e34' : '#bd2130';
+            const icon = isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+            alertDiv.style.cssText = `
+        background: ${bgColor};
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        margin-bottom: 10px;
+        border-left: 5px solid ${borderColor};
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        pointer-events: auto; // Re-enable pointer events for the alert
+        opacity: 0;
+        transform: translateX(120%);
+    `;
+
+            // Create alert content
+            alertDiv.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <i class="fas ${icon}" style="font-size: 24px;"></i>
+            <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">${message}</p>
+        </div>
+        <button onclick="this.parentElement.remove()" 
+                style="background: transparent; 
+                       border: none;
+                       color: white;
+                       font-size: 20px;
+                       cursor: pointer;
+                       opacity: 0.8;
+                       padding: 0;
+                       margin-left: 15px;">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+
+            // Add to container
+            containerDiv.appendChild(alertDiv);
+
+            // Trigger animation
+            requestAnimationFrame(() => {
+                alertDiv.style.transition = 'all 0.5s ease-in-out';
+                alertDiv.style.transform = 'translateX(0)';
+                alertDiv.style.opacity = '1';
+            });
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                alertDiv.style.transform = 'translateX(120%)';
+                alertDiv.style.opacity = '0';
+                setTimeout(() => {
+                    alertDiv.remove();
+                    if (containerDiv.children.length === 0) {
+                        containerDiv.remove();
+                    }
+                }, 500);
+            }, 5000);
+        }
+
+
         function toggleComments() {
             const hiddenComments = document.getElementById('hiddenComments');
             const toggleButton = document.getElementById('toggleComments');
-            
+
             if (hiddenComments.style.display === 'none') {
                 hiddenComments.style.display = 'block';
                 toggleButton.textContent = 'Sembunyikan Komentar';
@@ -224,11 +427,12 @@
 
             const articleId = likeButton.getAttribute('data-article-id');
             const hasLiked = localStorage.getItem(`liked_${articleId}`);
+            const likeKey = `user_${userId}_berita_${articleId}`;
 
-            if (hasLiked) {
-                likeButton.classList.add('active');
+            if (localStorage.getItem(likeKey)) {
+                alert('Anda sudah menyukai berita ini');
+                return;
             }
-
             const hasViewed = sessionStorage.getItem(`viewed_${articleId}`);
             if (!hasViewed) {
                 incrementViews();
@@ -236,13 +440,85 @@
             }
         });
 
+        function showAlert(message, type = 'error') {
+            // Create container if it doesn't exist
+            let containerDiv = document.querySelector('.alert-container');
+            if (!containerDiv) {
+                containerDiv = document.createElement('div');
+                containerDiv.classList.add('alert-container');
+                containerDiv.style.cssText =
+                    'position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;';
+                document.body.appendChild(containerDiv);
+            }
+
+            // Create alert element
+            const alertDiv = document.createElement('div');
+            const isSuccess = type === 'success';
+            const bgColor = isSuccess ? 'linear-gradient(135deg, #28a745, #20c997)' :
+                'linear-gradient(135deg, #dc3545, #f86d7d)';
+            const borderColor = isSuccess ? '#1e7e34' : '#bd2130';
+            const icon = isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+            alertDiv.style.cssText = `
+        background: ${bgColor};
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        margin-bottom: 10px;
+        border-left: 5px solid ${borderColor};
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        animation: slideIn 0.5s forwards;
+    `;
+
+            // Create alert content
+            alertDiv.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <i class="fas ${icon}" style="font-size: 24px;"></i>
+            <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">${message}</p>
+        </div>
+        <button onclick="this.parentElement.remove()" 
+                style="background: transparent; 
+                       border: none;
+                       color: white;
+                       font-size: 20px;
+                       cursor: pointer;
+                       opacity: 0.8;
+                       padding: 0;
+                       margin-left: 15px;">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+
+            // Add to container
+            containerDiv.appendChild(alertDiv);
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideOut 0.9s forwards';
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 500);
+            }, 5000);
+        }
+
         function incrementLikes(event) {
             event.preventDefault();
 
             const likeButton = document.getElementById('like-button');
             const articleId = likeButton.getAttribute('data-article-id');
+            const userId = '{{ Auth::id() }}';
 
-            if (localStorage.getItem(`liked_${articleId}`)) {
+            if (!userId) {
+                showAlert('Silakan login terlebih dahulu untuk menyukai berita ini', 'error');
+                return;
+            }
+
+            const likeKey = `user_${userId}_berita_${articleId}`;
+            if (localStorage.getItem(likeKey)) {
+                showAlert('Anda sudah menyukai berita ini', 'error');
                 return;
             }
 
@@ -257,20 +533,27 @@
                 })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        if (response.status === 401) {
+                            throw new Error('Silakan login untuk menyukai berita ini');
+                        }
+                        throw new Error('Terjadi kesalahan pada jaringan');
                     }
                     return response.json();
                 })
                 .then(data => {
                     if (data.success) {
                         const likeCount = document.getElementById('like-count');
-                        likeCount.textContent = parseInt(likeCount.textContent) + 1;
-                        localStorage.setItem(`liked_${articleId}`, 'true');
+                        likeCount.textContent = data.likes;
+                        localStorage.setItem(likeKey, 'true');
                         likeButton.classList.add('active');
+                        showAlert('Berhasil menyukai berita', 'success');
+                    } else {
+                        showAlert(data.message || 'Gagal menyukai berita', 'error');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    showAlert(error.message || 'Gagal menyukai berita', 'error');
                 })
                 .finally(() => {
                     setTimeout(() => {
@@ -278,6 +561,7 @@
                     }, 1000);
                 });
         }
+
 
         function incrementViews() {
             const viewButton = document.getElementById('view-button');

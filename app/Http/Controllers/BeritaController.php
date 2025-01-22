@@ -85,12 +85,27 @@ class BeritaController extends Controller
     {
         try {
             $berita = Berita::findOrFail($kd_info);
+            $userId = Auth::id(); // Get logged in user ID
+            
+            // Create a unique key for this user and berita
+            $likeKey = "user_{$userId}_likes_berita_{$kd_info}";
+            
+            // Check if user has already liked
+            if (session()->has($likeKey)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You have already liked this news'
+                ], 400);
+            }
             
             if ($berita->likes === null) {
                 $berita->likes = 0;
             }
             
             $berita->increment('likes');
+            
+            // Mark this berita as liked by this user
+            session()->put($likeKey, true);
             
             return response()->json([
                 'success' => true,

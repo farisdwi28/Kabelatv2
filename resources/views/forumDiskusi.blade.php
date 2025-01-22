@@ -4,6 +4,99 @@
 
 @section('content')
 <x-page-title title="Beranda" pagetitle="Forum Diskusi" maintitle="Forum Diskusi" />
+    <!-- Alert Container -->
+    @if(session('success') || session('error'))
+        <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
+            @if(session('success'))
+                <div style="background: linear-gradient(135deg, #064e3b, #34d399); 
+                            color: white; 
+                            padding: 20px; 
+                            border-radius: 10px; 
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
+                            margin-bottom: 10px; 
+                            display: flex; 
+                            align-items: center; 
+                            justify-content: space-between;
+                            animation: slideIn 0.5s forwards;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-check-circle" style="font-size: 24px;"></i>
+                        <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">{{ session('success') }}</p>
+                    </div>
+                    <button onclick="this.parentElement.remove()" 
+                            style="background: transparent; 
+                                   border: none; 
+                                   color: white; 
+                                   font-size: 20px; 
+                                   cursor: pointer; 
+                                   opacity: 0.8; 
+                                   padding: 0; 
+                                   margin-left: 15px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div style="background: linear-gradient(135deg, #dc3545, #f86d7d); 
+                            color: white; 
+                            padding: 20px; 
+                            border-radius: 10px; 
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
+                            margin-bottom: 10px; 
+                            border-left: 5px solid #bd2130; 
+                            display: flex; 
+                            align-items: center; 
+                            justify-content: space-between;
+                            animation: slideIn 0.5s forwards;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-exclamation-circle" style="font-size: 24px;"></i>
+                        <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">{{ session('error') }}</p>
+                    </div>
+                    <button onclick="this.parentElement.remove()" 
+                            style="background: transparent; 
+                                   border: none; 
+                                   color: white; 
+                                   font-size: 20px; 
+                                   cursor: pointer; 
+                                   opacity: 0.8; 
+                                   padding: 0; 
+                                   margin-left: 15px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            @endif
+        </div>
+
+        <!-- Inline Keyframe Animation -->
+        <style>
+            @keyframes slideIn {
+                from {
+                    transform: translateX(120%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        </style>
+
+        <!-- Auto-remove alerts after 5 seconds -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const alerts = document.querySelectorAll('[style*="animation: slideIn"]');
+                alerts.forEach(alert => {
+                    setTimeout(() => {
+                        alert.style.animation = 'slideOut 0.9s forwards';
+                        setTimeout(() => {
+                            alert.remove();
+                        }, 500);
+                    }, 5000);
+                });
+            });
+        </script>
+    @endif
+
 <div class="container-fluid py-5 px-4">
     <div class="row">
         <!-- Sidebar -->

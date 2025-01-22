@@ -22,7 +22,7 @@
     @if(session('success') || session('error'))
         <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
             @if(session('success'))
-                <div style="background: linear-gradient(135deg, #28a745, #20c997); 
+                <div style="background: linear-gradient(135deg, #064e3b, #34d399); 
                             color: white; 
                             padding: 20px; 
                             border-radius: 10px; 
