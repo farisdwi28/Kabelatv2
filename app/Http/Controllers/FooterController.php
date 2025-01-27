@@ -17,7 +17,7 @@ class FooterController extends Controller
 
         // Get all active communities
         $komunitasList = Komunitas::where('status', 'aktif')
-            ->take(10)
+            ->take(4)
             ->get();
 
         // Share data with all views

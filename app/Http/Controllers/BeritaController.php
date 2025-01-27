@@ -14,7 +14,7 @@ class BeritaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['storeComment', 'like', 'view']);
+        $this->middleware('auth')->only(['storeComment', 'like','unlike', 'view']);
     }
 
     public function listBerita()
@@ -110,6 +110,39 @@ class BeritaController extends Controller
             return response()->json([
                 'success' => true,
                 'likes' => $berita->likes
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating likes: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+    public function unlike(Request $request, $kd_info)
+    {
+        try {
+            $berita = Berita::findOrFail($kd_info);
+            $userId = Auth::id();
+            
+            $likeKey = "user_{$userId}_likes_berita_{$kd_info}";
+            
+            if (!session()->has($likeKey)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You have not liked this news yet'
+                ], 400);
+            }
+            
+            if ($berita->likes > 0) {
+                $berita->decrement('likes');
+            }
+            
+            session()->forget($likeKey);
+            
+            return response()->json([
+                'success' => true,
+                'likes' => $berita->likes,
+                'isLiked' => false
             ]);
         } catch (\Exception $e) {
             return response()->json([

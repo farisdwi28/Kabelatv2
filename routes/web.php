@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/laporan/download/{kd_laporan}', [LaporanController::class, 'download'])->name('laporan.download');  Route::post('/berita/{kd_info}/komentar', [BeritaController::class, 'storeComment'])->name('berita.komentar');
     Route::post('/berita/{kd_info}/like', [BeritaController::class, 'like'])->name('berita.like');
     Route::get('/berita/{kd_info}/check-like', [BeritaController::class, 'checkLike'])->name('berita.checkLike');
+    Route::post('/berita/{kd_info}/unlike', [BeritaController::class, 'unlike'])->name('berita.unlike');
     Route::post('/berita/{kd_info}/view', [BeritaController::class, 'view'])->name('berita.view');
     Route::post('/forumdiskusi/{id}/komentar', [DiskusiController::class, 'storeComment'])->name('diskusi.comment');
     Route::get('/diskusi', [DiskusiController::class, 'create'])->name('diskusi.create'); // Perbaikan pada URL

@@ -41,13 +41,12 @@
                             @endif
                     
                             @if (session('warning'))
-                                <div style="background: linear-gradient(135deg, #b45309, #fbbf24); 
+                                <div style="background: linear-gradient(135deg, #b0ad0c, #b0ad0c); 
                                             color: white; 
                                             padding: 20px; 
                                             border-radius: 10px; 
                                             box-shadow: 0 5px 15px rgba(180, 83, 9, 0.2); 
                                             margin-bottom: 10px; 
-                                            border-left: 5px solid #b45309; 
                                             display: flex; 
                                             align-items: center; 
                                             justify-content: space-between;
@@ -180,7 +179,7 @@
                                 <label for="password" class="form-label">Password Baru</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     id="password" name="password">
-                                <small class="text-muted">Kosongkan jika tidak ingin mengubah password</small>
+                                <small class="text-muted">*Kosongkan jika tidak ingin mengubah password</small>
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

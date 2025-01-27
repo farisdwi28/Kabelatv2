@@ -141,7 +141,7 @@
                         </p>
                         <div class="social-tags">
                             <div class="tags">
-                                <h4>Statistics:</h4>
+                                <h4>Statistik:</h4>
                                 <ul>
                                     <li>
                                         <a href="#" id="like-button" onclick="incrementLikes(event)">
