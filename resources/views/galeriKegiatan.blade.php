@@ -2,7 +2,7 @@
 @section('title', 'Galeri Kegiatan')
 
 @section('content')
-    <x-page-title title="Beranda" pagetitle="Galeri Kegiatan" maintitle="Galeri Kegiatan" />
+    <x-page-title title="Beranda" maintitle="Galeri Kegiatan" />
 
     <div class="case-inner-section-area sp1">
         <div class="container">

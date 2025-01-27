@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <x-page-title title="Beranda" pagetitle="Program Dispusip" maintitle="Program Dispusip" />
+    <x-page-title title="Beranda" maintitle="Program Dispusip" />
 
     <!--===== BLOG AREA STARTS =======-->
     <div class="blog1-scetion-area sp1">

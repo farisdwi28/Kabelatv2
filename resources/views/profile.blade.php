@@ -2,7 +2,8 @@
 @section('title', 'Profile')
 
 @section('content')
-    <div class="container py-5">
+<x-page-title title="Beranda" maintitle="Profile" />
+    <div class="container" style="margin-top: -75px;">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-lg border-0 rounded" style="margin-top: 150px;">

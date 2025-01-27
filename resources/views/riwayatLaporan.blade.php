@@ -2,7 +2,7 @@
 @section('title', 'Riwayat Laporan')
 
 @section('content')
-    <x-page-title title="Beranda" pagetitle="Laporan" maintitle="Riwayat Laporan" />
+    <x-page-title title="Beranda" maintitle="Riwayat Laporan" />
     
     <!-- Alert Container -->
     @if(session('success') || session('error'))

@@ -2,7 +2,7 @@
 @section('title', 'Detail Program Dispusip')
 
 @section('content')
-    <x-page-title title="Beranda" pagetitle="Program Dispusip" maintitle="Detail Program Dispusip" />
+    <x-page-title title="Beranda" maintitle="Detail Program Dispusip" />
 
     <div class="case-single-section-area">
         <div class="container-fluid p-0">

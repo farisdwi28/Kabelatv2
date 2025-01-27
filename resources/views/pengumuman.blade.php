@@ -2,7 +2,7 @@
 @section('title', 'Pengumuman')
 
 @section('content')
-    <x-page-title title="Beranda" pagetitle="Indeks Pengumuman" maintitle="Pengumuman" />
+    <x-page-title title="Beranda" maintitle="Pengumuman" />
 
     <!--===== BLOG AREA STARTS =======-->
     <div class="blog-top-area sp1">

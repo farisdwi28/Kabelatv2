@@ -11,7 +11,7 @@
                 <div class="col-lg-8 mx-auto text-center">
                     <div class="about-inner-header heading9">
                         <h1>Struktur Komunitas</h1>
-                        <a href="index">Beranda <i class="fa-solid fa-angle-right"></i> <span>Struktur Komunitas</span></a>
+                        <a href="/">Beranda</a>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@
                 <div class="col-lg-8 m-auto">
                     <div class="about-inner-header heading9 text-center">
                         <h1>Join Komunitas</h1>
-                        <a href="index">Beranda <i class="fa-solid fa-angle-right"></i> <span>Join Komunitas</span></a>
+                        <a href="index">Beranda</a>
                     </div>
                 </div>
             </div>

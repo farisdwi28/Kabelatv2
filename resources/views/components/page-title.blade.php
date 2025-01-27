@@ -6,9 +6,10 @@
             <div class="col-lg-8 m-auto">
                 <div class="about-inner-header heading9 text-center">
                     <h1>{{ $attributes['maintitle'] }}</h1>
-                    <a href="index">{{ $attributes['title'] }} <i class="fa-solid fa-angle-right"></i> <span>{{ $attributes['pagetitle'] }}</span></a>
+                    <a href="/">{{ $attributes['title'] }} </i> <span>{{ $attributes['pagetitle'] }}</span></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{{-- <i class="fa-solid fa-angle-right"> --}}

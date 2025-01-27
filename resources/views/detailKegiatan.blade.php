@@ -2,7 +2,7 @@
 @section('title', 'Detail Kegiatan')
 
 @section('content')
-<x-page-title title="Beranda" pagetitle="Detail Kegiatan" maintitle="Detail Kegiatan" />
+<x-page-title title="Beranda" maintitle="Detail Kegiatan" />
 
 <div class="case-single-section-area py-5">
     <div class="container">

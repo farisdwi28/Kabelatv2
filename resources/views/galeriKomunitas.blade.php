@@ -2,7 +2,7 @@
 @section('title', 'Komunitas')
 
 @section('content')
-<x-page-title title="Beranda" pagetitle="Galeri Komunitas" maintitle=" Galeri Komunitas" />
+<x-page-title title="Beranda" maintitle=" Galeri Komunitas" />
 <div class="container-fluid py-5">
     <div class="row">
         <!-- Sidebar Section -->

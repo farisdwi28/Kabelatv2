@@ -3,7 +3,7 @@
 @section('title', 'Forum Diskusi')
 
 @section('content')
-<x-page-title title="Beranda" pagetitle="Forum Diskusi" maintitle="Forum Diskusi" />
+<x-page-title title="Beranda" maintitle="Forum Diskusi" />
     <!-- Alert Container -->
     @if(session('success') || session('error'))
         <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">

@@ -13,7 +13,7 @@
                 <div class="col-lg-8 m-auto">
                     <div class="about-inner-header heading9 text-center">
                         <h1>Detail Diskusi</h1>
-                        <a href="index">Beranda <i class="fa-solid fa-angle-right"></i> <span>Detail Diskusi</span></a>
+                        <a href="index">Beranda</a>
                     </div>
                 </div>
             </div>
