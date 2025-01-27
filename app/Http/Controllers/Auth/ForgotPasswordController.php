@@ -65,7 +65,7 @@ class ForgotPasswordController extends Controller
         if (!$user) {
             return response()->json([
                 'success' => false,
-                'message' => 'NIK belum terdaftar sebagai pengguna. Silakan registrasi terlebih dahulu.'
+                'message' => 'NIK belum terdaftar sebagai pengguna. Silahkan registrasi terlebih dahulu.'
             ]);
         }
 
@@ -81,8 +81,8 @@ class ForgotPasswordController extends Controller
     public function reset(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'login' => 'required|string',
-            'password' => 'required|string|min:8|confirmed',
+            'login' => 'required|string', // Bisa berupa username atau email
+            'password' => 'required|string|min:8|confirmed', // Password minimal 8 karakter, wajib sama dengan konfirmasi
         ], [
             'login.required' => 'Username atau email harus diisi.',
             'password.required' => 'Password baru harus diisi.',
@@ -90,6 +90,7 @@ class ForgotPasswordController extends Controller
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ]);
     
+        // Jika validasi gagal, kembalikan dengan pesan error
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)
@@ -98,19 +99,22 @@ class ForgotPasswordController extends Controller
     
         // Cek apakah input adalah email atau username
         $field = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        
+    
+        // Cari pengguna berdasarkan email atau username
         $user = User::where($field, $request->login)->first();
     
         if (!$user) {
+            // Jika pengguna tidak ditemukan, kembalikan dengan pesan error
             return back()
                 ->with('error', 'Username atau email tidak ditemukan.')
                 ->withInput($request->except('password', 'password_confirmation'));
         }
     
-        // Update password
+        // Update password jika semua validasi lolos
         $user->password = Hash::make($request->password);
         $user->save();
     
+        // Berikan pesan sukses dan arahkan ke halaman login
         return redirect()
             ->route('login')
             ->with('success', 'Password berhasil direset. Silakan login dengan password baru Anda.');

@@ -129,13 +129,15 @@
                             });
                         </script>
                     @endif
-                        <div class="text-center mb-4">
+                        <div class="text-center mb-3">
                             <img id="profilePreview"
                                 src="{{ $penduduk->foto_pen ? asset('storage/images/profiles/' . $penduduk->foto_pen) : asset('default-avatar.png') }}"
                                 alt="Profile Photo" class="rounded-circle img-thumbnail"
                                 style="width: 120px; height: 120px; object-fit: cover;">
                         </div>
-
+                        <div class="mb-2 text-center">
+                            <small class="text-muted">*Ukuran file maksimal 2MB.</small> <!-- Informasi ukuran file -->
+                        </div>
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3 text-center">
@@ -145,6 +147,7 @@
                                 <input type="file" id="profile_photo" name="profile_photo" class="form-control d-none"
                                     accept="image/*">
                             </div>
+                            
 
                             <!-- Rest of the form fields remain the same -->
 

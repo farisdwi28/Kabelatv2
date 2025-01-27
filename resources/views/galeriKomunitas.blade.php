@@ -27,7 +27,7 @@
 
             <!-- Scrollable Community List Container -->
             <div class="community-container"
-                 style="max-height: 850px; 
+                 style="max-height: 800px; 
                         overflow-y: scroll; 
                         padding-right: 15px; 
                         min-height: 700px; 

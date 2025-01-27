@@ -15,7 +15,6 @@
                             border-radius: 10px; 
                             box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
                             margin-bottom: 10px; 
-                            border-left: 5px solid #1e7e34; 
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between;
