@@ -12,7 +12,7 @@
                         @if (session('success') || session('error') || session('warning'))
                         <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
                             @if (session('success'))
-                                <div style="background: linear-gradient(135deg, #064e3b, #34d399); 
+                                <div style="background: linear-gradient(135deg, #064e3b, #149f6c); 
                                             color: white; 
                                             padding: 20px; 
                                             border-radius: 10px; 

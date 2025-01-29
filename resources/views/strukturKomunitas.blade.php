@@ -26,7 +26,7 @@
             </aside>
 
             <!-- Main Content -->
-            <div class="col-lg-6 col-md-8 offset-lg-0 offset-md-1 ml-lg-n8 ml-0" style="margin-left: -100px;">
+            <div class="col-lg-6 col-md-8 offset-lg-0 offset-md-1 ml-lg-n8 ml-0" style="margin-left: -75px;">
                 <div class="card shadow-sm border-0 rounded">
                     <div class="card-body p-4 text-center">
                         <div class="mb-4">

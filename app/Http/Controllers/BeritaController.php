@@ -6,7 +6,7 @@ use App\Models\Berita;
 use App\Models\KomentarInfo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log; 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -14,7 +14,7 @@ class BeritaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['storeComment', 'like','unlike', 'view']);
+        $this->middleware('auth')->only(['storeComment', 'like', 'unlike', 'view']);
     }
 
     public function listBerita()
@@ -85,12 +85,10 @@ class BeritaController extends Controller
     {
         try {
             $berita = Berita::findOrFail($kd_info);
-            $userId = Auth::id(); // Get logged in user ID
+            $userId = Auth::id();
             
-            // Create a unique key for this user and berita
             $likeKey = "user_{$userId}_likes_berita_{$kd_info}";
             
-            // Check if user has already liked
             if (session()->has($likeKey)) {
                 return response()->json([
                     'success' => false,
@@ -103,55 +101,85 @@ class BeritaController extends Controller
             }
             
             $berita->increment('likes');
-            
-            // Mark this berita as liked by this user
             session()->put($likeKey, true);
             
             return response()->json([
                 'success' => true,
-                'likes' => $berita->likes
+                'likes' => $berita->likes,
+                'isLiked' => true
             ]);
         } catch (\Exception $e) {
+            Log::error('Error in like method: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Error updating likes: ' . $e->getMessage()
             ], 500);
         }
     }
+
     public function unlike(Request $request, $kd_info)
     {
         try {
+            // Validate user authentication
+            if (!Auth::check()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User must be logged in to unlike'
+                ], 401);
+            }
+
+            // Find the news article
             $berita = Berita::findOrFail($kd_info);
             $userId = Auth::id();
             
+            // Create the unique session key for this user and article
             $likeKey = "user_{$userId}_likes_berita_{$kd_info}";
             
+            // Check if the user has actually liked the article
             if (!session()->has($likeKey)) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'You have not liked this news yet'
+                    'message' => 'You have not liked this article yet'
                 ], 400);
             }
             
+            // Decrement likes count if it's greater than 0
             if ($berita->likes > 0) {
                 $berita->decrement('likes');
+                
+                // Remove the like session
+                session()->forget($likeKey);
+                
+                // Save changes
+                $berita->save();
+                
+                return response()->json([
+                    'success' => true,
+                    'likes' => $berita->likes,
+                    'isLiked' => false,
+                    'message' => 'Successfully unliked the article'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Like count is already at 0'
+                ], 400);
             }
-            
-            session()->forget($likeKey);
-            
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::error('Article not found in unlike method: ' . $e->getMessage());
             return response()->json([
-                'success' => true,
-                'likes' => $berita->likes,
-                'isLiked' => false
-            ]);
+                'success' => false,
+                'message' => 'Article not found'
+            ], 404);
         } catch (\Exception $e) {
+            Log::error('Error in unlike method: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Error updating likes: ' . $e->getMessage()
             ], 500);
         }
     }
-    
+
     public function view(Request $request, $kd_info)
     {
         try {
@@ -168,6 +196,7 @@ class BeritaController extends Controller
                 'views' => $berita->views
             ]);
         } catch (\Exception $e) {
+            Log::error('Error in view method: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Error updating views: ' . $e->getMessage()
