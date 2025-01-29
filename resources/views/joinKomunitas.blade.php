@@ -22,13 +22,12 @@
     @if(session('success') || session('error'))
         <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
             @if(session('success'))
-                <div style="background: linear-gradient(135deg, #064e3b, #34d399); 
+                <div style="background: linear-gradient(135deg, #064e3b, #149f6c); 
                             color: white; 
                             padding: 20px; 
                             border-radius: 10px; 
                             box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
                             margin-bottom: 10px; 
-                            border-left: 5px solid #1e7e34; 
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between;
@@ -52,13 +51,12 @@
             @endif
 
             @if(session('error'))
-                <div style="background: linear-gradient(135deg, #dc3545, #f86d7d); 
+                <div style="background: linear-gradient(135deg,  #7b1f1f, #e63946); 
                             color: white; 
                             padding: 20px; 
                             border-radius: 10px; 
                             box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
                             margin-bottom: 10px; 
-                            border-left: 5px solid #bd2130; 
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between;
