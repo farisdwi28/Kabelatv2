@@ -2,19 +2,19 @@
 @section('title', $berita->judul_berita)
 
 @section('content')
-    <x-page-title title="Beranda" maintitle="Detail Berita" />
+    <x-page-title title="Beranda" pagetitle="Berita" maintitle="Detail Berita" />
 
     <!-- Alert Container -->
     @if (session('success') || session('error'))
         <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
             @if (session('success'))
                 <div
-                    style="background: linear-gradient(135deg, #064e3b, #149f6c); 
+                    style="background: linear-gradient(135deg, 064e3b, #149f6c); 
                             color: white; 
                             padding: 20px; 
                             border-radius: 10px; 
                             box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
-                            margin-bottom: 10px; 
+                            margin-bottom: 10px;  
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between;
@@ -39,13 +39,12 @@
 
             @if (session('error'))
                 <div
-                    style="background: linear-gradient(135deg, #dc3545, #f86d7d); 
+                    style="background: linear-gradient(135deg, #7b1f1f, #e63946); 
                             color: white; 
                             padding: 20px; 
                             border-radius: 10px; 
                             box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
                             margin-bottom: 10px; 
-                            border-left: 5px solid #bd2130; 
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between;
@@ -140,20 +139,13 @@
                         </p>
                         <div class="social-tags">
                             <div class="tags">
-                                <h4>Statistik:</h4>
+                                <h4>Statistics:</h4>
                                 <ul>
                                     <li>
-                                        @auth
-                                            <a href="#" id="like-button" onclick="toggleLike(event)" class="like-btn">
-                                                <i class="fa-solid fa-thumbs-up" id="like-icon"></i>
-                                                <span id="like-count">{{ $berita->likes }}</span>
-                                            </a>
-                                        @else
-                                            <a href="#" id="like-button" onclick="showLoginAlert()">
-                                                <i class="fa-solid fa-thumbs-up"></i>
-                                                <span id="like-count">{{ $berita->likes }}</span>
-                                            </a>
-                                        @endauth
+                                        <a href="#" id="like-button" onclick="incrementLikes(event)">
+                                            <i class="fa-solid fa-thumbs-up"></i>
+                                            <span id="like-count">{{ $berita->likes }}</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="#" id="view-button">
@@ -338,9 +330,9 @@
             // Create alert element
             const alertDiv = document.createElement('div');
             const isSuccess = type === 'success';
-            const bgColor = isSuccess ? 'linear-gradient(135deg, #28a745, #20c997)' :
-                'linear-gradient(135deg, #dc3545, #f86d7d)';
-            const borderColor = isSuccess ? '#1e7e34' : '#bd2130';
+            const bgColor = isSuccess ? 'linear-gradient(135deg, #064e3b, #149f6c)' :
+                'linear-gradient(135deg, #7b1f1f, #e63946)';
+            const borderColor = isSuccess ? '' : '#';
             const icon = isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle';
 
             alertDiv.style.cssText = `
@@ -431,18 +423,14 @@
                 viewButton.setAttribute('data-article-id', '{{ $berita->kd_info }}');
             }
 
-            const articleId = '{{ $berita->kd_info }}';
-            const userId = '{{ Auth::id() }}';
-            const likeKey = `user_${userId}_likes_berita_${articleId}`;
+            const articleId = likeButton.getAttribute('data-article-id');
+            const hasLiked = localStorage.getItem(`liked_${articleId}`);
+            const likeKey = `user_${userId}_berita_${articleId}`;
 
-            // Check if user has liked the article
-            if (sessionStorage.getItem(likeKey)) {
-                const likeIcon = document.querySelector('#like-icon');
-                if (likeIcon) {
-                    likeIcon.style.color = '#0d6efd'; // or your preferred "liked" color
-                }
+            if (localStorage.getItem(likeKey)) {
+                alert('Anda sudah menyukai berita ini');
+                return;
             }
-
             const hasViewed = sessionStorage.getItem(`viewed_${articleId}`);
             if (!hasViewed) {
                 incrementViews();
@@ -463,21 +451,12 @@
 
             // Create alert element
             const alertDiv = document.createElement('div');
-            let bgColor, borderColor, icon;
-            switch (type) {
-                case 'success':
-                    bgColor = 'linear-gradient(135deg,  #064e3b, #149f6c)';
-                    icon = 'fa-check-circle';
-                    break;
-                case 'unlike':
-                    bgColor = 'linear-gradient(135deg, #7b1f1f, #e63946)'; 
-                    icon = 'fa-times-circle';
-                    break;
-                default: // error
-                    bgColor = 'linear-gradient(135deg, #dc3545, #f86d7d)';
-                    borderColor = '#bd2130';
-                    icon = 'fa-exclamation-circle';
-            }
+            const isSuccess = type === 'success';
+            const bgColor = isSuccess ? 'linear-gradient(135deg, 064e3b, #149f6c)' :
+                'linear-gradient(135deg, #7b1f1f, #e63946)';
+            const borderColor = isSuccess ? '' : '';
+            const icon = isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle';
+
             alertDiv.style.cssText = `
         background: ${bgColor};
         color: white;
@@ -523,35 +502,25 @@
             }, 5000);
         }
 
-        function toggleLike(event) {
-            event.preventDefault();
-
-            const likeButton = document.getElementById('like-button');
-            const articleId = likeButton.getAttribute('data-article-id');
-            const userId = '{{ Auth::id() }}';
-            const likeKey = `user_${userId}_likes_berita_${articleId}`;
-
-            if (!userId) {
-                showAlert('Silakan login terlebih dahulu untuk menyukai berita ini', 'error');
-                return;
-            }
-
-            likeButton.style.pointerEvents = 'none';
-
-            if (!sessionStorage.getItem(likeKey)) {
-                incrementLikes(event);
-            } else {
-                decrementLikes(event);
-            }
-        }
-
         function incrementLikes(event) {
             event.preventDefault();
 
             const likeButton = document.getElementById('like-button');
             const articleId = likeButton.getAttribute('data-article-id');
             const userId = '{{ Auth::id() }}';
-            const likeKey = `user_${userId}_likes_berita_${articleId}`;
+
+            if (!userId) {
+                showAlert('Silakan login terlebih dahulu untuk menyukai berita ini', 'error');
+                return;
+            }
+
+            const likeKey = `user_${userId}_berita_${articleId}`;
+            if (localStorage.getItem(likeKey)) {
+                showAlert('Anda sudah menyukai berita ini', 'error');
+                return;
+            }
+
+            likeButton.style.pointerEvents = 'none';
 
             fetch(`/berita/${articleId}/like`, {
                     method: "POST",
@@ -572,11 +541,10 @@
                 .then(data => {
                     if (data.success) {
                         const likeCount = document.getElementById('like-count');
-                        const likeIcon = document.querySelector('#like-icon');
                         likeCount.textContent = data.likes;
-                        likeIcon.style.color = '#0d6efd';
-                        sessionStorage.setItem(likeKey, 'true');
-                        showAlert('Anda berhasil menyukai berita', 'success');
+                        localStorage.setItem(likeKey, 'true');
+                        likeButton.classList.add('active');
+                        showAlert('Berhasil menyukai berita', 'success');
                     } else {
                         showAlert(data.message || 'Gagal menyukai berita', 'error');
                     }
@@ -592,52 +560,6 @@
                 });
         }
 
-        function decrementLikes(event) {
-            event.preventDefault();
-
-            const likeButton = document.getElementById('like-button');
-            const articleId = likeButton.getAttribute('data-article-id');
-            const userId = '{{ Auth::id() }}';
-            const likeKey = `user_${userId}_likes_berita_${articleId}`;
-
-            fetch(`/berita/${articleId}/unlike`, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        if (response.status === 401) {
-                            throw new Error('Silakan login untuk unlike berita ini');
-                        }
-                        throw new Error('Terjadi kesalahan pada jaringan');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success) {
-                        const likeCount = document.getElementById('like-count');
-                        const likeIcon = document.querySelector('#like-icon');
-                        likeCount.textContent = data.likes;
-                        likeIcon.style.color = ''; // Reset to default color
-                        sessionStorage.removeItem(likeKey);
-                        showAlert('Anda batal menyukai berita', 'unlike');
-                    } else {
-                        showAlert(data.message || 'Gagal unlike berita', 'error');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    showAlert(error.message || 'Gagal unlike berita', 'error');
-                })
-                .finally(() => {
-                    setTimeout(() => {
-                        likeButton.style.pointerEvents = 'auto';
-                    }, 1000);
-                });
-        }
 
         function incrementViews() {
             const viewButton = document.getElementById('view-button');
