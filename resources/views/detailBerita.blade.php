@@ -139,7 +139,7 @@
                         </p>
                         <div class="social-tags">
                             <div class="tags">
-                                <h4>Statistics:</h4>
+                                <h4>Statistik:</h4>
                                 <ul>
                                     <li>
                                         <a href="#" id="like-button" onclick="incrementLikes(event)">
@@ -452,7 +452,7 @@
             // Create alert element
             const alertDiv = document.createElement('div');
             const isSuccess = type === 'success';
-            const bgColor = isSuccess ? 'linear-gradient(135deg, 064e3b, #149f6c)' :
+            const bgColor = isSuccess ? 'linear-gradient(135deg, #064e3b, #149f6c)' :
                 'linear-gradient(135deg, #7b1f1f, #e63946)';
             const borderColor = isSuccess ? '' : '';
             const icon = isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle';
