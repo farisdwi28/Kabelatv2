@@ -62,7 +62,7 @@
 
                         <div class="carousel-inner rounded">
                             <div class="carousel-item active">
-                                <img src="{{ $activity->getMainPhotoUrl() }}" 
+                                <img src="{{ asset('storage/' . $activity->photos->first()->foto_path) }}" 
                                      alt="Foto {{ $activity->nm_keg }}" 
                                      class="d-block w-100" 
                                      style="height: 400px; object-fit: cover;"
@@ -71,7 +71,7 @@
                             
                             @foreach($activity->photos->skip(1) as $photo)
                                 <div class="carousel-item">
-                                    <img src="{{ $photo->getPhotoUrl() }}" 
+                                    <img src="{{ asset('storage/' . $photo->foto_path) }}" 
                                          class="d-block w-100"
                                          alt="Foto tambahan {{ $activity->nm_keg }}" 
                                          style="height: 400px; object-fit: cover;"
@@ -139,7 +139,7 @@
                         });
                     </script>
                 @else
-                    <img src="{{ $activity->getMainPhotoUrl() }}" 
+                    <img src="{{ asset('storage/' . $activity->photos->first()->foto_path) }}" 
                          alt="Foto {{ $activity->nm_keg }}" 
                          class="d-block w-100 rounded" 
                          style="height: 400px; object-fit: cover;"

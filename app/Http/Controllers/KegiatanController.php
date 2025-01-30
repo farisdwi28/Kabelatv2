@@ -11,23 +11,19 @@ class KegiatanController extends Controller
 {
     public function index(Request $request)
     {
-        $activeTab = $request->query('tab', 'dispusip'); // Default to dispusip tab
-        $perPage = 6; // Items per page
-
-
+        $activeTab = $request->query('tab', 'dispusip');
         $kegiatanDispusip = collect([]);
         $kegiatanKomunitas = collect([]);
 
         if ($activeTab === 'dispusip') {
             $kegiatanDispusip = Kegiatan::with('photos')
                 ->orderBy('tgl_mulai', 'desc')
-                ->paginate(6); // Pastikan menggunakan paginate, bukan get
+                ->paginate(6);
         } else {
             $kegiatanKomunitas = KegiatanKomunitas::with('photos')
                 ->orderBy('tgl_mulai', 'desc')
-                ->paginate(6); // Pastikan menggunakan paginate, bukan get
+                ->paginate(6);
         }
-        
 
         return view('galeriKegiatan', compact('kegiatanDispusip', 'kegiatanKomunitas', 'activeTab'));
     }
@@ -42,10 +38,12 @@ class KegiatanController extends Controller
 
         return view('detailKegiatan', compact('activity'));
     }
+
     public function photos()
     {
         return $this->hasMany(FotoKegiatan::class, 'kd_kegiatan', 'kd_kegiatan');
     }
+
     public function footerGaleri()
     {
         $kegiatanDispusip = Kegiatan::with('photos')
