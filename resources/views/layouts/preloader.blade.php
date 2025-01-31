@@ -2,7 +2,7 @@
 <div class="preloader">
   <div class="loading-container">
     <div class="loading"></div>
-    <div id="loading-icon"><img src="{{ URL::asset('build/img/logo/preloader.png') }}" alt=""></div>
+    <div id="loading-icon"> <img src="{{ URL::asset('build/img/logo/logo kabelat.png') }}" class="img-fluid" style="max-width: 100px;" alt="Logo"></div>
   </div>
 </div>
 <!--===== PRELOADER ENDS =======-->
