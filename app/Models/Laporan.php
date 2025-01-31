@@ -24,6 +24,7 @@ class Laporan extends Model
         'status_periksa',
         'file',
         'kd_member',
+        'alasan_penolakan' 
     ];
     protected $dates = ['tgl_dibuat'];
     // Model Laporan
