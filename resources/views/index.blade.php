@@ -47,34 +47,26 @@
                 <a href="">
                     <div class="carousel-item active" data-bs-interval="10000">
                         <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100"
-                            alt="...">
+                            alt="..."
+                            style="object-fit: cover; height: 400px; @media (max-width: 768px) { height: 100px !important; object-fit: contain !important; }">
                         <div class="carousel-caption">
                             <h1></h1>
                             <p class="d-none d-md-block"></p>
                         </div>
                     </div>
                 </a>
-                <a href="">
+                @foreach($carouselPrograms as $program)
+                <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
                     <div class="carousel-item" data-bs-interval="2000">
-                        <img src="{{ URL::asset('build/img/all-images/carousel2.png') }}" class="d-block w-100"
-                            alt="...">
+                        <img src="{{ $program->sampul_program }}" class="d-block w-100" 
+                            alt="{{ $program->nm_program }}"
+                            style="object-fit: cover; height: 400px; @media (max-width: 768px) { height: 300px !important; }">
                         <div class="carousel-caption">
-                            <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
-                            <p class="d-none d-md-block">Meriahkan Sasakala Dongeng Bandung Bersama Ki Bedas!.</p>
+                            <h1 class="responsive-heading">{{ $program->nm_program }}</h1>
                         </div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="carousel-item" data-bs-interval="1000">
-                        <img src="{{ URL::asset('build/img/all-images/carousel1.png') }}" class="d-block w-100"
-                            alt="...">
-
-                        <div class="carousel-caption">
-                            <h1>Lomba Mendongeng Dan Bertutur Cerita Daerah</h1>
-                            <p class="d-none d-md-block">Meriahkan Sasakala Dongeng Bandung Bersama Ki Bedas!.</p>
-                        </div>
-                    </div>
-                </a>
+                @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

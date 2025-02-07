@@ -11,6 +11,13 @@ class HomepageController extends Controller
 {
     public function index()
     {
+        // Mengambil data Program Dispusip untuk carousel dengan status 'aktif'
+        $carouselPrograms = ProgramDispusip::where('status_program', 'aktif')
+            ->whereNotNull('sampul_program') // Memastikan program memiliki gambar
+            ->orderBy('tanggal_dibuat', 'desc')
+            ->take(3)
+            ->get();
+
         // Mengambil data Program Dispusip dengan status 'aktif'
         $programs = ProgramDispusip::where('status_program', 'aktif')
             ->orderBy('tanggal_dibuat', 'desc')
@@ -27,6 +34,6 @@ class HomepageController extends Controller
         $komunitasList = Komunitas::take(5)->get();
 
         // Mengembalikan data ke view homepage
-        return view('index', compact('programs', 'News', 'komunitasList'));
+        return view('index', compact('carouselPrograms','programs', 'News', 'komunitasList'));
     }
 }

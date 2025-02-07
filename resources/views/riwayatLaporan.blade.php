@@ -172,7 +172,7 @@
                                     style="transition: transform 0.3s ease;"></button>
                         </div>
                         <div class="modal-body p-4">
-                            <div style="background: #f8f9fa;
+                            <div style="background: #eff2f5;
                                       padding: 1.5rem;
                                       border-radius: 10px;">
                                 <p class="mb-0">{{ $L->alasan_penolakan ?: 'Tidak ada alasan penolakan yang dicantumkan.' }}</p>

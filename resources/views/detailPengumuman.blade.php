@@ -12,11 +12,13 @@
                     <div class="row align-items-center">
                         <div class="col-lg-4">
                             <div class="case-single-hedaer heading2">
-                                <h2>{{ $pengumuman->judul_pengumuman }}</h2>
+                                <h3>{{ $pengumuman->judul_pengumuman }}</h3>
                                 <div class="case-others-area">
                                     <ul>
-                                        <li><span>Penulis:</span>{{ $pengumuman->author }}</li>
-                                        <li><span>Tanggal:</span>{{ \Carbon\Carbon::parse($pengumuman->tanggal_dibuat)->format('d F Y') }}</li>
+                                        <li><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt=""
+                                            class="me-2">{{ $pengumuman->author }}</li>
+                                        <li><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt=""
+                                            class="me-2">{{ \Carbon\Carbon::parse($pengumuman->tanggal_dibuat)->format('d F Y') }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -45,7 +47,7 @@
                 <div class="case-pera-area">
                     <h2>Rincian Pengumuman:</h2>       
                     <br>                
-                    <p class="text-black" style="font-size: 25px;">{{ $pengumuman->isi_pengumuman }}</p>
+                    <p class="text-black" style="font-size: 20px;">{{ $pengumuman->isi_pengumuman }}</p>
                 </div>
             </div>
         </div>
