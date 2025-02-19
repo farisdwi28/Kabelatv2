@@ -118,7 +118,7 @@
                                     <a href="#" class="d-flex align-items-center">
                                         <img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt=""
                                             class="me-2">
-                                        {{ $berita->author }}
+                                        {{ str_replace(['[', ']', '"'], '', trim($berita->author)) }}
                                     </a>
                                 </li>
                             </ul>

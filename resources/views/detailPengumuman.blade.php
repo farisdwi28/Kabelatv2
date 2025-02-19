@@ -16,7 +16,7 @@
                                 <div class="case-others-area">
                                     <ul>
                                         <li><img src="{{ URL::asset('build/img/icons/contact1.svg') }}" alt=""
-                                            class="me-2">{{ $pengumuman->author }}</li>
+                                            class="me-2"> {{ str_replace(['[', ']', '"'], '', trim($pengumuman->author)) }}</li>
                                         <li><img src="{{ URL::asset('build/img/icons/calender1.svg') }}" alt=""
                                             class="me-2">{{ \Carbon\Carbon::parse($pengumuman->tanggal_dibuat)->format('d F Y') }}</li>
                                     </ul>
