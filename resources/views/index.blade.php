@@ -34,7 +34,8 @@
         </div>
     </div> --}}
     <div class="hero1-section-area">
-        <div id="carouselExampleDark" class="carousel carousel-light slide" data-bs-ride="carousel">
+        <div id="carouselExampleDark" class="carousel carousel-light slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <!-- Carousel Indicators -->
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -43,22 +44,31 @@
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
             </div>
+    
+            <!-- Carousel Items -->
             <div class="carousel-inner" data-aos="fade-left" data-aos-duration="1200">
+                <!-- Default Slide -->
                 <a href="">
-                    <div class="carousel-item active" data-bs-interval="10000">
-                        <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100" alt="..."
-                            style="object-fit: cover; height: 400px; @media (max-width: 768px) { height: 100px !important; object-fit: contain !important; }">
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <div class="carousel-image-container" style="height: 450px; overflow: hidden; position: relative;">
+                            <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100" alt="..."
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
                         <div class="carousel-caption">
                             <h1></h1>
                             <p class="d-none d-md-block"></p>
                         </div>
                     </div>
                 </a>
+    
+                <!-- Dynamic Slides from $carouselPrograms -->
                 @foreach ($carouselPrograms as $program)
                     <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img src="{{ $program->sampul_program }}" class="d-block w-100" alt="{{ $program->nm_program }}"
-                                style="object-fit: cover; height: 400px; @media (max-width: 768px) { height: 300px !important; }">
+                        <div class="carousel-item" data-bs-interval="3000">
+                            <div class="carousel-image-container" style="height: 450px; overflow: hidden; position: relative;">
+                                <img src="{{ $program->sampul_program }}" class="d-block w-100" alt="{{ $program->nm_program }}"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
                             <div class="carousel-caption">
                                 <h1 class="responsive-heading">{{ $program->nm_program }}</h1>
                             </div>
@@ -66,6 +76,8 @@
                     </a>
                 @endforeach
             </div>
+    
+            <!-- Carousel Controls -->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -75,6 +87,16 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+    </div>
+    
+    <!-- Responsive Styles for Mobile -->
+    <style>
+        @media (max-width: 768px) {
+            .carousel-image-container {
+                height: 150px !important;
+            }
+        }
+    </style>
 
         {{-- <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -294,43 +316,43 @@
             </div>
             <div class="row">
                 @if (count($programs) > 0)
-                <div class="col-12 col-md-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="testimonials-slider-area owl-carousel">
-                        @foreach ($programs->take(3) as $program)
-                            <div class="testimonial-boxarea shadow-lg rounded-4 p-4">
-                                <div class="row align-items-center">
-                                    <div class="col-12 col-lg-5">
-                                        <div class="pera" style="min-height: 150px;">
-                                            <p>{{ Str::limit($program->tentang_program, 150) }}</p>
-                                            <div class="space100"></div>
-                                            <div class="space30"></div>
-                                            <div class="list-area">
-                                                <div class="list">
-                                                    <a style="font-size: 1.25rem;"
-                                                        href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                                                        {{ $program->nm_program }}
-                                                    </a>
+                    <div class="col-12 col-md-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="testimonials-slider-area owl-carousel">
+                            @foreach ($programs->take(3) as $program)
+                                <div class="testimonial-boxarea shadow-lg rounded-4 p-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-lg-5">
+                                            <div class="pera" style="min-height: 150px;">
+                                                <p>{{ Str::limit($program->tentang_program, 150) }}</p>
+                                                <div class="space100"></div>
+                                                <div class="space30"></div>
+                                                <div class="list-area">
+                                                    <div class="list">
+                                                        <a style="font-size: 1.25rem;"
+                                                            href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                                            {{ $program->nm_program }}
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-lg-7 text-center">
-                                        <div class="images">
-                                            <img src="{{ $program->sampul_program }}" alt="{{ $program->nm_program }}"
-                                                class="img-fluid rounded-3"
-                                                style="object-fit: cover; width: 100%; height: 200px;">
+                                        <div class="col-12 col-lg-7 text-center">
+                                            <div class="images">
+                                                <img src="{{ $program->sampul_program }}" alt="{{ $program->nm_program }}"
+                                                    class="img-fluid rounded-3"
+                                                    style="object-fit: cover; width: 100%; height: 200px;">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                </div>
                 @else
-                <div class="col-lg-12 text-center">
-                    <p>Tidak ada Program</p>
-                </div>
-            @endif
+                    <div class="col-lg-12 text-center">
+                        <p>Tidak ada Program</p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -544,19 +566,19 @@
     <div class="testimonial1-section-area sp6">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 m-auto">
-                    <div class="testimonial-header heading2 text-center">
-                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                            class="star2 keyframe5">
-                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                            class="star3 keyframe5">
-                        <h2 class="text-anime-style-3">Forum Komunitas</h2>
-                        <p data-aos="fade-up" data-aos-duration="1000">Jadilah bagian dari komunitas kami dan nikmati
-                            akses eksklusif ke berbagai diskusi, event, dan kolaborasi.<br class="d-md-block d-none">
-                            Bergabung sekarang untuk memperluas jaringan, belajar dari yang lain, dan berbagi pengalaman
-                            Anda.</p>
+                    <div class="col-lg-12 m-auto">
+                        <div class="testimonial-header heading2 text-center">
+                            <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                                class="star2 keyframe5">
+                            <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                                class="star3 keyframe5">
+                            <h2 class="text-anime-style-3">Forum Komunitas</h2>
+                            <p data-aos="fade-up" data-aos-duration="1000">Jadilah bagian dari komunitas kami dan nikmati
+                                akses eksklusif ke berbagai diskusi, event, dan kolaborasi.<br class="d-md-block d-none">
+                                Bergabung sekarang untuk memperluas jaringan, belajar dari yang lain, dan berbagi pengalaman
+                                Anda.</p>
+                        </div>
                     </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
