@@ -293,6 +293,7 @@
                 </div>
             </div>
             <div class="row">
+                @if (count($programs) > 0)
                 <div class="col-12 col-md-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
                     <div class="testimonials-slider-area owl-carousel">
                         @foreach ($programs->take(3) as $program)
@@ -325,6 +326,11 @@
                         @endforeach
                     </div>
                 </div>
+                @else
+                <div class="col-lg-12 text-center">
+                    <p>Tidak ada Program</p>
+                </div>
+            @endif
             </div>
         </div>
     </div>
