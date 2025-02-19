@@ -46,8 +46,7 @@
             <div class="carousel-inner" data-aos="fade-left" data-aos-duration="1200">
                 <a href="">
                     <div class="carousel-item active" data-bs-interval="10000">
-                        <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100"
-                            alt="..."
+                        <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100" alt="..."
                             style="object-fit: cover; height: 400px; @media (max-width: 768px) { height: 100px !important; object-fit: contain !important; }">
                         <div class="carousel-caption">
                             <h1></h1>
@@ -55,17 +54,16 @@
                         </div>
                     </div>
                 </a>
-                @foreach($carouselPrograms as $program)
-                <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img src="{{ $program->sampul_program }}" class="d-block w-100" 
-                            alt="{{ $program->nm_program }}"
-                            style="object-fit: cover; height: 400px; @media (max-width: 768px) { height: 300px !important; }">
-                        <div class="carousel-caption">
-                            <h1 class="responsive-heading">{{ $program->nm_program }}</h1>
+                @foreach ($carouselPrograms as $program)
+                    <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img src="{{ $program->sampul_program }}" class="d-block w-100" alt="{{ $program->nm_program }}"
+                                style="object-fit: cover; height: 400px; @media (max-width: 768px) { height: 300px !important; }">
+                            <div class="carousel-caption">
+                                <h1 class="responsive-heading">{{ $program->nm_program }}</h1>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
@@ -298,39 +296,39 @@
                 <div class="col-12 col-md-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
                     <div class="testimonials-slider-area owl-carousel">
                         @foreach ($programs->take(3) as $program)
-                        <div class="testimonial-boxarea shadow-lg rounded-4 p-4">
-                            <div class="row align-items-center">
-                                <div class="col-12 col-lg-5">
-                                    <div class="pera" style="min-height: 150px;">
-                                        <p>{{ Str::limit($program->tentang_program, 150) }}</p>
-                                        <div class="space100"></div>
-                                        <div class="space30"></div>
-                                        <div class="list-area">
-                                            <div class="list">
-                                                <a style="font-size: 1.25rem;" href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                                                    {{ $program->nm_program }}
-                                                </a>
+                            <div class="testimonial-boxarea shadow-lg rounded-4 p-4">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="pera" style="min-height: 150px;">
+                                            <p>{{ Str::limit($program->tentang_program, 150) }}</p>
+                                            <div class="space100"></div>
+                                            <div class="space30"></div>
+                                            <div class="list-area">
+                                                <div class="list">
+                                                    <a style="font-size: 1.25rem;"
+                                                        href="{{ route('programdispusip.detail', $program->kd_program) }}">
+                                                        {{ $program->nm_program }}
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-lg-7 text-center">
-                                    <div class="images">
-                                        <img src="{{ $program->sampul_program }}" 
-                                            alt="{{ $program->nm_program }}" 
-                                            class="img-fluid rounded-3"
-                                            style="object-fit: cover; width: 100%; height: 200px;">
+                                    <div class="col-12 col-lg-7 text-center">
+                                        <div class="images">
+                                            <img src="{{ $program->sampul_program }}" alt="{{ $program->nm_program }}"
+                                                class="img-fluid rounded-3"
+                                                style="object-fit: cover; width: 100%; height: 200px;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!--===== TESTIMONIAL AREA ENDS =======-->
 
     <!--===== SERVICE AREA STARTS =======-->
@@ -339,8 +337,7 @@
             <div class="row">
                 <div class="col-lg-12 m-auto">
                     <div class="service2-header heading2 text-center">
-                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                            class="star2 keyframe5">
+                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt="" class="star2 keyframe5">
                         <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
                             class="star3 keyframe5">
                         <h2 class="text-anime-style-3">Berita Terkini</h2>
@@ -350,56 +347,69 @@
                 </div>
             </div>
             <div class="row">
-                <!-- Berita Utama -->
-                <div class="col-lg-7">
-                    <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000" style="margin-bottom: 30px;">
-                        <div class="img1 position-relative">
-                          <img src="{{ $News[0]->foto_berita ?? URL::asset('build/img/all-images/default-news.png') }}" 
-                                 alt="{{ $News[0]->judul_berita }}" 
-                                 style="width: 100%; height: 300px; object-fit: cover;">
-                        </div>
-                        <div class="content-area position-absolute bottom-0 start-0 p-3 text-white text-white">
-                            <h5 class="d-lg-none" style="color: white;">{{ \Carbon\Carbon::parse($News[0]->tanggal_dibuat)->format('d M Y') }}</h5>
-                            <a href="{{ route('berita.show', $News[0]->kd_info) }}" class="text text-anime-style-3 fs-5 text-white">
-                                {{ $News[0]->judul_berita }}
-                            </a>
-                            <div class="btn-area mt-2" data-aos="fade-up" data-aos-duration="1200">
-                                <a href="{{ route('berita.show', $News[0]->kd_info) }}" class="header-btn1">
-                                    Lihat Selengkapnya<span><i class="fa-solid fa-arrow-right"></i></span>
-                                </a>
+                @if (count($News) > 0)
+                    <!-- Berita Utama -->
+                    <div class="col-lg-7">
+                        <div class="images-content-area" data-aos="zoom-in" data-aos-duration="1000"
+                            style="margin-bottom: 30px;">
+                            <div class="img1 position-relative">
+                                <img src="{{ $News[0]->foto_berita ?? URL::asset('build/img/all-images/default-news.png') }}"
+                                    alt="{{ $News[0]->judul_berita }}"
+                                    style="width: 100%; height: 300px; object-fit: cover;">
                             </div>
-                        </div>
-                        <div class="arrow-area">
-                            <a href="{{ route('berita.show', $News[0]->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Sidebar Berita Lainnya -->
-                <div class="col-lg-5">
-                    <div class="service-all-boxes">
-                        <div class="row g-3">
-                            @foreach($News->slice(1, 2) as $berita)
-                            <div class="col-lg-12 col-md-6">
-                                <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000"   style="background: linear-gradient(145deg, #88beea, #e4e8f3);">
-                                    <div class="arrow">
-                                        <a href="{{ route('berita.show', $berita->kd_info) }}"><i class="fa-solid fa-arrow-right"></i></a>
-                                    </div>
-                                    <div class="content-area">
-                                        <h5>{{ \Carbon\Carbon::parse($berita->tanggal_dibuat)->format('d M Y') }}</h5>
-                                        <a href="{{ route('berita.show', $berita->kd_info) }}">
-                                            {{ $berita->judul_berita }}
-                                        </a>
-                                        <p>
-                                            {{ Str::limit($berita->isi_berita ?? 100) }}
-                                        </p>
-                                    </div>
+                            <div class="content-area position-absolute bottom-0 start-0 p-3 text-white text-white">
+                                <h5 class="d-lg-none" style="color: white;">
+                                    {{ \Carbon\Carbon::parse($News[0]->tanggal_dibuat)->format('d M Y') }}</h5>
+                                <a href="{{ route('berita.show', $News[0]->kd_info) }}"
+                                    class="text text-anime-style-3 fs-5 text-white">
+                                    {{ $News[0]->judul_berita }}
+                                </a>
+                                <div class="btn-area mt-2" data-aos="fade-up" data-aos-duration="1200">
+                                    <a href="{{ route('berita.show', $News[0]->kd_info) }}" class="header-btn1">
+                                        Lihat Selengkapnya<span><i class="fa-solid fa-arrow-right"></i></span>
+                                    </a>
                                 </div>
                             </div>
-                            @endforeach
+                            <div class="arrow-area">
+                                <a href="{{ route('berita.show', $News[0]->kd_info) }}"><i
+                                        class="fa-solid fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <!-- Sidebar Berita Lainnya -->
+                    <div class="col-lg-5">
+                        <div class="service-all-boxes">
+                            <div class="row g-3">
+                                @foreach ($News->slice(1, 2) as $berita)
+                                    <div class="col-lg-12 col-md-6">
+                                        <div class="service2-auhtor-boxarea" data-aos="zoom-out" data-aos-duration="1000"
+                                            style="background: linear-gradient(145deg, #88beea, #e4e8f3);">
+                                            <div class="arrow">
+                                                <a href="{{ route('berita.show', $berita->kd_info) }}"><i
+                                                        class="fa-solid fa-arrow-right"></i></a>
+                                            </div>
+                                            <div class="content-area">
+                                                <h5>{{ \Carbon\Carbon::parse($berita->tanggal_dibuat)->format('d M Y') }}
+                                                </h5>
+                                                <a href="{{ route('berita.show', $berita->kd_info) }}">
+                                                    {{ $berita->judul_berita }}
+                                                </a>
+                                                <p>
+                                                    {{ Str::limit($berita->isi_berita ?? 100) }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-lg-12 text-center">
+                        <p>Tidak ada berita</p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -524,39 +534,43 @@
     <!--===== CASE AREA ENDS =======-->
 
     <!--===== TESTIMONIAL AREA STARTS =======-->
-        <!--===== INDEX KOMUNITAS AREA STARTS =======-->
-        <div class="testimonial1-section-area sp6">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 m-auto">
-                        <div class="testimonial-header heading2 text-center">
-                            <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                                class="star2 keyframe5">
-                            <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                                class="star3 keyframe5">
-                            <h2 class="text-anime-style-3">Forum Komunitas</h2>
-                            <p data-aos="fade-up" data-aos-duration="1000">Jadilah bagian dari komunitas kami dan nikmati
-                                akses eksklusif ke berbagai diskusi, event, dan kolaborasi.<br class="d-md-block d-none">
-                                Bergabung sekarang untuk memperluas jaringan, belajar dari yang lain, dan berbagi pengalaman
-                                Anda.</p>
-                        </div>
+    <!--===== INDEX KOMUNITAS AREA STARTS =======-->
+    <div class="testimonial1-section-area sp6">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 m-auto">
+                    <div class="testimonial-header heading2 text-center">
+                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                            class="star2 keyframe5">
+                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                            class="star3 keyframe5">
+                        <h2 class="text-anime-style-3">Forum Komunitas</h2>
+                        <p data-aos="fade-up" data-aos-duration="1000">Jadilah bagian dari komunitas kami dan nikmati
+                            akses eksklusif ke berbagai diskusi, event, dan kolaborasi.<br class="d-md-block d-none">
+                            Bergabung sekarang untuk memperluas jaringan, belajar dari yang lain, dan berbagi pengalaman
+                            Anda.</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="testimonials-slider-area owl-carousel ">
-                            @foreach ($komunitasList->take(5) as $item)
+            </div>
+            <div class="row">
+                <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="testimonials-slider-area owl-carousel ">
+                        @foreach ($komunitasList->take(5) as $item)
                             <div class="testimonial-boxarea rounded-5">
                                 <div class="row">
                                     <!-- Konten Bersama -->
                                     <div class="col-lg-5">
                                         <div class="pera">
-                                            <p class="text-muted" style="font-size: 1.1rem;">{{ Str::limit($item->desk_komunitas, 100) ?: 'No description available' }}</p>
+                                            <p class="text-muted" style="font-size: 1.1rem;">
+                                                {{ Str::limit($item->desk_komunitas, 100) ?: 'No description available' }}
+                                            </p>
                                             <div class="space100"></div>
                                             <div class="space30"></div>
                                             <div class="list-area">
                                                 <div class="list">
-                                                    <a style="font-size: 1.25rem" href="{{ route('komunitas.detail', $item->kd_komunitas) }}" class="h3 text-dark font-weight-bold">
+                                                    <a style="font-size: 1.25rem"
+                                                        href="{{ route('komunitas.detail', $item->kd_komunitas) }}"
+                                                        class="h3 text-dark font-weight-bold">
                                                         {{ $item->nm_komunitas }}
                                                     </a>
                                                 </div>
@@ -566,17 +580,18 @@
                                     <!-- Konten Bersama -->
                                     <div class="col-lg-7 text-center">
                                         <div class="images">
-                                            <img src="{{ $item->logo }}" alt="{{ $item->nm_komunitas }}" class="img-fluid rounded" style="max-width: 90%; height: auto;">
+                                            <img src="{{ $item->logo }}" alt="{{ $item->nm_komunitas }}"
+                                                class="img-fluid rounded" style="max-width: 90%; height: auto;">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-    <!--===== TESTIMONIAL AREA ENDS =======-->
-    {{-- 
+            </div>
+            <!--===== TESTIMONIAL AREA ENDS =======-->
+            {{-- 
     <!--===== BLOG AREA STARTS =======-->
     <div class="blog1-scetion-area">
         <div class="container">
@@ -667,63 +682,72 @@
     </div>
     <!--===== BLOG AREA ENDS =======--> --}}
 
-    <!--===== CONTACT AREA STARTS =======-->
-    <div class="contact1-section-area sp6">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 m-auto">
-                    <div class="contact-header-area text-center heading2">
-                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                            class="star2 keyframe5">
-                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                            class="star3 keyframe5">
-                        <h2 class="text-anime-style-3">Hubungi Kami</h2>
-                        <p>Kami selalu terbuka untuk masukan, pengaduan. <br
-                                class="d-md-block d-none"> Anda dapat menghubungi kami melalui detail berikut:</p>
+            <!--===== CONTACT AREA STARTS =======-->
+            <div class="contact1-section-area sp6">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 m-auto">
+                            <div class="contact-header-area text-center heading2">
+                                <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                                    class="star2 keyframe5">
+                                <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                                    class="star3 keyframe5">
+                                <h2 class="text-anime-style-3">Hubungi Kami</h2>
+                                <p>Kami selalu terbuka untuk masukan, pengaduan. <br class="d-md-block d-none"> Anda dapat
+                                    menghubungi kami melalui detail berikut:</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-5" data-aos="zoom-out" data-aos-duration="1000">
-                    <div class="contact-info-area">
-                        <h3>Hubungi Kami</h3>
-                        <div class="space32"></div>
-                        <div class="contact-auhtor-box">
-                            <div class="icons">
-                                <a href="https://www.google.com/maps?q=Perpustakaan+Kabupaten+Bandung,+Jl.+Al-Fathu+Pamekaran,+Kabupaten+Bandung" target="_blank"> <img src="{{ URL::asset('build/img/icons/location2.svg') }}" alt=""></a>
-                            </div>
-                            <div class="content">
-                                <h4>Lokasi</h4>
-                                <!-- Mengarahkan ke Google Maps dengan alamat yang sesuai -->
-                                <a href="https://www.google.com/maps?q=Perpustakaan+Kabupaten+Bandung,+Jl.+Al-Fathu+Pamekaran,+Kabupaten+Bandung" target="_blank">
-                                    Perpustakaan Kabupaten Bandung <br class="d-lg-block d-none"> Jl. Al-Fathu Pamekaran, Kabupaten Bandung
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="space40"></div>
-                        
-                        <div class="contact-auhtor-box">
-                            <div class="icons">
-                                <img src="{{ URL::asset('build/img/icons/phone2.svg') }}" alt="">
-                            </div>
-                            <div class="content">
-                                <h6 class="text-white mb-2">Telepon</h6> <!-- margin bottom untuk memberi jarak antar elemen -->
-                                <!-- Opsi Telepon dan WhatsApp -->
-                                <a href="tel:+6285922549352" class="text-white mb-3">(0859) 2254 9352<br></a>
-                            
-                                <h6 class="text-white mb-2">WhatsApp</h6> <!-- margin bottom untuk memberi jarak antar elemen -->
-                                <!-- Mengarahkan ke WhatsApp -->
-                                <a href="https://wa.me/6285922549352" target="_blank" class="text-white mb-3">Hubungi via WhatsApp</a>
-                            
-                                <h6 class="text-white mb-2">Website</h6> <!-- margin bottom untuk memberi jarak antar elemen -->
-                                <a href="http://dispusip.bandungkab.go.id" target="_blank" class="text-white">dispusip@bandungkab.go.id</a>
-                            </div>
-                            
-                        </div>
-                        
+                    <div class="row">
+                        <div class="col-lg-5" data-aos="zoom-out" data-aos-duration="1000">
+                            <div class="contact-info-area">
+                                <h3>Hubungi Kami</h3>
+                                <div class="space32"></div>
+                                <div class="contact-auhtor-box">
+                                    <div class="icons">
+                                        <a href="https://www.google.com/maps?q=Perpustakaan+Kabupaten+Bandung,+Jl.+Al-Fathu+Pamekaran,+Kabupaten+Bandung"
+                                            target="_blank"> <img src="{{ URL::asset('build/img/icons/location2.svg') }}"
+                                                alt=""></a>
+                                    </div>
+                                    <div class="content">
+                                        <h4>Lokasi</h4>
+                                        <!-- Mengarahkan ke Google Maps dengan alamat yang sesuai -->
+                                        <a href="https://www.google.com/maps?q=Perpustakaan+Kabupaten+Bandung,+Jl.+Al-Fathu+Pamekaran,+Kabupaten+Bandung"
+                                            target="_blank">
+                                            Perpustakaan Kabupaten Bandung <br class="d-lg-block d-none"> Jl. Al-Fathu
+                                            Pamekaran, Kabupaten Bandung
+                                        </a>
+                                    </div>
+                                </div>
 
-                        {{-- <div class="space40"></div>
+                                <div class="space40"></div>
+
+                                <div class="contact-auhtor-box">
+                                    <div class="icons">
+                                        <img src="{{ URL::asset('build/img/icons/phone2.svg') }}" alt="">
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="text-white mb-2">Telepon</h6>
+                                        <!-- margin bottom untuk memberi jarak antar elemen -->
+                                        <!-- Opsi Telepon dan WhatsApp -->
+                                        <a href="tel:+6285922549352" class="text-white mb-3">(0859) 2254 9352<br></a>
+
+                                        <h6 class="text-white mb-2">WhatsApp</h6>
+                                        <!-- margin bottom untuk memberi jarak antar elemen -->
+                                        <!-- Mengarahkan ke WhatsApp -->
+                                        <a href="https://wa.me/6285922549352" target="_blank"
+                                            class="text-white mb-3">Hubungi via WhatsApp</a>
+
+                                        <h6 class="text-white mb-2">Website</h6>
+                                        <!-- margin bottom untuk memberi jarak antar elemen -->
+                                        <a href="http://dispusip.bandungkab.go.id" target="_blank"
+                                            class="text-white">dispusip@bandungkab.go.id</a>
+                                    </div>
+
+                                </div>
+
+
+                                {{-- <div class="space40"></div>
                         <div class="contact-auhtor-box">
                             <div class="icons">
                                 <img src="{{ URL::asset('build/img/icons/email2.svg') }}" alt="">
@@ -755,30 +779,31 @@
                                 <a href="mailto:feedback_kabelat@gmail.com">feedback_kabelat@gmail.com <br></a>
                             </div>
                         </div> --}}
-                    </div>
-                </div>
-
-
-                <div class="col-lg-7" data-aos="zoom-out" data-aos-duration="1200">
-                    <div class="contact-boxarea">
-                        <h3>Google Maps</h3>
-                        <p>Anda dapat menemukan lokasi kami dengan lebih mudah melalui Google Maps. <br
-                                class="d-lg-block d-none"> Klik maps dibawah ini untuk petunjuk arah menuju
-                            Perpustakaan Kabupaten Bandung di Jl. Al-Fathu, Pamekaran, Kec. Soreang, Kabupaten Bandung,
-                            Jawa Barat 40912.</p>
-                        <div class="space40"></div>
-                        <div class="ratio ratio-16x9">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.9176773900626!2d107.52442907514863!3d-7.018962668758149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68edd4aaca7f3d%3A0x812d934aaf92ffc7!2sPerpustakaan%20Kabupaten%20Bandung!5e0!3m2!1sid!2sid!4v1728848644939!5m2!1sid!2sid"
-                                class="embed-responsive-item" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                         </div>
+
+
+                        <div class="col-lg-7" data-aos="zoom-out" data-aos-duration="1200">
+                            <div class="contact-boxarea">
+                                <h3>Google Maps</h3>
+                                <p>Anda dapat menemukan lokasi kami dengan lebih mudah melalui Google Maps. <br
+                                        class="d-lg-block d-none"> Klik maps dibawah ini untuk petunjuk arah menuju
+                                    Perpustakaan Kabupaten Bandung di Jl. Al-Fathu, Pamekaran, Kec. Soreang, Kabupaten
+                                    Bandung,
+                                    Jawa Barat 40912.</p>
+                                <div class="space40"></div>
+                                <div class="ratio ratio-16x9">
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.9176773900626!2d107.52442907514863!3d-7.018962668758149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68edd4aaca7f3d%3A0x812d934aaf92ffc7!2sPerpustakaan%20Kabupaten%20Bandung!5e0!3m2!1sid!2sid!4v1728848644939!5m2!1sid!2sid"
+                                        class="embed-responsive-item" allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
             </div>
-        </div>
-    </div>
-    <!--===== CONTACT AREA ENDS =======-->
+            <!--===== CONTACT AREA ENDS =======-->
 
-@endsection
+        @endsection
