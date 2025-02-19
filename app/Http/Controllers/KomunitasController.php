@@ -55,7 +55,17 @@ class KomunitasController extends Controller
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
-        return view('joinKomunitas', compact('komunitas'));
+    
+        // Cek apakah user sudah menjadi anggota komunitas ini
+        $isMember = false;
+        if (Auth::check()) {
+            $user = Auth::user();
+            $isMember = MemberKomunitas::where('id', $user->id)
+                ->where('kd_komunitas', $kd_komunitas)
+                ->exists();
+        }
+    
+        return view('joinKomunitas', compact('komunitas', 'isMember'));
     }
 
     // Bergabung dengan komunitas
