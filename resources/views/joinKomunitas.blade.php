@@ -4,8 +4,7 @@
 @section('content')
 
     {{-- Updated Page Title Section --}}
-    <div class="about-header-area"
-        style="background-image: url({{ URL::asset('build/img/bg/header1.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center; margin: -24px -24px  -24px;">
+    <div class="about-header-area" style="background-image: url({{ URL::asset('build/img/bg/header1.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center; margin: -24px -24px  -24px;">
         <img src="{{ URL::asset('build/img/elements/elements1.png') }}" alt="" class="elements1 aniamtion-key-1">
         <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt="" class="star2 keyframe5">
         <div class="container">
@@ -20,11 +19,10 @@
         </div>
     </div>
     <!-- Alert Container -->
-    @if (session('success') || session('error'))
+    @if(session('success') || session('error'))
         <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
-            @if (session('success'))
-                <div
-                    style="background: linear-gradient(135deg, #064e3b, #149f6c); 
+            @if(session('success'))
+                <div style="background: linear-gradient(135deg, #064e3b, #149f6c); 
                             color: white; 
                             padding: 20px; 
                             border-radius: 10px; 
@@ -38,8 +36,8 @@
                         <i class="fas fa-check-circle" style="font-size: 24px;"></i>
                         <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">{{ session('success') }}</p>
                     </div>
-                    <button onclick="this.parentElement.remove()"
-                        style="background: transparent; 
+                    <button onclick="this.parentElement.remove()" 
+                            style="background: transparent; 
                                    border: none; 
                                    color: white; 
                                    font-size: 20px; 
@@ -52,9 +50,8 @@
                 </div>
             @endif
 
-            @if (session('error'))
-                <div
-                    style="background: linear-gradient(135deg,  #7b1f1f, #e63946); 
+            @if(session('error'))
+                <div style="background: linear-gradient(135deg,  #7b1f1f, #e63946); 
                             color: white; 
                             padding: 20px; 
                             border-radius: 10px; 
@@ -68,8 +65,8 @@
                         <i class="fas fa-exclamation-circle" style="font-size: 24px;"></i>
                         <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">{{ session('error') }}</p>
                     </div>
-                    <button onclick="this.parentElement.remove()"
-                        style="background: transparent; 
+                    <button onclick="this.parentElement.remove()" 
+                            style="background: transparent; 
                                    border: none; 
                                    color: white; 
                                    font-size: 20px; 
@@ -90,7 +87,6 @@
                     transform: translateX(120%);
                     opacity: 0;
                 }
-
                 to {
                     transform: translateX(0);
                     opacity: 1;
@@ -137,23 +133,17 @@
 
                 <div class="text-center mt-5">
                     @auth
-                        @if ($isMember)
-                            <div class="alert alert-success" role="alert">
-                                Anda sudah menjadi anggota komunitas ini.
-                            </div>
-                        @else
-                            <form action="{{ route('komunitas.join', $komunitas->kd_komunitas) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="header-btn1">Gabung Komunitas</button>
-                            </form>
-                        @endif
+                        <form action="{{ route('komunitas.join', $komunitas->kd_komunitas) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="header-btn1">Gabung Komunitas</button>
+                        </form>
                     @else
-                        <a href="{{ route('login') }}?redirect_to={{ route('komunitas.detail', $komunitas->kd_komunitas) }}"
-                            class="header-btn1">
+                        <a href="{{ route('login') }}?redirect_to={{ route('komunitas.detail', $komunitas->kd_komunitas) }}" class="header-btn1">
                             Login untuk Gabung Komunitas
                         </a>
                     @endauth
                 </div>
+                
             @else
                 <p class="text-center">Komunitas tidak ditemukan.</p>
             @endif
