@@ -182,6 +182,7 @@
 
             @auth
                 <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
+                    <!-- Foto Profil -->
                     <button class="btn btn-link p-0" type="button" data-bs-toggle="dropdown">
                         <img src="{{ $profilePhoto }}" alt="Profile" class="rounded-circle"
                             style="width: 40px; height: 40px; object-fit: cover;">
