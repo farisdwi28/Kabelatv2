@@ -1,7 +1,7 @@
 @php
     $isMember = false;
     $jabatan = null;
-    $profilePhoto = null;
+    $profilePhoto = 'https://ui-avatars.com/api/?name=Guest&background=random'; // Default avatar
 
     if (Auth::check()) {
         $memberInfo = App\Models\MemberKomunitas::where('kd_member', Auth::user()->kd_pen)->first();
@@ -11,11 +11,11 @@
         }
 
         // Get profile photo
+        // Get profile photo
         $penduduk = App\Models\Penduduk::where('kd_pen', Auth::user()->kd_pen)->first();
-        $profilePhoto =
-            $penduduk && $penduduk->foto_pen
-                ? asset('storage/images/profiles/' . $penduduk->foto_pen)
-                : asset('default-avatar.png');
+        if ($penduduk && $penduduk->foto_pen) {
+            $profilePhoto = asset('storage/images/profiles/' . $penduduk->foto_pen);
+        }
     }
 @endphp
 
