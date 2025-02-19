@@ -50,7 +50,7 @@
                 <!-- Default Slide -->
                 <a href="">
                     <div class="carousel-item active" data-bs-interval="3000">
-                        <div class="carousel-image-container" style="height: 450px; overflow: hidden; position: relative;">
+                        <div class="carousel-image-container" style="height: 550px; overflow: hidden; position: relative;">
                             <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100" alt="..."
                                 style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
