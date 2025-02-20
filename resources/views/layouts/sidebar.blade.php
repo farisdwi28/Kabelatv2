@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="me-2">
                                         <span class="font-weight-bold">
-                                            {{ Str::limit(Auth::user()->username, 15, '...') }}
+                                            {{ Str::limit(Auth::user()->username, 10, '...') }}
                                         </span>
                                         @if ($isMember && $jabatan)
                                             <div class="text-muted small">{{ $jabatan }}</div>
@@ -189,7 +189,7 @@
                     </button>
                     <div class="me-2">
                         <span class="font-weight-bold">
-                            {{ Str::limit(Auth::user()->username, 15, '...') }}
+                            {{ Str::limit(Auth::user()->username, 10, '...') }}
                         </span>
                         @if ($isMember && $jabatan)
                             <div class="text-muted small">{{ $jabatan }}</div>

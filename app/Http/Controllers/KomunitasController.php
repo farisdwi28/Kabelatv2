@@ -27,14 +27,14 @@ class KomunitasController extends Controller
             }
             return view('galeriKomunitas', compact('komunitas'));
         }
-    
+
         $query = Komunitas::query();
-        
+
         if (request('search')) {
             $search = request('search');
             $query->where('nm_komunitas', 'like', "%{$search}%");
         }
-    
+
         $komunitasList = $query->paginate(6);
         return view('galeriKomunitas', compact('komunitasList'));
     }
@@ -55,17 +55,21 @@ class KomunitasController extends Controller
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
-    
-        // Cek apakah user sudah menjadi anggota komunitas ini
+
+        // Cek apakah user sudah menjadi anggota komunitas ini atau sudah ditambahkan oleh admin
         $isMember = false;
+        $userKomunitas = null;
         if (Auth::check()) {
             $user = Auth::user();
-            $isMember = MemberKomunitas::where('id', $user->id)
-                ->where('kd_komunitas', $kd_komunitas)
-                ->exists();
+            $memberKomunitas = MemberKomunitas::where('id', $user->id)->first();
+
+            if ($memberKomunitas) {
+                $isMember = true;
+                $userKomunitas = Komunitas::where('kd_komunitas', $memberKomunitas->kd_komunitas)->first();
+            }
         }
-    
-        return view('joinKomunitas', compact('komunitas', 'isMember'));
+
+        return view('joinKomunitas', compact('komunitas', 'isMember', 'userKomunitas'));
     }
 
     // Bergabung dengan komunitas
@@ -84,23 +88,32 @@ class KomunitasController extends Controller
 
         try {
             $user = Auth::user();
-    
+
             // Cek apakah user sudah menjadi anggota di komunitas manapun
             $existingMembership = MemberKomunitas::where('id', $user->id)->first();
-    
+
             if ($existingMembership) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
                     ->with('error', 'Anda sudah menjadi anggota komunitas. Tidak dapat bergabung lebih dari satu komunitas.');
             }
-    
+
             // Cek apakah sudah menjadi anggota di komunitas ini
             $existingMember = MemberKomunitas::where('kd_member', $user->kd_pen)
                 ->where('kd_komunitas', $kd_komunitas)
                 ->first();
-    
+
             if ($existingMember) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
                     ->with('error', 'Anda sudah menjadi anggota komunitas ini.');
+            }
+
+            // Cek apakah user sudah ditambahkan oleh admin ke komunitas manapun
+            $existingMembership = MemberKomunitas::where('id', $user->id)->first();
+
+            if ($existingMembership) {
+                $komunitas = Komunitas::where('kd_komunitas', $existingMembership->kd_komunitas)->first();
+                return redirect()->route('komunitas.detail', $kd_komunitas)
+                    ->with('error', "Anda sudah terdaftar di komunitas {$komunitas->nm_komunitas}");
             }
             // Proses join
             DB::beginTransaction();
