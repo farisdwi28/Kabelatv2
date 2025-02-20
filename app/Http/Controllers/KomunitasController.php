@@ -98,55 +98,51 @@ class KomunitasController extends Controller
             return redirect()->route('login')
                 ->with('info', 'Silakan login untuk bergabung dengan komunitas.');
         }
-
+    
         // Pastikan komunitas ada
         $komunitas = Komunitas::where('kd_komunitas', $kd_komunitas)->first();
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
-
+    
         try {
             $user = Auth::user();
-
+    
             // Cek keanggotaan menggunakan kd_member
             $existingMembership = MemberKomunitas::where('kd_member', $user->kd_pen)->first();
-
+    
             if ($existingMembership) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
                     ->with('error', 'Anda sudah menjadi anggota komunitas. Tidak dapat bergabung lebih dari satu komunitas.');
             }
-
+    
             // Cek apakah sudah menjadi anggota di komunitas ini
             $existingMember = MemberKomunitas::where('kd_member', $user->kd_pen)
                 ->where('kd_komunitas', $kd_komunitas)
                 ->first();
-
+    
             if ($existingMember) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
                     ->with('error', 'Anda sudah menjadi anggota komunitas ini.');
             }
-
-            // Cek apakah user sudah ditambahkan oleh admin ke komunitas manapun
-            $existingMembership = MemberKomunitas::where('id', $user->id)->first();
-
-            if ($existingMembership) {
-                $komunitas = Komunitas::where('kd_komunitas', $existingMembership->kd_komunitas)->first();
-                return redirect()->route('komunitas.detail', $kd_komunitas)
-                    ->with('error', "Anda sudah terdaftar di komunitas {$komunitas->nm_komunitas}");
-            }
+    
+            // Generate member code using the same method as admin
+            $latestMember = MemberKomunitas::orderBy('kd_member', 'desc')->first();
+            $memberCode = !$latestMember ? 'M0001' : 'M' . str_pad((intval(substr($latestMember->kd_member, 1)) + 1), 4, '0', STR_PAD_LEFT);
+    
             // Proses join
             DB::beginTransaction();
-
+    
             $member = new MemberKomunitas();
-            $member->kd_member = $user->kd_pen;
-            $member->id = $user->id;  // Tambahkan id user
+            $member->kd_member = $memberCode; // Using the generated code
+            $member->id = $user->id;
             $member->kd_komunitas = $kd_komunitas;
             $member->tgl_bergabung = Carbon::now();
             $member->kd_jabatan = 'ANGGT';
             $member->save();
-
+    
             DB::commit();
-
+    
             return redirect()->route('komunitas.detail', $kd_komunitas)
                 ->with('success', 'Berhasil bergabung dengan komunitas!');
         } catch (\Exception $e) {
