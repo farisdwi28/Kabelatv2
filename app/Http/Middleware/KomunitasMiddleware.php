@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\MemberKomunitas;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class KomunitasMiddleware   
 {
@@ -17,25 +18,31 @@ class KomunitasMiddleware
         }
     
         $user = Auth::user();
-        $memberInfo = MemberKomunitas::where('kd_member', $user->kd_pen)->first();
+        
+        // Updated join with struktur_jabatan table
+        $memberInfo = DB::table('member_komunitas')
+            ->join('struktur_jabatan', 'member_komunitas.kd_jabatan', '=', 'struktur_jabatan.kd_jabatan')
+            ->where('member_komunitas.kd_member', $user->kd_pen)
+            ->select('member_komunitas.*', 'struktur_jabatan.nama_jabatan')
+            ->first();
     
         if (!$memberInfo) {
             return redirect()->route('komunitas.show')
                 ->with('error', 'Anda harus menjadi anggota komunitas terlebih dahulu.');
         }
     
-        // Tambahkan informasi member ke dalam request
+        // Add member info to request
         $request->attributes->add([
             'memberInfo' => $memberInfo,
-            'isLeadership' => $memberInfo->kd_jabatan !== 'ANGGT', // Jabatan selain anggota
+            'isLeadership' => $memberInfo->kd_jabatan !== 'ANGGT',
         ]);
     
-        // Batasi akses halaman tertentu
-        if (!$memberInfo->jabatan || !$memberInfo->jabatan->isLeadershipRole()) {
+        // Check role based on kd_jabatan
+        if ($memberInfo->kd_jabatan === 'ANGGT') {
             return redirect()->route('dashboard')
                 ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }
+
         return $next($request);
     }
-    
 }
