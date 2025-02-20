@@ -78,8 +78,6 @@ class KomunitasController extends Controller
         return view('joinKomunitas', compact('komunitas', 'isMember', 'userKomunitas', 'memberData'));
     }
 
-    
-
     // Bergabung dengan komunitas
     public function join($kd_komunitas)
     {
@@ -126,10 +124,8 @@ class KomunitasController extends Controller
             // Proses join
             DB::beginTransaction();
 
-            $memberCode = $this->generateMemberCode(); // Generate kode member yang sama
-
             $member = new MemberKomunitas();
-            $member->kd_member = $memberCode; // Gunakan kode member yang baru di-generate
+            $member->kd_member = $user->kd_pen;
             $member->id = $user->id;  // Tambahkan id user
             $member->kd_komunitas = $kd_komunitas;
             $member->tgl_bergabung = Carbon::now();
