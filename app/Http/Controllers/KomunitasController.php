@@ -55,21 +55,27 @@ class KomunitasController extends Controller
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
-
+    
         // Cek apakah user sudah menjadi anggota komunitas ini atau sudah ditambahkan oleh admin
         $isMember = false;
         $userKomunitas = null;
+        $memberData = null; // Untuk menyimpan data member lengkap
+    
         if (Auth::check()) {
             $user = Auth::user();
-            $memberKomunitas = MemberKomunitas::where('id', $user->id)->first();
-
-            if ($memberKomunitas) {
+            // Langsung ambil data member dari database
+            $memberData = MemberKomunitas::select('member_komunitas.*', 'komunitas.nm_komunitas')
+                ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
+                ->where('member_komunitas.id', $user->id)
+                ->first();
+    
+            if ($memberData) {
                 $isMember = true;
-                $userKomunitas = Komunitas::where('kd_komunitas', $memberKomunitas->kd_komunitas)->first();
+                $userKomunitas = Komunitas::where('kd_komunitas', $memberData->kd_komunitas)->first();
             }
         }
-
-        return view('joinKomunitas', compact('komunitas', 'isMember', 'userKomunitas'));
+    
+        return view('joinKomunitas', compact('komunitas', 'isMember', 'userKomunitas', 'memberData'));
     }
 
     // Bergabung dengan komunitas
