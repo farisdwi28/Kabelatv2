@@ -56,22 +56,35 @@ class KomunitasController extends Controller
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
     
-        // Cek apakah user sudah menjadi anggota komunitas ini atau sudah ditambahkan oleh admin
         $isMember = false;
         $userKomunitas = null;
-        $memberData = null; // Untuk menyimpan data member lengkap
+        $memberData = null;
     
         if (Auth::check()) {
             $user = Auth::user();
-            // Langsung ambil data member dari database
+            // Mengambil data member berdasarkan id user dan kd_komunitas
             $memberData = MemberKomunitas::select('member_komunitas.*', 'komunitas.nm_komunitas')
                 ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
+                ->where([
+                    ['member_komunitas.id', $user->id],
+                    ['member_komunitas.kd_komunitas', $kd_komunitas]
+                ])
+                ->first();
+    
+            // Cek juga apakah user terdaftar di komunitas lain
+            $otherKomunitas = MemberKomunitas::select('member_komunitas.*', 'komunitas.nm_komunitas')
+                ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
                 ->where('member_komunitas.id', $user->id)
+                ->where('member_komunitas.kd_komunitas', '!=', $kd_komunitas)
                 ->first();
     
             if ($memberData) {
                 $isMember = true;
-                $userKomunitas = Komunitas::where('kd_komunitas', $memberData->kd_komunitas)->first();
+                $userKomunitas = $komunitas;
+            } elseif ($otherKomunitas) {
+                $isMember = true;
+                $userKomunitas = Komunitas::where('kd_komunitas', $otherKomunitas->kd_komunitas)->first();
+                $memberData = $otherKomunitas;
             }
         }
     
