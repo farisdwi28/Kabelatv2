@@ -17,8 +17,8 @@ class KomunitasMiddleware
         }
     
         $user = Auth::user();
-        $memberInfo = MemberKomunitas::where('kd_member', $user->kd_pen)->first();
-    
+        $memberInfo = MemberKomunitas::where('id', $user->id)->first();
+        
         if (!$memberInfo) {
             return redirect()->route('komunitas.show')
                 ->with('error', 'Anda harus menjadi anggota komunitas terlebih dahulu.');

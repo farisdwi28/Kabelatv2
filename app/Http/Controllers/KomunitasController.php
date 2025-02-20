@@ -87,10 +87,10 @@ class KomunitasController extends Controller
                 return 'M0002';
             }
 
-            $lastNumber = intval(substr($latestMember->kd_member, 3));
+            $lastNumber = intval(substr($latestMember->kd_member, 1));
             $newNumber = $lastNumber + 1;
 
-            return 'MBR' . str_pad($newNumber, 4, '0', STR_PAD_LEFT);
+            return 'M' . str_pad($newNumber, 4, '0', STR_PAD_LEFT);
         } catch (\Exception $e) {
             throw new \Exception('Gagal generate kode member: ' . $e->getMessage());
         }
