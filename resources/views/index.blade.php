@@ -336,7 +336,7 @@
                                                     <div class="list">
                                                         <a style="font-size: 1.25rem;"
                                                             href="{{ route('programdispusip.detail', $program->kd_program) }}">
-                                                            {{ $program->nm_program }}
+                                                            {{ Str::limit($program->nm_program, 20) }}
                                                         </a>
                                                     </div>
                                                 </div>
