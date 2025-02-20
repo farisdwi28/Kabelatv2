@@ -55,29 +55,29 @@ class KomunitasController extends Controller
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
-    
+
         $isMember = false;
         $userKomunitas = null;
         $memberData = null;
-    
+
         if (Auth::check()) {
             $user = Auth::user();
-            // Mengambil data member berdasarkan id user dan kd_komunitas
+            // Menggunakan kd_member sesuai dengan middleware
             $memberData = MemberKomunitas::select('member_komunitas.*', 'komunitas.nm_komunitas')
                 ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
                 ->where([
-                    ['member_komunitas.id', $user->id],
+                    ['member_komunitas.kd_member', $user->kd_pen], // Ganti dari id ke kd_member
                     ['member_komunitas.kd_komunitas', $kd_komunitas]
                 ])
                 ->first();
-    
+
             // Cek juga apakah user terdaftar di komunitas lain
             $otherKomunitas = MemberKomunitas::select('member_komunitas.*', 'komunitas.nm_komunitas')
                 ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
-                ->where('member_komunitas.id', $user->id)
+                ->where('member_komunitas.kd_member', $user->kd_pen) // Ganti dari id ke kd_member
                 ->where('member_komunitas.kd_komunitas', '!=', $kd_komunitas)
                 ->first();
-    
+
             if ($memberData) {
                 $isMember = true;
                 $userKomunitas = $komunitas;
@@ -87,7 +87,7 @@ class KomunitasController extends Controller
                 $memberData = $otherKomunitas;
             }
         }
-    
+
         return view('joinKomunitas', compact('komunitas', 'isMember', 'userKomunitas', 'memberData'));
     }
 
@@ -108,8 +108,8 @@ class KomunitasController extends Controller
         try {
             $user = Auth::user();
 
-            // Cek apakah user sudah menjadi anggota di komunitas manapun
-            $existingMembership = MemberKomunitas::where('id', $user->id)->first();
+            // Cek keanggotaan menggunakan kd_member
+            $existingMembership = MemberKomunitas::where('kd_member', $user->kd_pen)->first();
 
             if ($existingMembership) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
