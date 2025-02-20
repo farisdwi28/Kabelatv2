@@ -56,35 +56,22 @@ class KomunitasController extends Controller
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
     
+        // Cek apakah user sudah menjadi anggota komunitas ini atau sudah ditambahkan oleh admin
         $isMember = false;
         $userKomunitas = null;
-        $memberData = null;
+        $memberData = null; // Untuk menyimpan data member lengkap
     
         if (Auth::check()) {
             $user = Auth::user();
-            // Menggunakan kd_member sesuai dengan middleware
+            // Langsung ambil data member dari database
             $memberData = MemberKomunitas::select('member_komunitas.*', 'komunitas.nm_komunitas')
                 ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
-                ->where([
-                    ['member_komunitas.kd_member', $user->kd_pen], // Ganti dari id ke kd_member
-                    ['member_komunitas.kd_komunitas', $kd_komunitas]
-                ])
-                ->first();
-    
-            // Cek juga apakah user terdaftar di komunitas lain
-            $otherKomunitas = MemberKomunitas::select('member_komunitas.*', 'komunitas.nm_komunitas')
-                ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
-                ->where('member_komunitas.kd_member', $user->kd_pen) // Ganti dari id ke kd_member
-                ->where('member_komunitas.kd_komunitas', '!=', $kd_komunitas)
+                ->where('member_komunitas.id', $user->id)
                 ->first();
     
             if ($memberData) {
                 $isMember = true;
-                $userKomunitas = $komunitas;
-            } elseif ($otherKomunitas) {
-                $isMember = true;
-                $userKomunitas = Komunitas::where('kd_komunitas', $otherKomunitas->kd_komunitas)->first();
-                $memberData = $otherKomunitas;
+                $userKomunitas = Komunitas::where('kd_komunitas', $memberData->kd_komunitas)->first();
             }
         }
     
