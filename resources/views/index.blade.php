@@ -37,17 +37,23 @@
         <div id="carouselExampleDark" class="carousel carousel-light slide" data-bs-ride="carousel" data-bs-interval="3000">
             <!-- Carousel Indicators -->
             <div class="carousel-indicators">
+                <!-- Indicator untuk slide default -->
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
+                <!-- Indicator untuk program 1 -->
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
                     aria-label="Slide 2"></button>
+                <!-- Indicator untuk program 2 -->
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
+                <!-- Indicator untuk program 3 -->
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
             </div>
     
             <!-- Carousel Items -->
             <div class="carousel-inner" data-aos="fade-left" data-aos-duration="1200">
-                <!-- Default Slide -->
+                <!-- Slide Default (header2.png) -->
                 <a href="">
                     <div class="carousel-item active" data-bs-interval="3000">
                         <div class="carousel-image-container" style="height: 450px; overflow: hidden; position: relative;">
@@ -61,8 +67,8 @@
                     </div>
                 </a>
     
-                <!-- Dynamic Slides from $carouselPrograms -->
-                @foreach ($carouselPrograms as $program)
+                <!-- Dynamic Slides from $carouselPrograms (Hanya 3 Program) -->
+                @foreach ($carouselPrograms->take(3) as $index => $program)
                     <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
                         <div class="carousel-item" data-bs-interval="3000">
                             <div class="carousel-image-container" style="height: 450px; overflow: hidden; position: relative;">
