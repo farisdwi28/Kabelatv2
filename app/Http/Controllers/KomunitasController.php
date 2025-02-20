@@ -109,7 +109,7 @@ class KomunitasController extends Controller
             $user = Auth::user();
 
             // Cek keanggotaan menggunakan kd_member
-            $existingMembership = MemberKomunitas::where('kd_member', $user->kd_pen)->first();
+            $existingMembership = MemberKomunitas::where('id', $user->id)->first();
 
             if ($existingMembership) {
                 return redirect()->route('komunitas.detail', $kd_komunitas)
