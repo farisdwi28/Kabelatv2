@@ -55,12 +55,12 @@ class KomunitasController extends Controller
         if (!$komunitas) {
             return redirect()->route('home')->with('error', 'Komunitas tidak ditemukan.');
         }
-    
+
         // Cek apakah user sudah menjadi anggota komunitas ini atau sudah ditambahkan oleh admin
         $isMember = false;
         $userKomunitas = null;
         $memberData = null; // Untuk menyimpan data member lengkap
-    
+
         if (Auth::check()) {
             $user = Auth::user();
             // Langsung ambil data member dari database
@@ -68,14 +68,32 @@ class KomunitasController extends Controller
                 ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
                 ->where('member_komunitas.id', $user->id)
                 ->first();
-    
+
             if ($memberData) {
                 $isMember = true;
                 $userKomunitas = Komunitas::where('kd_komunitas', $memberData->kd_komunitas)->first();
             }
         }
-    
+
         return view('joinKomunitas', compact('komunitas', 'isMember', 'userKomunitas', 'memberData'));
+    }
+
+    private function generateMemberCode()
+    {
+        try {
+            $latestMember = MemberKomunitas::orderBy('kd_member', 'desc')->first();
+
+            if (!$latestMember) {
+                return 'M0002';
+            }
+
+            $lastNumber = intval(substr($latestMember->kd_member, 3));
+            $newNumber = $lastNumber + 1;
+
+            return 'MBR' . str_pad($newNumber, 4, '0', STR_PAD_LEFT);
+        } catch (\Exception $e) {
+            throw new \Exception('Gagal generate kode member: ' . $e->getMessage());
+        }
     }
 
     // Bergabung dengan komunitas
@@ -124,8 +142,10 @@ class KomunitasController extends Controller
             // Proses join
             DB::beginTransaction();
 
+            $memberCode = $this->generateMemberCode(); // Generate kode member yang sama
+
             $member = new MemberKomunitas();
-            $member->kd_member = $user->kd_pen;
+            $member->kd_member = $memberCode; // Gunakan kode member yang baru di-generate
             $member->id = $user->id;  // Tambahkan id user
             $member->kd_komunitas = $kd_komunitas;
             $member->tgl_bergabung = Carbon::now();
