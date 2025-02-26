@@ -66,6 +66,7 @@ class KomunitasController extends Controller
             // Langsung ambil data member dari database
             $memberData = MemberKomunitas::select('member_komunitas.*', 'komunitas.nm_komunitas')
                 ->join('komunitas', 'komunitas.kd_komunitas', '=', 'member_komunitas.kd_komunitas')
+                ->select('member_komunitas.*', 'komunitas.nm_komunitas')
                 ->where('member_komunitas.id', $user->id)
                 ->first();
     
@@ -99,10 +100,11 @@ class KomunitasController extends Controller
             $existingMembership = MemberKomunitas::where('id', $user->id)->first();
 
             if ($existingMembership) {
+                $komunitas = Komunitas::where('kd_komunitas', $existingMembership->kd_komunitas)->first();
                 return redirect()->route('komunitas.detail', $kd_komunitas)
-                    ->with('error', 'Anda sudah menjadi anggota komunitas. Tidak dapat bergabung lebih dari satu komunitas.');
+                    ->with('error', "Anda sudah terdaftar di komunitas {$komunitas->nm_komunitas}");
             }
-
+       
             // Cek apakah sudah menjadi anggota di komunitas ini
             $existingMember = MemberKomunitas::where('kd_member', $user->kd_pen)
                 ->where('kd_komunitas', $kd_komunitas)

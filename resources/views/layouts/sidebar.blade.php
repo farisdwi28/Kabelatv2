@@ -1,7 +1,9 @@
 @php
     $isMember = false;
     $jabatan = null;
-    $profilePhoto = 'https://ui-avatars.com/api/?name=Guest&background=random'; // Default avatar
+    $userName = Auth::check() ? Auth::user()->username : 'Guest';
+    $initials = substr($userName, 0, 2); // Get first two characters
+    $profilePhoto = null;
 
     if (Auth::check()) {
         $memberInfo = App\Models\MemberKomunitas::where('kd_member', Auth::user()->kd_pen)->first();
@@ -9,8 +11,6 @@
             $isMember = true;
             $jabatan = $memberInfo->kd_jabatan === 'ANGGT' ? 'Anggota' : $memberInfo->kd_jabatan;
         }
-
-        // Get profile photo
         // Get profile photo
         $penduduk = App\Models\Penduduk::where('kd_pen', Auth::user()->kd_pen)->first();
         if ($penduduk && $penduduk->foto_pen) {
@@ -73,9 +73,16 @@
                             @auth
                                 <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
                                     <div class="profile-avatar">
-                                        <img src="{{ $profilePhoto }}" alt="User Avatar"
-                                            class="profile-picture rounded-circle shadow-sm"
-                                            style="width: 60px; height: 60px; object-fit: cover;">
+                                        @if ($profilePhoto)
+                                            <img src="{{ $profilePhoto }}" alt="User Avatar"
+                                                class="profile-picture rounded-circle shadow-sm"
+                                                style="width: 60px; height: 60px; object-fit: cover;">
+                                        @else
+                                            <div class="profile-picture rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                                                style="width: 60px; height: 60px; background-color: #1a5b5b; color: white; font-weight: bold; text-transform: uppercase;">
+                                                {{ $initials }}
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="me-2">
                                         <span class="font-weight-bold">
@@ -183,9 +190,15 @@
             @auth
                 <div class="user-profile-dropdown d-flex align-items-center gap-3 position-relative">
                     <!-- Foto Profil -->
-                    <button class="btn btn-link p-0" type="button" data-bs-toggle="dropdown">
+                    @if ($profilePhoto)
                         <img src="{{ $profilePhoto }}" alt="Profile" class="rounded-circle"
                             style="width: 40px; height: 40px; object-fit: cover;">
+                    @else
+                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px; background-color: #1a5b5b; color: white; font-weight: bold; text-transform: uppercase; font-size: 14px;">
+                            {{ $initials }}
+                        </div>
+                    @endif
                     </button>
                     <div class="me-2">
                         <span class="font-weight-bold">

@@ -6,32 +6,33 @@
 
     <div class="case-inner-section-area sp1">
         <div class="container">
+            <!-- Title Section -->
             <div class="row">
-                <div class="col-lg-4 m-auto">
+                <div class="col-12 col-lg-4 mx-auto">
                     <div class="case-header text-center heading2">
-                        <h2 id="activity-title">{{ $activeTab === 'dispusip' ? 'Kegiatan Dispusip' : 'Kegiatan Komunitas' }}</h2>
+                        <h2 id="activity-title" class="h2 mb-3">{{ $activeTab === 'dispusip' ? 'Kegiatan Dispusip' : 'Kegiatan Komunitas' }}</h2>
                     </div>
-                    <div class="space50 d-lg-block d-none"></div>
-                    <div class="space30 d-lg-none d-block"></div>
+                    <div class="space50 d-none d-lg-block"></div>
+                    <div class="space30 d-block d-lg-none"></div>
                 </div>
             </div>
 
-            <!-- Nav Pills -->
+            <!-- Nav Pills - Responsive -->
             <div class="row">
-                <div class="col-lg-7 m-auto">
+                <div class="col-12 col-lg-7 mx-auto">
                     <div class="tabs-area text-center">
-                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
+                        <ul class="nav nav-pills flex-column flex-sm-row gap-2" id="pills-tab" role="tablist">
+                            <li class="nav-item flex-sm-fill" role="presentation">
                                 <a href="{{ route('kegiatan.index', ['tab' => 'dispusip']) }}"
-                                    class="nav-item {{ $activeTab === 'dispusip' ? 'active' : '' }}"
-                                    style="background-color: #1a5b5b; color: white; border: none; border-radius: 25px; padding: 10px 20px; transition: all 0.3s ease; text-decoration: none; display: inline-block; margin: 0 5px;">
+                                    class="nav-link {{ $activeTab === 'dispusip' ? 'active' : '' }}"
+                                    style="background-color: #1a5b5b; color: white; border: none; border-radius: 25px; padding: 5px 10px; transition: all 0.3s ease;">
                                     Kegiatan Program Dispusip
                                 </a>
                             </li>
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item flex-sm-fill" role="presentation">
                                 <a href="{{ route('kegiatan.index', ['tab' => 'komunitas']) }}"
-                                    class="nav-item {{ $activeTab === 'komunitas' ? 'active' : '' }}"
-                                    style="background-color: #227377; color: white; border: none; border-radius: 25px; padding: 10px 20px; transition: all 0.3s ease; text-decoration: none; display: inline-block; margin: 0 5px;">
+                                    class="nav-link  {{ $activeTab === 'komunitas' ? 'active' : '' }}"
+                                    style="background-color: #227377; color: white; border: none; border-radius: 25px; padding: 5px 10px; transition: all 0.3s ease;">
                                     Kegiatan Komunitas
                                 </a>
                             </li>
@@ -40,40 +41,43 @@
                 </div>
             </div>
 
-            <!-- Content -->
-            <div class="row">
-                <div class="col-lg-12">
+            <!-- Content Grid -->
+            <div class="row mt-4">
+                <div class="col-12">
                     <div class="tabs-content-area">
                         <div class="tab-content" id="pills-tabContent">
                             @if ($activeTab === 'dispusip')
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel">
                                     <div class="tabs-contents">
-                                        <div class="row align-items-center">
+                                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                                             @foreach ($kegiatanDispusip as $kegiatan)
-                                                <div class="col-lg-4">
-                                                    <div class="case-inner-box">
-                                                        <div class="img1 image-anime" style="height: 250px; overflow: hidden; border-radius: 8px;">
+                                                <div class="col">
+                                                    <div class="case-inner-box h-100">
+                                                        <div class="img1 image-anime position-relative" style="height: 0; padding-bottom: 75%; overflow: hidden; border-radius: 8px;">
                                                             <a href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}">
                                                                 @if($kegiatan->photos->isNotEmpty())
                                                                     <img src="{{ asset('storage/' . $kegiatan->photos->first()->foto_path) }}"
                                                                          alt="{{ $kegiatan->nm_keg }}"
-                                                                         style="width: 100%; height: 100%; object-fit: cover;"
+                                                                         class="position-absolute w-100 h-100"
+                                                                         style="object-fit: cover; top: 0; left: 0;"
                                                                          onerror="this.src='{{ asset('build/img/all-images/contoh4.png') }}'">
                                                                 @else
                                                                     <img src="{{ asset('build/img/all-images/contoh4.png') }}"
                                                                          alt="{{ $kegiatan->nm_keg }}"
-                                                                         style="width: 100%; height: 100%; object-fit: cover;">
+                                                                         class="position-absolute w-100 h-100"
+                                                                         style="object-fit: cover; top: 0; left: 0;">
                                                                 @endif
                                                             </a>
                                                         </div>
-                                                        <div class="content-area">
+                                                        <div class="content-area p-3">
                                                             <div class="link-area">
                                                                 <a href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}" 
-                                                                   class="head">{{ $kegiatan->nm_keg }}</a>
-                                                                <a href="#" class="tags">{{ Str::limit($kegiatan->desk_keg, 100) }}</a>
+                                                                   class="head h5 text-break">{{  Str::limit($kegiatan->nm_keg, 15) }}</a>
+                                                                <p class="tags small mt-2">{{ Str::limit($kegiatan->desk_keg, 100) }}</p>
                                                             </div>
-                                                            <div class="arrow">
-                                                                <a href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}">
+                                                            <div class="arrow text-end">
+                                                                <a href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}"
+                                                                   class="btn btn-link">
                                                                     <i class="fa-solid fa-arrow-right"></i>
                                                                 </a>
                                                             </div>
@@ -85,34 +89,38 @@
                                     </div>
                                 </div>
                             @else
+                                <!-- Similar structure for komunitas tab with the same responsive improvements -->
                                 <div class="tab-pane fade show active" id="pills-profile" role="tabpanel">
                                     <div class="tabs-contents">
-                                        <div class="row align-items-center">
+                                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                                             @foreach ($kegiatanKomunitas as $kegiatan)
-                                                <div class="col-lg-4">
-                                                    <div class="case-inner-box">
-                                                        <div class="img1 image-anime" style="height: 250px; overflow: hidden; border-radius: 8px;">
+                                                <div class="col">
+                                                    <div class="case-inner-box h-100">
+                                                        <div class="img1 image-anime position-relative" style="height: 0; padding-bottom: 75%; overflow: hidden; border-radius: 8px;">
                                                             <a href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}">
                                                                 @if($kegiatan->photos->isNotEmpty())
                                                                     <img src="{{ asset('storage/' . $kegiatan->photos->first()->foto_path) }}"
                                                                          alt="{{ $kegiatan->nm_keg }}"
-                                                                         style="width: 100%; height: 100%; object-fit: cover;"
+                                                                         class="position-absolute w-100 h-100"
+                                                                         style="object-fit: cover; top: 0; left: 0;"
                                                                          onerror="this.src='{{ asset('build/img/all-images/komunitas1.png') }}'">
                                                                 @else
                                                                     <img src="{{ asset('build/img/all-images/komunitas1.png') }}"
                                                                          alt="{{ $kegiatan->nm_keg }}"
-                                                                         style="width: 100%; height: 100%; object-fit: cover;">
+                                                                         class="position-absolute w-100 h-100"
+                                                                         style="object-fit: cover; top: 0; left: 0;">
                                                                 @endif
                                                             </a>
                                                         </div>
-                                                        <div class="content-area">
+                                                        <div class="content-area p-3">
                                                             <div class="link-area">
                                                                 <a href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}" 
-                                                                   class="head">{{ $kegiatan->nm_keg }}</a>
-                                                                <a href="#" class="tags">{{ Str::limit($kegiatan->desk_keg, 100) }}</a>
+                                                                   class="head h5 text-break">{{  Str::limit($kegiatan->nm_keg, 15) }}</a>
+                                                                <p class="tags small mt-2">{{ Str::limit($kegiatan->desk_keg, 100) }}</p>
                                                             </div>
-                                                            <div class="arrow">
-                                                                <a href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}">
+                                                            <div class="arrow text-end">
+                                                                <a href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}"
+                                                                   class="btn btn-link">
                                                                     <i class="fa-solid fa-arrow-right"></i>
                                                                 </a>
                                                             </div>
@@ -129,150 +137,75 @@
                 </div>
             </div>
 
-
-            <!-- Pagination -->
-            {{-- <div class="col-lg-12">
-                        <div class="pagination-area">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    {{-- Previous Page Link --}}
-            {{-- @if (($activeTab === 'dispusip' && !$kegiatanDispusip->onFirstPage()) || ($activeTab === 'komunitas' && !$kegiatanKomunitas->onFirstPage()))
+            <!-- Responsive Pagination -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="pagination-area">
+                        <nav aria-label="Page navigation" class="d-flex justify-content-center">
+                            <ul class="pagination pagination-sm flex-wrap gap-2">
+                                {{-- Previous Page --}}
+                                @if ($activeTab === 'dispusip')
+                                    <li class="page-item {{ $kegiatanDispusip->currentPage() == 1 ? 'disabled' : '' }}">
+                                        <a class="page-link rounded-circle d-flex align-items-center justify-content-center" 
+                                           href="{{ $kegiatanDispusip->currentPage() == 1 ? '#' : $kegiatanDispusip->url($kegiatanDispusip->currentPage() - 1) . '&tab=dispusip' }}"
+                                           style="width: 35px; height: 35px;">
+                                            <i class="fa-solid fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    
+                                    {{-- Page Numbers --}}
+                                    @for ($i = 1; $i <= $kegiatanDispusip->lastPage(); $i++)
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $activeTab === 'dispusip' ? $kegiatanDispusip->previousPageUrl() : $kegiatanKomunitas->previousPageUrl() }}">
-                                                <i class="fa-solid fa-angle-left"></i>
+                                            <a class="page-link rounded-circle d-flex align-items-center justify-content-center {{ $kegiatanDispusip->currentPage() == $i ? 'active' : '' }}"
+                                               href="{{ $kegiatanDispusip->url($i) }}&tab=dispusip"
+                                               style="width: 35px; height: 35px;">
+                                                {{ $i }}
                                             </a>
                                         </li>
-                                    @else
-                                        <li class="page-item disabled">
-                                            <span class="page-link"><i class="fa-solid fa-angle-left"></i></span>
-                                        </li>
-                                    @endif
-
-                                    {{-- Page Number Links --}}
-            {{-- @foreach ($activeTab === 'dispusip' ? $kegiatanDispusip->links()->elements[0] : $kegiatanKomunitas->links()->elements[0] as $page => $url)
-                                        <li class="page-item {{ ($activeTab === 'dispusip' ? $kegiatanDispusip->currentPage() : $kegiatanKomunitas->currentPage()) == $page ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                        </li>
-                                    @endforeach --}}
-
-            {{-- Next Page Link --}}
-            {{-- @if (($activeTab === 'dispusip' && $kegiatanDispusip->hasMorePages()) || ($activeTab === 'komunitas' && $kegiatanKomunitas->hasMorePages()))
+                                    @endfor
+                                    
+                                    {{-- Next Page --}}
+                                    <li class="page-item {{ $kegiatanDispusip->currentPage() == $kegiatanDispusip->lastPage() ? 'disabled' : '' }}">
+                                        <a class="page-link rounded-circle d-flex align-items-center justify-content-center"
+                                           href="{{ $kegiatanDispusip->currentPage() == $kegiatanDispusip->lastPage() ? '#' : $kegiatanDispusip->url($kegiatanDispusip->currentPage() + 1) . '&tab=dispusip' }}"
+                                           style="width: 35px; height: 35px;">
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                @else
+                                    {{-- Similar structure for komunitas pagination --}}
+                                    <li class="page-item {{ $kegiatanKomunitas->currentPage() == 1 ? 'disabled' : '' }}">
+                                        <a class="page-link rounded-circle d-flex align-items-center justify-content-center"
+                                           href="{{ $kegiatanKomunitas->currentPage() == 1 ? '#' : $kegiatanKomunitas->url($kegiatanKomunitas->currentPage() - 1) . '&tab=komunitas' }}"
+                                           style="width: 35px; height: 35px;">
+                                            <i class="fa-solid fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    
+                                    @for ($i = 1; $i <= $kegiatanKomunitas->lastPage(); $i++)
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $activeTab === 'dispusip' ? $kegiatanDispusip->nextPageUrl() : $kegiatanKomunitas->nextPageUrl() }}">
-                                                <i class="fa-solid fa-angle-right"></i>
+                                            <a class="page-link rounded-circle d-flex align-items-center justify-content-center {{ $kegiatanKomunitas->currentPage() == $i ? 'active' : '' }}"
+                                               href="{{ $kegiatanKomunitas->url($i) }}&tab=komunitas"
+                                               style="width: 35px; height: 35px;">
+                                                {{ $i }}
                                             </a>
                                         </li>
-                                    @else --}}
-            {{-- <li class="page-item disabled">
-                                            <span class="page-link"><i class="fa-solid fa-angle-right"></i></span>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </nav>
-                        </div> --}}
-            {{-- </div> --}}
-            {{-- Custom Pagination --}}
-            <div class="col-lg-12">
-                <div class="pagination-area">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center" style="gap: 0.5rem;">
-                            {{-- Previous Page --}}
-                            @if ($activeTab === 'dispusip')
-                                @if ($kegiatanDispusip->currentPage() == 1)
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; background-color: #f8f9fa;">
-                                            <i class="fa-solid fa-angle-left"></i>
-                                        </a>
-                                    </li>
-                                @else
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $kegiatanDispusip->url($kegiatanDispusip->currentPage() - 1) }}&tab=dispusip" 
-                                           style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; background-color: #f8f9fa; color: #0d6efd;">
-                                            <i class="fa-solid fa-angle-left"></i>
-                                        </a>
-                                    </li>
-                                @endif
-                            @else
-                                @if ($kegiatanKomunitas->currentPage() == 1)
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; background-color: #f8f9fa;">
-                                            <i class="fa-solid fa-angle-left"></i>
-                                        </a>
-                                    </li>
-                                @else
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $kegiatanKomunitas->url($kegiatanKomunitas->currentPage() - 1) }}&tab=komunitas" 
-                                           style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; background-color: #f8f9fa; color: #0d6efd;">
-                                            <i class="fa-solid fa-angle-left"></i>
-                                        </a>
-                                    </li>
-                                @endif
-                            @endif
-            
-                            {{-- Page Numbers --}}
-                            @if ($activeTab === 'dispusip')
-                                @for ($i = 1; $i <= $kegiatanDispusip->lastPage(); $i++)
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $kegiatanDispusip->url($i) }}&tab=dispusip" 
-                                           style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; 
-                                           background-color: {{ $kegiatanDispusip->currentPage() == $i ? '#0d6efd' : '#f8f9fa' }}; 
-                                           color: {{ $kegiatanDispusip->currentPage() == $i ? '#ffffff' : '#0d6efd' }};">
-                                            {{ $i }}
-                                        </a>
-                                    </li>
-                                @endfor
-                            @else
-                                @for ($i = 1; $i <= $kegiatanKomunitas->lastPage(); $i++)
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $kegiatanKomunitas->url($i) }}&tab=komunitas" 
-                                           style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; 
-                                           background-color: {{ $kegiatanKomunitas->currentPage() == $i ? '#0d6efd' : '#f8f9fa' }}; 
-                                           color: {{ $kegiatanKomunitas->currentPage() == $i ? '#ffffff' : '#0d6efd' }};">
-                                            {{ $i }}
-                                        </a>
-                                    </li>
-                                @endfor
-                            @endif
-            
-                            {{-- Next Page --}}
-                            @if ($activeTab === 'dispusip')
-                                @if ($kegiatanDispusip->currentPage() == $kegiatanDispusip->lastPage())
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; background-color: #f8f9fa;">
-                                            <i class="fa-solid fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                @else
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $kegiatanDispusip->url($kegiatanDispusip->currentPage() + 1) }}&tab=dispusip" 
-                                           style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; background-color: #f8f9fa; color: #0d6efd;">
+                                    @endfor
+                                    
+                                    <li class="page-item {{ $kegiatanKomunitas->currentPage() == $kegiatanKomunitas->lastPage() ? 'disabled' : '' }}">
+                                        <a class="page-link rounded-circle d-flex align-items-center justify-content-center"
+                                           href="{{ $kegiatanKomunitas->currentPage() == $kegiatanKomunitas->lastPage() ? '#' : $kegiatanKomunitas->url($kegiatanKomunitas->currentPage() + 1) . '&tab=komunitas' }}"
+                                           style="width: 35px; height: 35px;">
                                             <i class="fa-solid fa-angle-right"></i>
                                         </a>
                                     </li>
                                 @endif
-                            @else
-                                @if ($kegiatanKomunitas->currentPage() == $kegiatanKomunitas->lastPage())
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; background-color: #f8f9fa;">
-                                            <i class="fa-solid fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                @else
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $kegiatanKomunitas->url($kegiatanKomunitas->currentPage() + 1) }}&tab=komunitas" 
-                                           style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; transition: all 0.3s ease; background-color: #f8f9fa; color: #0d6efd;">
-                                            <i class="fa-solid fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                @endif
-                            @endif
-                        </ul>
-                    </nav>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 
     <script>

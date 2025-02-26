@@ -50,15 +50,15 @@
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3"
                     aria-label="Slide 4"></button>
             </div>
-    
+
             <!-- Carousel Items -->
             <div class="carousel-inner" data-aos="fade-left" data-aos-duration="1200">
                 <!-- Slide Default (header2.png) -->
                 <a href="">
                     <div class="carousel-item active" data-bs-interval="3000">
                         <div class="carousel-image-container" style="height: 450px; overflow: hidden; position: relative;">
-                            <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100" alt="..."
-                                style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ URL::asset('build/img/all-images/header2.png') }}" class="d-block w-100"
+                                alt="..." style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div class="carousel-caption">
                             <h1></h1>
@@ -66,14 +66,15 @@
                         </div>
                     </div>
                 </a>
-    
+
                 <!-- Dynamic Slides from $carouselPrograms (Hanya 3 Program) -->
                 @foreach ($carouselPrograms->take(3) as $index => $program)
                     <a href="{{ route('programdispusip.detail', $program->kd_program) }}">
                         <div class="carousel-item" data-bs-interval="3000">
-                            <div class="carousel-image-container" style="height: 450px; overflow: hidden; position: relative;">
-                                <img src="{{ $program->sampul_program }}" class="d-block w-100" alt="{{ $program->nm_program }}"
-                                    style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="carousel-image-container"
+                                style="height: 450px; overflow: hidden; position: relative;">
+                                <img src="{{ $program->sampul_program }}" class="d-block w-100"
+                                    alt="{{ $program->nm_program }}" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div class="carousel-caption">
                                 <h1 class="responsive-heading">{{ $program->nm_program }}</h1>
@@ -82,7 +83,7 @@
                     </a>
                 @endforeach
             </div>
-    
+
             <!-- Carousel Controls -->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -94,7 +95,7 @@
             </button>
         </div>
     </div>
-    
+
     <!-- Responsive Styles for Mobile -->
     <style>
         @media (max-width: 768px) {
@@ -104,7 +105,7 @@
         }
     </style>
 
-        {{-- <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    {{-- <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -371,7 +372,8 @@
             <div class="row">
                 <div class="col-lg-12 m-auto">
                     <div class="service2-header heading2 text-center">
-                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt="" class="star2 keyframe5">
+                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                            class="star2 keyframe5">
                         <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
                             class="star3 keyframe5">
                         <h2 class="text-anime-style-3">Berita Terkini</h2>
@@ -572,54 +574,55 @@
     <div class="testimonial1-section-area sp6">
         <div class="container">
             <div class="row">
-                    <div class="col-lg-12 m-auto">
-                        <div class="testimonial-header heading2 text-center">
-                            <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                                class="star2 keyframe5">
-                            <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
-                                class="star3 keyframe5">
-                            <h2 class="text-anime-style-3">Forum Komunitas</h2>
-                            <p data-aos="fade-up" data-aos-duration="1000">Jadilah bagian dari komunitas kami dan nikmati
-                                akses eksklusif ke berbagai diskusi, event, dan kolaborasi.<br class="d-md-block d-none">
-                                Bergabung sekarang untuk memperluas jaringan, belajar dari yang lain, dan berbagi pengalaman
-                                Anda.</p>
-                        </div>
+                <div class="col-lg-12 m-auto">
+                    <div class="testimonial-header heading2 text-center">
+                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                            class="star2 keyframe5">
+                        <img src="{{ URL::asset('build/img/elements/star2.png') }}" alt=""
+                            class="star3 keyframe5">
+                        <h2 class="text-anime-style-3">Forum Komunitas</h2>
+                        <p data-aos="fade-up" data-aos-duration="1000">Jadilah bagian dari komunitas kami dan nikmati
+                            akses eksklusif ke berbagai diskusi, event, dan kolaborasi.<br class="d-md-block d-none">
+                            Bergabung sekarang untuk memperluas jaringan, belajar dari yang lain, dan berbagi pengalaman
+                            Anda.</p>
                     </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 m-auto" data-aos="fade-up" data-aos-duration="1000">
                     <div class="testimonials-slider-area owl-carousel ">
                         @foreach ($komunitasList->take(5) as $item)
-                            <div class="testimonial-boxarea rounded-5">
-                                <div class="row">
-                                    <!-- Konten Bersama -->
-                                    <div class="col-lg-5">
-                                        <div class="pera">
-                                            <p class="text-muted" style="font-size: 1.1rem;">
-                                                {{ Str::limit($item->desk_komunitas, 100) ?: 'No description available' }}
-                                            </p>
-                                            <div class="space100"></div>
-                                            <div class="space30"></div>
-                                            <div class="list-area">
-                                                <div class="list">
-                                                    <a style="font-size: 1.25rem"
-                                                        href="{{ route('komunitas.detail', $item->kd_komunitas) }}"
-                                                        class="h3 text-dark font-weight-bold">
-                                                        {{ $item->nm_komunitas }}
-                                                    </a>
-                                                </div>
+                        <div class="testimonial-boxarea rounded-5" style="height: 320px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                            <div class="row h-100">
+                                <!-- Konten Bersama -->
+                                <div class="col-lg-5 d-flex flex-column">
+                                    <div class="pera p-3 d-flex flex-column h-100">
+                                        <p class="text-muted" style="font-size: 1.1rem;">
+                                            {{ Str::limit($item->desk_komunitas, 100) ?: 'No description available' }}
+                                        </p>
+                                        <!-- Spacer to push the name to the bottom -->
+                                        <div class="flex-grow-1"></div>
+                                        <div class="list-area ps-2 mb-3">
+                                            <div class="list">
+                                                <a style="font-size: 1.25rem" 
+                                                   href="{{ route('komunitas.detail', $item->kd_komunitas) }}"
+                                                   class="h3 text-dark font-weight-bold">
+                                                    {{ $item->nm_komunitas }}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Konten Bersama -->
-                                    <div class="col-lg-7 text-center">
-                                        <div class="images">
-                                            <img src="{{ $item->logo }}" alt="{{ $item->nm_komunitas }}"
-                                                class="img-fluid rounded" style="max-width: 90%; height: auto;">
-                                        </div>
+                                </div>
+                                <!-- Konten Bersama -->
+                                <div class="col-lg-7 text-center d-flex align-items-center justify-content-center" style="min-height: 200px; padding: 20px;">
+                                    <div class="images" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                                        <img src="{{ $item->logo }}" alt="{{ $item->nm_komunitas }}"
+                                             class="img-fluid rounded" 
+                                             style="max-height: 100%; max-width: 90%; object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
