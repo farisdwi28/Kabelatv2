@@ -102,6 +102,18 @@
                                         <span>Riwayat Laporan</span>
                                     </a>
                                 </li>
+                                {{-- <li class="nav-item">
+                                    <a href="{{ route('informasi.create') }}" class="nav-link d-flex align-items-center {{ Request::is('tambahBerita') ? 'active bg-light text-dark' : 'text-dark' }}">
+                                        <i class="fas fa-plus-circle me-1"></i> Tambah Berita
+                                    </a>
+                                </li> --}}
+                                <li class="nav-item">
+                                    <a href="{{ url('daftarBerita') }}" 
+                                       class="nav-link d-flex align-items-center {{ Request::is('daftarBerita') ? 'active bg-light text-dark' : 'text-dark' }}">
+                                        <i class="fa-solid fa-newspaper me-2"></i>
+                                        <span>Kelola Berita</span>
+                                    </a>
+                                </li>
                             @endif
                         @else
                             <div class="mt-3 text-muted small">

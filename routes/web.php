@@ -12,6 +12,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -73,10 +74,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
     Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
     Route::get('/riwayatLaporan', [LaporanController::class, 'index'])->name('laporan.index');
-    Route::get('/laporan/download/{kd_laporan}', [LaporanController::class, 'download'])->name('laporan.download');  Route::post('/berita/{kd_info}/komentar', [BeritaController::class, 'storeComment'])->name('berita.komentar');
+    Route::get('/laporan/download/{kd_laporan}', [LaporanController::class, 'download'])->name('laporan.download');
+    Route::post('/berita/{kd_info}/komentar', [BeritaController::class, 'storeComment'])->name('berita.komentar');
     Route::post('/berita/{kd_info}/like', [BeritaController::class, 'like'])->name('berita.like');
     Route::get('/berita/{kd_info}/check-like-status', [BeritaController::class, 'checkLikeStatus'])
-    ->name('berita.checkLikeStatus');
+        ->name('berita.checkLikeStatus');
     Route::post('/berita/{kd_info}/unlike', [BeritaController::class, 'unlike'])->name('berita.unlike');
     Route::post('/berita/{kd_info}/view', [BeritaController::class, 'view'])->name('berita.view');
     Route::post('/forumdiskusi/{id}/komentar', [DiskusiController::class, 'storeComment'])->name('diskusi.comment');
@@ -88,13 +90,23 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('auth');
     Route::get('/strukturKomunitas/{kd_komunitas}', [KomunitasController::class, 'showStructure'])
         ->name('strukturKomunitas.show');
-        // Update this route
+    // Update this route
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     });
+
+    Route::get('/daftarBerita', [InformasiController::class, 'index'])->name('informasi.index');
+    Route::get('/tambahBerita', [InformasiController::class, 'create'])->name('informasi.create');
+    Route::post('/informasi', [InformasiController::class, 'store'])->name('informasi.store');
+    Route::get('/informasi/{id}', [InformasiController::class, 'show'])->name('informasi.show');
+    Route::get('/informasi/{id}/edit', [InformasiController::class, 'edit'])->name('informasi.edit');
+    Route::put('/informasi/{id}', [InformasiController::class, 'update'])->name('informasi.update');
+    Route::delete('/informasi/{id}', [InformasiController::class, 'destroy'])->name('informasi.destroy');
+    Route::get('/informasi/get/{kd_info}', [InformasiController::class, 'getInfo'])->name('informasi.get');
 });
+
 
 
 // Catch-all route for dynamic pages

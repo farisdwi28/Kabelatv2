@@ -8,63 +8,93 @@
     @if(session('success') || session('error'))
         <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
             @if(session('success'))
-                <div style="background: white; 
-                            border-left: 4px solid #198754;
-                            color: #333; 
-                            padding: 1rem; 
-                            border-radius: 12px; 
-                            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
-                            margin-bottom: 1rem; 
+                <div style="background: linear-gradient(135deg, #064e3b, #149f6c); 
+                            color: white; 
+                            padding: 20px; 
+                            border-radius: 10px; 
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
+                            margin-bottom: 10px; 
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between;
-                            animation: alertSlideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <i class="fas fa-check-circle text-success fs-5"></i>
-                        <p class="m-0" style="font-size: 0.95rem;">{{ session('success') }}</p>
+                            animation: slideIn 0.5s forwards;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-check-circle" style="font-size: 24px;"></i>
+                        <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">{{ session('success') }}</p>
                     </div>
                     <button onclick="this.parentElement.remove()" 
                             style="background: transparent; 
                                    border: none; 
-                                   color: #666;
-                                   cursor: pointer;
-                                   padding: 0;
-                                   font-size: 1.1rem;
-                                   transition: color 0.3s ease;">
+                                   color: white; 
+                                   font-size: 20px; 
+                                   cursor: pointer; 
+                                   opacity: 0.8; 
+                                   padding: 0; 
+                                   margin-left: 15px;">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             @endif
 
             @if(session('error'))
-                <div style="background: white; 
-                            border-left: 4px solid #dc3545;
-                            color: #333; 
-                            padding: 1rem; 
-                            border-radius: 12px; 
-                            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
-                            margin-bottom: 1rem; 
+                <div style="background: linear-gradient(135deg, #dc3545, #f86d7d); 
+                            color: white; 
+                            padding: 20px; 
+                            border-radius: 10px; 
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
+                            margin-bottom: 10px; 
+                            border-left: 5px solid #bd2130; 
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between;
-                            animation: alertSlideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <i class="fas fa-exclamation-circle text-danger fs-5"></i>
-                        <p class="m-0" style="font-size: 0.95rem;">{{ session('error') }}</p>
+                            animation: slideIn 0.5s forwards;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-exclamation-circle" style="font-size: 24px;"></i>
+                        <p style="margin: 0; font-size: 0.95rem; line-height: 1.4;">{{ session('error') }}</p>
                     </div>
                     <button onclick="this.parentElement.remove()" 
                             style="background: transparent; 
                                    border: none; 
-                                   color: #666;
-                                   cursor: pointer;
-                                   padding: 0;
-                                   font-size: 1.1rem;
-                                   transition: color 0.3s ease;">
+                                   color: white; 
+                                   font-size: 20px; 
+                                   cursor: pointer; 
+                                   opacity: 0.8; 
+                                   padding: 0; 
+                                   margin-left: 15px;">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             @endif
         </div>
+
+        <!-- Inline Keyframe Animation -->
+        <style>
+            @keyframes slideIn {
+                from {
+                    transform: translateX(120%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        </style>
+
+        <!-- Auto-remove alerts after 5 seconds -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const alerts = document.querySelectorAll('[style*="animation: slideIn"]');
+                alerts.forEach(alert => {
+                    setTimeout(() => {
+                        alert.style.animation = 'slideOut 0.9s forwards';
+                        setTimeout(() => {
+                            alert.remove();
+                        }, 500);
+                    }, 5000);
+                });
+            });
+        </script>
     @endif
 
     <div class="container-fluid py-4">

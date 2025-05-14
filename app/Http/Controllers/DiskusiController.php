@@ -52,15 +52,28 @@ class DiskusiController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'judul' => 'required|string|max:250',
-            'deskripsi' => 'required|string',
-        ]);
-
         $userId = Auth::id();
         $userKomunitas = MemberKomunitas::where('id', $userId)
             ->pluck('kd_komunitas')
             ->first();
+
+        $validated = $request->validate([
+            'judul' => [
+                'required',
+                'string',
+                'max:250',
+                function ($attribute, $value, $fail) use ($userKomunitas) {
+                    $exists = Diskusi::where('topik_diskusi', $value)
+                        ->where('kd_komunitas', $userKomunitas)
+                        ->exists();
+                    
+                    if ($exists) {
+                        $fail('Judul diskusi ini sudah ada di forum diskusi komunitas Anda. Silakan gunakan judul yang berbeda.');
+                    }
+                }
+            ],
+            'deskripsi' => 'required|string',
+        ]);
 
         if (!$userKomunitas) {
             return back()->with('error', 'Anda harus bergabung dengan komunitas terlebih dahulu.');

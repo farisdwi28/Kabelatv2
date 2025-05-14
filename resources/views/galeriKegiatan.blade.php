@@ -10,7 +10,8 @@
             <div class="row">
                 <div class="col-12 col-lg-4 mx-auto">
                     <div class="case-header text-center heading2">
-                        <h2 id="activity-title" class="h2 mb-3">{{ $activeTab === 'dispusip' ? 'Kegiatan Dispusip' : 'Kegiatan Komunitas' }}</h2>
+                        <h2 id="activity-title" class="h2 mb-3">
+                            {{ $activeTab === 'dispusip' ? 'Kegiatan Dispusip' : 'Kegiatan Komunitas' }}</h2>
                     </div>
                     <div class="space50 d-none d-lg-block"></div>
                     <div class="space30 d-block d-lg-none"></div>
@@ -53,31 +54,35 @@
                                             @foreach ($kegiatanDispusip as $kegiatan)
                                                 <div class="col">
                                                     <div class="case-inner-box h-100">
-                                                        <div class="img1 image-anime position-relative" style="height: 0; padding-bottom: 75%; overflow: hidden; border-radius: 8px;">
-                                                            <a href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}">
-                                                                @if($kegiatan->photos->isNotEmpty())
+                                                        <div class="img1 image-anime position-relative"
+                                                            style="height: 0; padding-bottom: 75%; overflow: hidden; border-radius: 8px;">
+                                                            <a
+                                                                href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}">
+                                                                @if ($kegiatan->photos->isNotEmpty())
                                                                     <img src="{{ asset('storage/' . $kegiatan->photos->first()->foto_path) }}"
-                                                                         alt="{{ $kegiatan->nm_keg }}"
-                                                                         class="position-absolute w-100 h-100"
-                                                                         style="object-fit: cover; top: 0; left: 0;"
-                                                                         onerror="this.src='{{ asset('build/img/all-images/contoh4.png') }}'">
+                                                                        alt="{{ $kegiatan->nm_keg }}"
+                                                                        class="position-absolute w-100 h-100"
+                                                                        style="object-fit: cover; top: 0; left: 0;"
+                                                                        onerror="this.src='{{ asset('build/img/all-images/contoh4.png') }}'">
                                                                 @else
                                                                     <img src="{{ asset('build/img/all-images/contoh4.png') }}"
-                                                                         alt="{{ $kegiatan->nm_keg }}"
-                                                                         class="position-absolute w-100 h-100"
-                                                                         style="object-fit: cover; top: 0; left: 0;">
+                                                                        alt="{{ $kegiatan->nm_keg }}"
+                                                                        class="position-absolute w-100 h-100"
+                                                                        style="object-fit: cover; top: 0; left: 0;">
                                                                 @endif
                                                             </a>
                                                         </div>
                                                         <div class="content-area p-3">
                                                             <div class="link-area">
-                                                                <a href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}" 
-                                                                   class="head h5 text-break">{{  Str::limit($kegiatan->nm_keg, 15) }}</a>
-                                                                <p class="tags small mt-2">{{ Str::limit($kegiatan->desk_keg, 100) }}</p>
-                                                            </div>
-                                                            <div class="arrow text-end">
                                                                 <a href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}"
-                                                                   class="btn btn-link">
+                                                                    class="head h5 text-break">{{ Str::limit($kegiatan->nm_keg, 15) }}</a>
+                                                                <p class="tags small mt-2">
+                                                                    {{ Str::limit($kegiatan->desk_keg, 100) }}</p>
+                                                            </div>
+                                                            <div class="arrow d-flex justify-content-center align-items-center"
+                                                                style="width: 50px; height: 50px; background-color: #f0edff; border-radius: 50%;">
+                                                                <a href="{{ route('kegiatan.detail', ['type' => 'dispusip', 'id' => $kegiatan->kd_kegiatan]) }}"
+                                                                    class="btn btn-link p-0 m-0">
                                                                     <i class="fa-solid fa-arrow-right"></i>
                                                                 </a>
                                                             </div>
@@ -96,31 +101,35 @@
                                             @foreach ($kegiatanKomunitas as $kegiatan)
                                                 <div class="col">
                                                     <div class="case-inner-box h-100">
-                                                        <div class="img1 image-anime position-relative" style="height: 0; padding-bottom: 75%; overflow: hidden; border-radius: 8px;">
-                                                            <a href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}">
-                                                                @if($kegiatan->photos->isNotEmpty())
+                                                        <div class="img1 image-anime position-relative"
+                                                            style="height: 0; padding-bottom: 75%; overflow: hidden; border-radius: 8px;">
+                                                            <a
+                                                                href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}">
+                                                                @if ($kegiatan->photos->isNotEmpty())
                                                                     <img src="{{ asset('storage/' . $kegiatan->photos->first()->foto_path) }}"
-                                                                         alt="{{ $kegiatan->nm_keg }}"
-                                                                         class="position-absolute w-100 h-100"
-                                                                         style="object-fit: cover; top: 0; left: 0;"
-                                                                         onerror="this.src='{{ asset('build/img/all-images/komunitas1.png') }}'">
+                                                                        alt="{{ $kegiatan->nm_keg }}"
+                                                                        class="position-absolute w-100 h-100"
+                                                                        style="object-fit: cover; top: 0; left: 0;"
+                                                                        onerror="this.src='{{ asset('build/img/all-images/komunitas1.png') }}'">
                                                                 @else
                                                                     <img src="{{ asset('build/img/all-images/komunitas1.png') }}"
-                                                                         alt="{{ $kegiatan->nm_keg }}"
-                                                                         class="position-absolute w-100 h-100"
-                                                                         style="object-fit: cover; top: 0; left: 0;">
+                                                                        alt="{{ $kegiatan->nm_keg }}"
+                                                                        class="position-absolute w-100 h-100"
+                                                                        style="object-fit: cover; top: 0; left: 0;">
                                                                 @endif
                                                             </a>
                                                         </div>
                                                         <div class="content-area p-3">
                                                             <div class="link-area">
-                                                                <a href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}" 
-                                                                   class="head h5 text-break">{{  Str::limit($kegiatan->nm_keg, 15) }}</a>
-                                                                <p class="tags small mt-2">{{ Str::limit($kegiatan->desk_keg, 100) }}</p>
-                                                            </div>
-                                                            <div class="arrow text-end">
                                                                 <a href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}"
-                                                                   class="btn btn-link">
+                                                                    class="head h5 text-break">{{ Str::limit($kegiatan->nm_keg, 15) }}</a>
+                                                                <p class="tags small mt-2">
+                                                                    {{ Str::limit($kegiatan->desk_keg, 100) }}</p>
+                                                            </div>
+                                                            <div class="arrow d-flex justify-content-center align-items-center"
+                                                                style="width: 50px; height: 50px; background-color: #f0edff; border-radius: 50%;">
+                                                                <a href="{{ route('kegiatan.detail', ['type' => 'komunitas', 'id' => $kegiatan->kd_kegiatan2]) }}"
+                                                                    class="btn btn-link p-0 m-0">
                                                                     <i class="fa-solid fa-arrow-right"></i>
                                                                 </a>
                                                             </div>
@@ -146,29 +155,30 @@
                                 {{-- Previous Page --}}
                                 @if ($activeTab === 'dispusip')
                                     <li class="page-item {{ $kegiatanDispusip->currentPage() == 1 ? 'disabled' : '' }}">
-                                        <a class="page-link rounded-circle d-flex align-items-center justify-content-center" 
-                                           href="{{ $kegiatanDispusip->currentPage() == 1 ? '#' : $kegiatanDispusip->url($kegiatanDispusip->currentPage() - 1) . '&tab=dispusip' }}"
-                                           style="width: 35px; height: 35px;">
+                                        <a class="page-link rounded-circle d-flex align-items-center justify-content-center"
+                                            href="{{ $kegiatanDispusip->currentPage() == 1 ? '#' : $kegiatanDispusip->url($kegiatanDispusip->currentPage() - 1) . '&tab=dispusip' }}"
+                                            style="width: 35px; height: 35px;">
                                             <i class="fa-solid fa-angle-left"></i>
                                         </a>
                                     </li>
-                                    
+
                                     {{-- Page Numbers --}}
                                     @for ($i = 1; $i <= $kegiatanDispusip->lastPage(); $i++)
                                         <li class="page-item">
                                             <a class="page-link rounded-circle d-flex align-items-center justify-content-center {{ $kegiatanDispusip->currentPage() == $i ? 'active' : '' }}"
-                                               href="{{ $kegiatanDispusip->url($i) }}&tab=dispusip"
-                                               style="width: 35px; height: 35px;">
+                                                href="{{ $kegiatanDispusip->url($i) }}&tab=dispusip"
+                                                style="width: 35px; height: 35px;">
                                                 {{ $i }}
                                             </a>
                                         </li>
                                     @endfor
-                                    
+
                                     {{-- Next Page --}}
-                                    <li class="page-item {{ $kegiatanDispusip->currentPage() == $kegiatanDispusip->lastPage() ? 'disabled' : '' }}">
+                                    <li
+                                        class="page-item {{ $kegiatanDispusip->currentPage() == $kegiatanDispusip->lastPage() ? 'disabled' : '' }}">
                                         <a class="page-link rounded-circle d-flex align-items-center justify-content-center"
-                                           href="{{ $kegiatanDispusip->currentPage() == $kegiatanDispusip->lastPage() ? '#' : $kegiatanDispusip->url($kegiatanDispusip->currentPage() + 1) . '&tab=dispusip' }}"
-                                           style="width: 35px; height: 35px;">
+                                            href="{{ $kegiatanDispusip->currentPage() == $kegiatanDispusip->lastPage() ? '#' : $kegiatanDispusip->url($kegiatanDispusip->currentPage() + 1) . '&tab=dispusip' }}"
+                                            style="width: 35px; height: 35px;">
                                             <i class="fa-solid fa-angle-right"></i>
                                         </a>
                                     </li>
@@ -176,26 +186,27 @@
                                     {{-- Similar structure for komunitas pagination --}}
                                     <li class="page-item {{ $kegiatanKomunitas->currentPage() == 1 ? 'disabled' : '' }}">
                                         <a class="page-link rounded-circle d-flex align-items-center justify-content-center"
-                                           href="{{ $kegiatanKomunitas->currentPage() == 1 ? '#' : $kegiatanKomunitas->url($kegiatanKomunitas->currentPage() - 1) . '&tab=komunitas' }}"
-                                           style="width: 35px; height: 35px;">
+                                            href="{{ $kegiatanKomunitas->currentPage() == 1 ? '#' : $kegiatanKomunitas->url($kegiatanKomunitas->currentPage() - 1) . '&tab=komunitas' }}"
+                                            style="width: 35px; height: 35px;">
                                             <i class="fa-solid fa-angle-left"></i>
                                         </a>
                                     </li>
-                                    
+
                                     @for ($i = 1; $i <= $kegiatanKomunitas->lastPage(); $i++)
                                         <li class="page-item">
                                             <a class="page-link rounded-circle d-flex align-items-center justify-content-center {{ $kegiatanKomunitas->currentPage() == $i ? 'active' : '' }}"
-                                               href="{{ $kegiatanKomunitas->url($i) }}&tab=komunitas"
-                                               style="width: 35px; height: 35px;">
+                                                href="{{ $kegiatanKomunitas->url($i) }}&tab=komunitas"
+                                                style="width: 35px; height: 35px;">
                                                 {{ $i }}
                                             </a>
                                         </li>
                                     @endfor
-                                    
-                                    <li class="page-item {{ $kegiatanKomunitas->currentPage() == $kegiatanKomunitas->lastPage() ? 'disabled' : '' }}">
+
+                                    <li
+                                        class="page-item {{ $kegiatanKomunitas->currentPage() == $kegiatanKomunitas->lastPage() ? 'disabled' : '' }}">
                                         <a class="page-link rounded-circle d-flex align-items-center justify-content-center"
-                                           href="{{ $kegiatanKomunitas->currentPage() == $kegiatanKomunitas->lastPage() ? '#' : $kegiatanKomunitas->url($kegiatanKomunitas->currentPage() + 1) . '&tab=komunitas' }}"
-                                           style="width: 35px; height: 35px;">
+                                            href="{{ $kegiatanKomunitas->currentPage() == $kegiatanKomunitas->lastPage() ? '#' : $kegiatanKomunitas->url($kegiatanKomunitas->currentPage() + 1) . '&tab=komunitas' }}"
+                                            style="width: 35px; height: 35px;">
                                             <i class="fa-solid fa-angle-right"></i>
                                         </a>
                                     </li>
